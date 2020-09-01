@@ -1,0 +1,31 @@
+<!DOCTYPE html >
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<title>企业公告</title>
+	<link href="css/style.css" rel="stylesheet" />
+	<script src="js/client_js.js"></script>
+	<script src="js/riq.js"></script>
+</head>
+<body>
+<table width="765" border="1" cellpadding="0" cellspacing="0" class="big_td">
+	<tr>
+		<td height="33" background="../images/list.jpg" id="list">{$rs}</td>
+	</tr>
+</table>
+<table width="765" border="1" cellpadding="0" cellspacing="0" bgcolor="#DEEBEF" class="big_td">
+	<tr>
+		<td width="100" height="25" align="center" valign="middle">发布时间</td>
+		<td align="center" valign="middle">标题</td>
+	</tr>
+	{section name=re_id loop=$res}
+	<tr>
+		<td height=30 align=center valign=middle>{$res[re_id].p_time}</td>
+		<td style='text-indent: 30px;'>
+		<a href="#" onclick="javascript:openWin=open('show_message.php?id={$res[re_id].id}','','width=600,height=200,scrollbars=no');">{$res[re_id].p_title}</a>
+		</td>
+	</tr>
+	{/section}
+</table>
+</body>
+</html>

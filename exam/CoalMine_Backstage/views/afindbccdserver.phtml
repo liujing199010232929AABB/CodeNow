@@ -1,0 +1,116 @@
+<link rel=stylesheet type=text/css href="{util->baseUrl}/css/examinations.css">
+<script type="text/javascript">
+function chksearch(form){ldelim}  
+	if(form.pro_class.value=='-1' && form.name.value==''&& form.ID_number.value==''&& form.tel.value==''&& form.admission.value==''&& form.post.value==''&& form.units.value==''&& form.address.value==''&& form.year.value=='-1'){ldelim}
+		alert('请输入查询条件！');
+        form.name.focus();
+        return false; 
+   	{rdelim}
+    return true;
+{rdelim}
+</script>
+<!--右侧-->
+<div id="con_right">
+  <div class="right_con">
+    <div class="right_con_bt">·{$smarty.get.big_type} < {$smarty.get.small_type}</div>
+    <div class="right_con_bt" style=" height:35px; padding-top:4px; padding-bottom:4px; padding-left:6px; ">
+      <form id="form1" name="form1" method="post" action="afindbccdserver.php?big_type={$smarty.get.big_type}&small_type={$smarty.get.small_type}" onsubmit="return chksearch(this)" >
+          姓名：
+        <input name="name" id="name" type="text" size="10"  value="{$sname}"/>
+        身份证号码：
+        <input name="ID_number" id="ID_number" type="text" size="15"  value="{$sidnum}"/>
+        电话：
+        <input name="tel" id="tel" type="text" size="5"  value="{$stel}"/>
+        地址：
+        <input name="address" id="address" type="text" size="20" value="{$saddr}"/>
+       <br />     
+        准考证号：
+        <input name="admission" id="admission" type="text" size="35"  value="{$sadmiss}"/>
+             <br />  
+          所属工种：
+        <select name="pro_class" id="pro_class" class="input1" >
+          <option value="-1">请选择</option>     
+    	{$displayType}
+        </select>
+          职务：
+        <input name="post" id="post" type="text" size="15"  value="{$spost}"/>
+        所属单位：
+        <input name="units" id="units" type="text" size="20" value="{$sunits}"/>
+ 
+       
+          <br />  
+        入职时间：
+        <select name="year" id="year">
+          <option value="-1">请选择</option>
+          
+                    {html_options options=$arrayYear selected=$syear}
+                
+        </select>
+        年
+        <select name="month" id="month">
+          
+                    {html_options options=$arrayMonth selected=$smonth}
+                
+        </select>
+        月
+        <select name="day" id="day">
+          
+                    {html_options options=$arrayDay selected=$sday}
+                
+        </select>
+        日
+        <select name="years" id="years">
+            <option value="-1">请选择</option>
+                    {html_options options=$arrayYear selected=$syears}
+                
+        </select>
+        年
+        <select name="months" id="months">
+
+                    {html_options options=$arrayMonth selected=$smonths}
+                
+        </select>
+        月
+        <select name="days" id="days">
+          
+                    {html_options options=$arrayDay selected=$sdays}
+                
+        </select>
+        日
+        <input type="submit" id="submit" value="查询" name="submit">
+      </form>
+    </div>
+    <div> {if $bcjyzs.data!=false}
+      <DIV style="padding-left:6px;">
+        <UL>
+          <LI style="LINE-HEIGHT: 25px; WIDTH: 6%; FLOAT: left; text-align:center; HEIGHT: 25px; BORDER-RIGHT: #21de26 1px solid; border-bottom:#21de26 1px solid;">ID</LI>
+          <LI style="LINE-HEIGHT: 25px; WIDTH: 42%; FLOAT: left; text-align:center; HEIGHT: 25px; BORDER-RIGHT: #21de26 1px solid; border-bottom:#21de26 1px solid;">姓名（电话）—准考证号</LI>
+          <LI style="LINE-HEIGHT: 25px; WIDTH: 31%; FLOAT: left; text-align:center; HEIGHT: 25px; BORDER-RIGHT: #21de26 1px solid; border-bottom:#21de26 1px solid;">工种（职务）—级别</LI>
+          <LI style="LINE-HEIGHT: 25px; WIDTH: 18%; FLOAT: left; text-align:center; HEIGHT: 25px; border-bottom:#21de26 1px solid;">操作 </LI>
+        </UL>
+      </DIV>
+      {section name=id loop=$bcjyzs.data}
+      <DIV style="padding-left:6px;">
+        <UL>
+          <LI style="LINE-HEIGHT: 23px; WIDTH: 6%; FLOAT: left; text-align:center; HEIGHT: 23px; BORDER-RIGHT: #21de26 1px solid; border-bottom:#21de26 1px solid;"> {$bcjyzs.data[id].id} </LI>
+          <LI style="LINE-HEIGHT: 23px; WIDTH: 42%; FLOAT: left; padding-left:10px; HEIGHT: 23px; BORDER-RIGHT: #21de26 1px solid; border-bottom:#21de26 1px solid;">{$bcjyzs.data[id].name}（{$bcjyzs.data[id].tel}）—{$bcjyzs.data[id].admission}</LI>
+          <LI style="LINE-HEIGHT: 23px; WIDTH: 31%; FLOAT: left; padding-left:10px; HEIGHT: 23px; BORDER-RIGHT: #21de26 1px solid; border-bottom:#21de26 1px solid;">{section name=bccdnameids loop=$arrayBccdnames1}
+            {if $arrayBccdnames1[bccdnameids].id==$bcjyzs.data[id].typework}
+            {$arrayBccdnames1[bccdnameids].typename}
+            {/if}
+            {/section}{$bcjyzs.data[id].pro_type}（{$bcjyzs.data[id].post}）—{if $bcjyzs.data[id].permissions==0}员工{elseif $bcjyzs.data[id].permissions==1}队长{elseif $bcjyzs.data[id].permissions==2}管理员{else}超级管理员{/if}</LI>
+          <LI style="LINE-HEIGHT: 23px; WIDTH: 18%; FLOAT: left; text-align:center; HEIGHT: 23px; border-bottom:#21de26 1px solid;"> <a href="aeditbccdserver.php?edit=t&id={$bcjyzs.data[id].id}&big_type={$smarty.get.big_type|escape:'hex'}&small_type={'更改员工信息'|escape:'hex'}" class="a1">更改&nbsp;|&nbsp;<a href="aeditbccdserver.php?delete=t&id={$bcjyzs.data[id].id}&big_type={$smarty.get.big_type|escape:'hex'}&small_type={'更改员工信息'|escape:'hex'}" class="a1">删除</a> </LI>
+        </UL>
+      </DIV>
+      {/section}
+      <div style="padding-left:6px; padding-top:6px; padding-bottom:6px;">
+        <div style="height:22px;  float:left">
+          <div style="width:400px; height:22px; border:1px solid #AED4EB; padding-left:5px; float:left; padding-top:3px"> <strong> 共{$bcjyzs.countRs}篇&nbsp;&nbsp;每页{$bcjyzs.pageSize}篇&nbsp;&nbsp;第{$bcjyzs.page}页/共{$bcjyzs.countPage}页&nbsp;&nbsp;<a href="{util->baseUrl}/afindbccdserver.php?page={$bcjyzs.first}&big_type={$smarty.get.big_type|escape:'hex'}&small_type={$smarty.get.small_type|escape:'hex'}{if $name != ''}&name={$name}{/if}{if $sname != ''}&name={$sname}{/if}{if $stel != ''}&tel={$stel}{/if}{if $spro_class != ''}&pro_class={$spro_class}{/if}{if $saddr != ''}&address={$saddr}{/if}{if $sidnum != ''}&ID_number={$sidnum}{/if}{if $sadmiss != ''}&admission={$sadmiss}{/if}{if $spost != ''}&post={$spost}{/if}{if $sunits != ''}&units={$sunits}{/if}&flag={$flag}{if $yearparams != ''}{$yearparams}{/if}" class="a1">首页</a>&nbsp;&nbsp;<a href="{util->baseUrl}/afindbccdserver.php?page={$bcjyzs.previous}&big_type={$smarty.get.big_type|escape:'hex'}&small_type={$smarty.get.small_type|escape:'hex'}{if $name != ''}&name={$name}{/if}{if $sname != ''}&name={$sname}{/if}{if $stel != ''}&tel={$stel}{/if}{if $spro_class != ''}&pro_class={$spro_class}{/if}{if $saddr != ''}&address={$saddr}{/if}{if $sidnum != ''}&ID_number={$sidnum}{/if}{if $sadmiss != ''}&admission={$sadmiss}{/if}{if $spost != ''}&post={$spost}{/if}{if $sunits != ''}&units={$sunits}{/if}&flag={$flag}{if $yearparams != ''}{$yearparams}{/if}" class="a1">上页</a>&nbsp;&nbsp;<a href="{util->baseUrl}/afindbccdserver.php?page={$bcjyzs.next}&big_type={$smarty.get.big_type|escape:'hex'}&small_type={$smarty.get.small_type|escape:'hex'}{if $name != ''}&name={$name}{/if}{if $sname != ''}&name={$sname}{/if}{if $stel != ''}&tel={$stel}{/if}{if $spro_class != ''}&pro_class={$spro_class}{/if}{if $saddr != ''}&address={$saddr}{/if}{if $sidnum != ''}&ID_number={$sidnum}{/if}{if $sadmiss != ''}&admission={$sadmiss}{/if}{if $spost != ''}&post={$spost}{/if}{if $sunits != ''}&units={$sunits}{/if}&flag={$flag}{if $yearparams != ''}{$yearparams}{/if}" class="a1">下页</a>&nbsp;&nbsp;<a href="{util->baseUrl}/afindbccdserver.php?page={$bcjyzs.last}&big_type={$smarty.get.big_type|escape:'hex'}&small_type={$smarty.get.small_type|escape:'hex'}{if $name != ''}&name={$name}{/if}{if $sname != ''}&name={$sname}{/if}{if $stel != ''}&tel={$stel}{/if}{if $spro_class != ''}&pro_class={$spro_class}{/if}{if $saddr != ''}&address={$saddr}{/if}{if $sidnum != ''}&ID_number={$sidnum}{/if}{if $sadmiss != ''}&admission={$sadmiss}{/if}{if $spost != ''}&post={$spost}{/if}{if $sunits != ''}&units={$sunits}{/if}&flag={$flag}{if $yearparams != ''}{$yearparams}{/if}" class="a1">尾页</a></strong> </div>
+          {section name=numId loop=$bcjyzs.arrayNum}
+          <div style="width:3px; height:22px; float:left"></div>
+          <div style="width:23px; height:22px; padding-left:5px; float:left; border:1px solid #AED4EB; padding-top:3px ;{if $bcjyzs.arrayNum[numId]==$bcjyzs.page} background-color:#51D26B {/if} "> <a href="{util->baseUrl}/afindbccdserver.php?page={$bcjyzs.arrayNum[numId]}&big_type={$smarty.get.big_type|escape:'hex'}&small_type={$smarty.get.small_type|escape:'hex'}{if $name != ''}&name={$name}{/if}{if $sname != ''}&name={$sname}{/if}{if $stel != ''}&tel={$stel}{/if}{if $spro_class != ''}&pro_class={$spro_class}{/if}{if $saddr != ''}&address={$saddr}{/if}{if $sidnum != ''}&ID_number={$sidnum}{/if}{if $sadmiss != ''}&admission={$sadmiss}{/if}{if $spost != ''}&post={$spost}{/if}{if $sunits != ''}&units={$sunits}{/if}&flag={$flag}{if $yearparams != ''}{$yearparams}{/if}" class="{if $bcjyzs.arrayNum[numId]==$bcjyzs.page}a2{else}a6{/if}">{$bcjyzs.arrayNum[numId]}{if $bcjyzs.arrayNum[numId]==$bcjyzs.page}{/if}</a> </div>
+          {/section} </div>
+      </div>
+      {/if} </div>
+  </div>
+</div>

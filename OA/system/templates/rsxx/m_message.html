@@ -1,0 +1,58 @@
+<!DOCTYPE html >
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<title>修改消息</title>
+	<link href="css/style.css" rel="stylesheet" />
+	<script src="js/client_js.js"></script>
+</head>
+
+<body>
+	<table width="765" border="0" cellpadding="0" cellspacing="0" class="big_td">
+		<tr>
+			<td height="33" background="../images/list.jpg" id="list">修改消息
+			</td>
+		</tr>
+	</table>
+	<form action="m_message_chk.php" method="post" name="form1">
+		{section name=res_id loop=$res}
+		<table width="500" height="180" border="0" cellpadding="0" cellspacing="0" bgcolor="#DEEBEF">
+			<tr>
+			<td width="100" height="25" align="right" valign="middle" scope="col">标题：</td>
+			<td height="25" align="left" valign="middle" scope="col">
+			<input type="text" name="p_title" value="{$res[res_id].p_title}" /></td>
+			</tr>
+			<tr>
+				<td align="right" valign="middle">内容：</td>
+				<td align="left" valign="top">
+					<textarea name="p_content" cols="50" rows="15">{$res[res_id].p_content}</textarea>
+				</td>
+			</tr>
+			<tr>
+				<td height="30" align="right" valign="middle">类别：</td>
+				<td height="30" align="left" valign="middle">
+					<select name="p_type">
+						{if $res[res_id].u_id==18}}
+
+							<option value="18" selected="selected">企业公告</option>
+							<option value="19">活动安排</option>
+						{else}
+							<option value="18">企业公告</option>
+							<option value="19" selected="selected">活动安排</option>
+						{/if}
+					</select>
+				</td>
+			</tr>
+			<tr>
+				<td colspan="2" height="30" align="center" valign="middle">
+					<input type="hidden" name="id" value="{$res[res_id].id}">
+					<input type="submit" value="修改" />
+					<input type="reset"  value="重置" />
+				</td>
+			</tr>
+		</table>
+		{/section}
+	</form>
+</body>
+</html>
+

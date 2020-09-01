@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<title>任务绩效</title>
+	<link href="css/style.css" rel="stylesheet" />
+	<script src="js/client_js.js"></script>
+</head>
+<body>
+<!--部门列表-->
+	<table width="765" border="1" cellpadding="0" cellspacing="0" class="big_td">
+		<tr>
+			<td height="33" background="images/list.jpg" id="list">任务绩效</td>
+		</tr>
+	</table>
+
+	<table width="765" border="1" cellpadding="0" cellspacing="0" class="big_td">
+		{section name=res1_id loop=$res1}
+			<tr>
+				<td width="50" height="25" align="center" valign="middle">
+					<a href="t_performance.php?d_id={$res1[res1_id].id}">{$res1[res1_id].d_name}</a>
+				</td>
+			</tr>
+		{/section}
+	</table>
+	<!--部门员工-->
+    <table border="0" cellpadding="0" cellspacing="0"  bgcolor="#DEEBEF">
+        {section name=psql_id loop=$psql}
+        <tr>
+            <td width="50" height="25" align="center" valign="middle">
+                <a href="#" onclick="javascript:openWin=open('show_performance.php?action=m&p_id={$psql[psql_id].id}' ,'','width=450,height=450,scrollbars=no');">{$psql[psql_id].u_name}</a>
+            </td>
+        </tr>
+        {/section}
+    </table>
+
+</body>
+</html>

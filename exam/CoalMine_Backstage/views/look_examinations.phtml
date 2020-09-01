@@ -1,0 +1,415 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>模拟试卷——————{$bccdname[0].title}</title>
+<link rel=stylesheet type=text/css href="{util->baseUrl}/css/examination.css">
+</head>
+<body>
+<object id="WebBrowser" classid="ClSID:8856F961-340A-11D0-A96B-00C04Fd705A2" width="0" height="0">
+</object>
+<table id="brand" width="100%" border="1" >
+  <tr>
+    <td class="sub_c_bt" style="padding-top:12px; color:#000000; line-height:20px; font-size:14px; font-weight:bold; text-align:center;">
+    {$bccdname[0].title}<br />
+        <span style=" color:#FF0033; font-weight:normal; padding-right:30px; font-size:12px; float:right;">计时：{$times}分钟  &nbsp;  题数：{$counts}题&nbsp;&nbsp; <a href="#" onClick="document.all.WebBrowser.Execwb(6,1)">模拟</a>&nbsp;&nbsp;</span>
+    </td>
+  </tr>
+    <form name="form_addbccdinfo" method="post" action="" enctype="multipart/form-data">
+    <tr>
+    <td>&nbsp;</td>
+  </tr>
+  <tr class="k_con_t_c">
+    <td class="k_con_t_c_text">姓名：____________    工号：____________ 工种：____________     分数：______ </td>
+  </tr>
+  <tr>
+    <td>&nbsp;</td>
+  </tr>
+  {php}
+              $i=0;
+              $m=0;
+              {/php}
+              {if $Radio==T}
+  <tr>
+    <td> <span style="width:913px; float:left; padding-left:13px; line-height:28px;  color:#000000; margin-bottom:5px; display:inline; border:1px solid #FF0000; font-weight:bold;"> {php}
+              $m++;
+              switch($m){
+              case "1":
+              $n="一";
+              break;
+              case "2":
+              $n="二";
+              break;
+              case "3":
+              $n="三";
+              break;
+              case "4":
+              $n="四";
+              break;
+              case "5":
+              $n="五";
+              break;
+              case "6":
+              $n="六";
+              break;
+              }
+              echo $n;
+              {/php}、 单选题（选择一个正确答案字母）每题{$radiofraction}分，共{$Radios}题。</span></td>
+  </tr>
+   {section name=rad_id loop=$arrayRadio}
+  <tr>
+    <td><span class="kt"> <span class="kt_t"> {php}
+              $i++;
+              echo $i;
+              {/php}、{$arrayRadio[rad_id].content}</span> </span> <span class="kt_a">
+        {if $arrayRadio[rad_id].search_list==6 } <span class="kt_a_1">
+              <input type="radio" name="radio{$arrayRadio[rad_id].id}" style="margin-top:2px; margin-left:2px; float:left; display:inline;" value="A" id="radio{$arrayRadio[rad_id].id}">
+              </span><span class="kt_a_1">A</span> <span class="kt_a_1">
+              <input type="radio" name="radio{$arrayRadio[rad_id].id}" style="margin-top:2px; margin-left:2px; float:left; display:inline;" value="B" id="radio{$arrayRadio[rad_id].id}">
+              </span><span class="kt_a_1">B</span> <span class="kt_a_1">
+              <input type="radio" name="radio{$arrayRadio[rad_id].id}" style="margin-top:2px; margin-left:2px; float:left; display:inline;" value="C" id="radio{$arrayRadio[rad_id].id}">
+              </span><span class="kt_a_1">C</span> <span class="kt_a_1">
+              <input type="radio" name="radio{$arrayRadio[rad_id].id}" style="margin-top:2px; margin-left:2px; float:left; display:inline;" value="D" id="radio{$arrayRadio[rad_id].id}">
+              </span><span class="kt_a_1">D</span><span class="kt_a_1">
+              <input type="radio" name="radio{$arrayRadio[rad_id].id}" style="margin-top:2px; margin-left:2px; float:left; display:inline;" value="E" id="radio{$arrayRadio[rad_id].id}">
+              </span><span class="kt_a_1">E</span> <span class="kt_a_1">
+              <input type="radio" name="radio{$arrayRadio[rad_id].id}" style="margin-top:2px; margin-left:2px; float:left; display:inline;" value="F" id="radio{$arrayRadio[rad_id].id}">
+              </span><span class="kt_a_1">F</span>
+        {elseif $arrayRadio[rad_id].search_list==5 } <span class="kt_a_1">
+              <input type="radio" name="radio{$arrayRadio[rad_id].id}" style="margin-top:2px; margin-left:2px; float:left; display:inline;" value="A" id="radio{$arrayRadio[rad_id].id}">
+              </span><span class="kt_a_1">A</span> <span class="kt_a_1">
+              <input type="radio" name="radio{$arrayRadio[rad_id].id}" style="margin-top:2px; margin-left:2px; float:left; display:inline;" value="B" id="radio{$arrayRadio[rad_id].id}">
+              </span><span class="kt_a_1">B</span> <span class="kt_a_1">
+              <input type="radio" name="radio{$arrayRadio[rad_id].id}" style="margin-top:2px; margin-left:2px; float:left; display:inline;" value="C" id="radio{$arrayRadio[rad_id].id}">
+              </span><span class="kt_a_1">C</span> <span class="kt_a_1">
+              <input type="radio" name="radio{$arrayRadio[rad_id].id}" style="margin-top:2px; margin-left:2px; float:left; display:inline;" value="D" id="radio{$arrayRadio[rad_id].id}">
+              </span><span class="kt_a_1">D</span><span class="kt_a_1">
+              <input type="radio" name="radio{$arrayRadio[rad_id].id}" style="margin-top:2px; margin-left:2px; float:left; display:inline;" value="E" id="radio{$arrayRadio[rad_id].id}">
+              </span><span class="kt_a_1">E</span>
+        {elseif $arrayRadio[rad_id].search_list==4 } <span class="kt_a_1">
+              <input type="radio" name="radio{$arrayRadio[rad_id].id}" style="margin-top:2px; margin-left:2px; float:left; display:inline;" value="A" id="radio{$arrayRadio[rad_id].id}">
+              </span><span class="kt_a_1">A</span> <span class="kt_a_1">
+              <input type="radio" name="radio{$arrayRadio[rad_id].id}" style="margin-top:2px; margin-left:2px; float:left; display:inline;" value="B" id="radio{$arrayRadio[rad_id].id}">
+              </span><span class="kt_a_1">B</span> <span class="kt_a_1">
+              <input type="radio" name="radio{$arrayRadio[rad_id].id}" style="margin-top:2px; margin-left:2px; float:left; display:inline;" value="C" id="radio{$arrayRadio[rad_id].id}">
+              </span><span class="kt_a_1">C</span> <span class="kt_a_1">
+              <input type="radio" name="radio{$arrayRadio[rad_id].id}" style="margin-top:2px; margin-left:2px; float:left; display:inline;" value="D" id="radio{$arrayRadio[rad_id].id}">
+              </span><span class="kt_a_1">D</span>
+        {elseif $arrayRadio[rad_id].search_list==3} <span class="kt_a_1">
+              <input type="radio" name="radio{$arrayRadio[rad_id].id}" style="margin-top:2px; margin-left:2px; float:left; display:inline;" value="A" id="radio{$arrayRadio[rad_id].id}">
+              </span><span class="kt_a_1">A</span> <span class="kt_a_1">
+              <input type="radio" name="radio{$arrayRadio[rad_id].id}" style="margin-top:2px; margin-left:2px; float:left; display:inline;" value="B" id="radio{$arrayRadio[rad_id].id}">
+              </span><span class="kt_a_1">B</span> <span class="kt_a_1">
+              <input type="radio" name="radio{$arrayRadio[rad_id].id}" style="margin-top:2px; margin-left:2px; float:left; display:inline;" value="C" id="radio{$arrayRadio[rad_id].id}">
+              </span><span class="kt_a_1">C</span> {else} <span class="kt_a_1">
+              <input type="radio" name="radio{$arrayRadio[rad_id].id}" style="margin-top:2px; margin-left:2px; float:left; display:inline;" value="A" id="radio{$arrayRadio[rad_id].id}">
+              </span><span class="kt_a_1">A</span> <span class="kt_a_1">
+              <input type="radio" name="radio{$arrayRadio[rad_id].id}" style="margin-top:2px; margin-left:2px; float:left; display:inline;" value="B" id="radio{$arrayRadio[rad_id].id}">
+              </span><span class="kt_a_1">B</span> {/if} </span> </td>
+  </tr>
+   {/section}
+            {/if}
+            
+            
+            {if $Checkbox==T}
+  
+  <tr>
+    <td><span style="width:913px; float:left; padding-left:13px; line-height:28px;  color:#000000; margin-bottom:5px; display:inline; border:1px solid #FF0000; font-weight:bold;"> {php}
+              $m++;
+              switch($m){
+              case "1":
+              $n="一";
+              break;
+              case "2":
+              $n="二";
+              break;
+              case "3":
+              $n="三";
+              break;
+              case "4":
+              $n="四";
+              break;
+              case "5":
+              $n="五";
+              break;
+              case "6":
+              $n="六";
+              break;
+              }
+              echo $n;
+              {/php}、 多选题（选择两个或两个以上正确答案字母）每题{$checkboxfraction}分，共{$Checkboxs}题</span> </td>
+  </tr>
+    {section name=chk_id loop=$arrayCheckbox}
+  <tr>
+    <td><span class="kt"> <span class="kt_t"> {php}
+              $i++;
+              echo $i;
+              {/php}、{$arrayCheckbox[chk_id].content}</span> </span> <span class="kt_a">
+        {if $arrayCheckbox[chk_id].search_list==8} <span class="kt_a_1">
+              <input type="checkbox" name="checkbox{$arrayCheckbox[chk_id].id}[]" style=" margin-left:2px; margin-top:2px; float; display:inline;" value="A" id="checkbox{$arrayCheckbox[chk_id].id}">
+              </span><span class="kt_a_1">A</span> <span class="kt_a_1">
+              <input type="checkbox" name="checkbox{$arrayCheckbox[chk_id].id}[]" style=" margin-left:2px; margin-top:2px; float; display:inline;" value="B" id="checkbox{$arrayCheckbox[chk_id].id}">
+              </span><span class="kt_a_1">B</span> <span class="kt_a_1">
+              <input type="checkbox" name="checkbox{$arrayCheckbox[chk_id].id}[]" style=" margin-left:2px; margin-top:2px; float; display:inline;" value="C" id="checkbox{$arrayCheckbox[chk_id].id}">
+              </span><span class="kt_a_1">C</span> <span class="kt_a_1">
+              <input type="checkbox" name="checkbox{$arrayCheckbox[chk_id].id}[]" style=" margin-left:2px; margin-top:2px; float; display:inline;" value="D" id="checkbox{$arrayCheckbox[chk_id].id}">
+              </span><span class="kt_a_1">D</span> <span class="kt_a_1">
+              <input type="checkbox" name="checkbox{$arrayCheckbox[chk_id].id}[]" style=" margin-left:2px; margin-top:2px; float; display:inline;" value="E" id="checkbox{$arrayCheckbox[chk_id].id}">
+              </span><span class="kt_a_1">E</span> <span class="kt_a_1">
+              <input type="checkbox" name="checkbox{$arrayCheckbox[chk_id].id}[]" style=" margin-left:2px; margin-top:2px; float; display:inline;" value="F" id="checkbox{$arrayCheckbox[chk_id].id}">
+              </span><span class="kt_a_1">F</span><span class="kt_a_1">
+              <input type="checkbox" name="checkbox{$arrayCheckbox[chk_id].id}[]" style=" margin-left:2px; margin-top:2px; float; display:inline;" value="G" id="checkbox{$arrayCheckbox[chk_id].id}">
+              </span><span class="kt_a_1">G</span> <span class="kt_a_1">
+              <input type="checkbox" name="checkbox{$arrayCheckbox[chk_id].id}[]" style=" margin-left:2px; margin-top:2px; float; display:inline;" value="H" id="checkbox{$arrayCheckbox[chk_id].id}">
+              </span><span class="kt_a_1">H</span>
+        {elseif $arrayCheckbox[chk_id].search_list==7} <span class="kt_a_1">
+              <input type="checkbox" name="checkbox{$arrayCheckbox[chk_id].id}[]" style=" margin-left:2px; margin-top:2px; float; display:inline;" value="A" id="checkbox{$arrayCheckbox[chk_id].id}">
+              </span><span class="kt_a_1">A</span> <span class="kt_a_1">
+              <input type="checkbox" name="checkbox{$arrayCheckbox[chk_id].id}[]" style=" margin-left:2px; margin-top:2px; float; display:inline;" value="B" id="checkbox{$arrayCheckbox[chk_id].id}">
+              </span><span class="kt_a_1">B</span> <span class="kt_a_1">
+              <input type="checkbox" name="checkbox{$arrayCheckbox[chk_id].id}[]" style=" margin-left:2px; margin-top:2px; float; display:inline;" value="C" id="checkbox{$arrayCheckbox[chk_id].id}">
+              </span><span class="kt_a_1">C</span> <span class="kt_a_1">
+              <input type="checkbox" name="checkbox{$arrayCheckbox[chk_id].id}[]" style=" margin-left:2px; margin-top:2px; float; display:inline;" value="D" id="checkbox{$arrayCheckbox[chk_id].id}">
+              </span><span class="kt_a_1">D</span> <span class="kt_a_1">
+              <input type="checkbox" name="checkbox{$arrayCheckbox[chk_id].id}[]" style=" margin-left:2px; margin-top:2px; float; display:inline;" value="E" id="checkbox{$arrayCheckbox[chk_id].id}">
+              </span><span class="kt_a_1">E</span> <span class="kt_a_1">
+              <input type="checkbox" name="checkbox{$arrayCheckbox[chk_id].id}[]" style=" margin-left:2px; margin-top:2px; float; display:inline;" value="F" id="checkbox{$arrayCheckbox[chk_id].id}">
+              </span><span class="kt_a_1">F</span><span class="kt_a_1">
+              <input type="checkbox" name="checkbox{$arrayCheckbox[chk_id].id}[]" style=" margin-left:2px; margin-top:2px; float; display:inline;" value="G" id="checkbox{$arrayCheckbox[chk_id].id}">
+              </span><span class="kt_a_1">G</span>
+        {elseif $arrayCheckbox[chk_id].search_list==6} <span class="kt_a_1">
+              <input type="checkbox" name="checkbox{$arrayCheckbox[chk_id].id}[]" style=" margin-left:2px; margin-top:2px; float; display:inline;" value="A" id="checkbox{$arrayCheckbox[chk_id].id}">
+              </span><span class="kt_a_1">A</span> <span class="kt_a_1">
+              <input type="checkbox" name="checkbox{$arrayCheckbox[chk_id].id}[]" style=" margin-left:2px; margin-top:2px; float; display:inline;" value="B" id="checkbox{$arrayCheckbox[chk_id].id}">
+              </span><span class="kt_a_1">B</span> <span class="kt_a_1">
+              <input type="checkbox" name="checkbox{$arrayCheckbox[chk_id].id}[]" style=" margin-left:2px; margin-top:2px; float; display:inline;" value="C" id="checkbox{$arrayCheckbox[chk_id].id}">
+              </span><span class="kt_a_1">C</span> <span class="kt_a_1">
+              <input type="checkbox" name="checkbox{$arrayCheckbox[chk_id].id}[]" style=" margin-left:2px; margin-top:2px; float; display:inline;" value="D" id="checkbox{$arrayCheckbox[chk_id].id}">
+              </span><span class="kt_a_1">D</span> <span class="kt_a_1">
+              <input type="checkbox" name="checkbox{$arrayCheckbox[chk_id].id}[]" style=" margin-left:2px; margin-top:2px; float; display:inline;" value="E" id="checkbox{$arrayCheckbox[chk_id].id}">
+              </span><span class="kt_a_1">E</span> <span class="kt_a_1">
+              <input type="checkbox" name="checkbox{$arrayCheckbox[chk_id].id}[]" style=" margin-left:2px; margin-top:2px; float; display:inline;" value="F" id="checkbox{$arrayCheckbox[chk_id].id}">
+              </span><span class="kt_a_1">F</span>
+        {elseif $arrayCheckbox[chk_id].search_list==5} <span class="kt_a_1">
+              <input type="checkbox" name="checkbox{$arrayCheckbox[chk_id].id}[]" style=" margin-left:2px; margin-top:2px; float; display:inline;" value="A" id="checkbox{$arrayCheckbox[chk_id].id}">
+              </span><span class="kt_a_1">A</span> <span class="kt_a_1">
+              <input type="checkbox" name="checkbox{$arrayCheckbox[chk_id].id}[]" style=" margin-left:2px; margin-top:2px; float; display:inline;" value="B" id="checkbox{$arrayCheckbox[chk_id].id}">
+              </span><span class="kt_a_1">B</span> <span class="kt_a_1">
+              <input type="checkbox" name="checkbox{$arrayCheckbox[chk_id].id}[]" style=" margin-left:2px; margin-top:2px; float; display:inline;" value="C" id="checkbox{$arrayCheckbox[chk_id].id}">
+              </span><span class="kt_a_1">C</span> <span class="kt_a_1">
+              <input type="checkbox" name="checkbox{$arrayCheckbox[chk_id].id}[]" style=" margin-left:2px; margin-top:2px; float; display:inline;" value="D" id="checkbox{$arrayCheckbox[chk_id].id}">
+              </span><span class="kt_a_1">D</span> <span class="kt_a_1">
+              <input type="checkbox" name="checkbox{$arrayCheckbox[chk_id].id}[]" style=" margin-left:2px; margin-top:2px; float; display:inline;" value="E" id="checkbox{$arrayCheckbox[chk_id].id}">
+              </span><span class="kt_a_1">E</span> {else} <span class="kt_a_1">
+              <input type="checkbox" name="checkbox{$arrayCheckbox[chk_id].id}[]" style=" margin-left:2px; margin-top:2px; float; display:inline;" value="A" id="checkbox{$arrayCheckbox[chk_id].id}">
+              </span><span class="kt_a_1">A</span> <span class="kt_a_1">
+              <input type="checkbox" name="checkbox{$arrayCheckbox[chk_id].id}[]" style=" margin-left:2px; margin-top:2px; float; display:inline;" value="B" id="checkbox{$arrayCheckbox[chk_id].id}">
+              </span><span class="kt_a_1">B</span> <span class="kt_a_1">
+              <input type="checkbox" name="checkbox{$arrayCheckbox[chk_id].id}[]" style=" margin-left:2px; margin-top:2px; float; display:inline;" value="C" id="checkbox{$arrayCheckbox[chk_id].id}">
+              </span><span class="kt_a_1">C</span> <span class="kt_a_1">
+              <input type="checkbox" name="checkbox{$arrayCheckbox[chk_id].id}[]" style=" margin-left:2px; margin-top:2px; float; display:inline;" value="D" id="checkbox{$arrayCheckbox[chk_id].id}">
+              </span><span class="kt_a_1">D</span> {/if} </span> </td>
+  </tr>
+     {/section}
+            {/if}
+            
+            {if $Fill==T}
+  <tr>
+    <td><span style="width:913px; float:left; padding-left:13px; line-height:28px;  color:#000000; margin-bottom:5px; display:inline; border:1px solid #FF0000; font-weight:bold;"> {php}
+              $m++;
+              switch($m){
+              case "1":
+              $n="一";
+              break;
+              case "2":
+              $n="二";
+              break;
+              case "3":
+              $n="三";
+              break;
+              case "4":
+              $n="四";
+              break;
+              case "5":
+              $n="五";
+              break;
+              case "6":
+              $n="六";
+              break;
+              }
+              echo $n;
+              {/php}、 填空题（每题{$fillfraction}分，共{$Fills}题）</span> </td>
+  </tr>
+      {section name=fil_id loop=$arrayFill}
+  <tr>
+    <td><span class="kt" style="background-color:#FFFFFF; border:1px dashed #FF6600; color:#333333;"> <span style="padding-top:4px; float:left;"> {php}
+              $i++;
+              echo $i;
+              {/php}、{$arrayFill[fil_id].content|replace:"______":" <span style=' line-height:22px; padding-left:2px; padding-right:2px;'><input name='fill[]' type='text'  style='width:80px; height:18px; line-height:18px; border:1px solid #DDDDDD;' id='fill' size='10' maxlength='50'></span>"} </span> </span></td>
+  </tr>
+    {/section}
+            {/if}
+            
+            {if $Judgment==T}
+  <tr>
+    <td><span style="width:913px; float:left; padding-left:13px; line-height:28px;  color:#000000; margin-bottom:5px; display:inline; border:1px solid #FF0000; font-weight:bold;"> {php}
+              $m++;
+              switch($m){
+              case "1":
+              $n="一";
+              break;
+              case "2":
+              $n="二";
+              break;
+              case "3":
+              $n="三";
+              break;
+              case "4":
+              $n="四";
+              break;
+              case "5":
+              $n="五";
+              break;
+              case "6":
+              $n="六";
+              break;
+              }
+              echo $n;
+              {/php}、 判断题（正确的选正确；错误的选错误）每题{$judgmentfraction}分，共{$Judgments}题</span> </td>
+  </tr>
+       {section name=jud_id loop=$arrayJudgment}
+  <tr>
+    <td><span class="kt"> <span class="kt_t"> {php}
+              $i++;
+              echo $i;
+              {/php}、{$arrayJudgment[jud_id].content}</span> </span><span class="kt_a"> <span class="kt_a_1">
+              <input type="radio" name="judgment{$arrayJudgment[jud_id].id}" style="margin-top:2px; margin-left:2px; float:left; display:inline;" value="正确" id="judgment{$arrayJudgment[jud_id].id}">
+              </span><span class="kt_a_1" style="width:35px;">正确</span><span class="kt_a_1">
+              <input type="radio" name="judgment{$arrayJudgment[jud_id].id}" style="margin-top:2px; margin-left:2px; float:left; display:inline;" value="错误" id="judgment{$arrayJudgment[jud_id].id}">
+              </span><span class="kt_a_1" style="width:35px;">错误</span></span></td>
+  </tr>
+       {/section}
+            {/if}
+  <tr>
+    <td>&nbsp;</td>
+  </tr>
+    {if $Explain==T}
+    <tr>
+        <td><span style="width:913px; float:left; padding-left:13px; line-height:28px;  color:#000000; margin-bottom:5px; display:inline; border:1px solid #FF0000; font-weight:bold;"> {php}
+              $m++;
+              switch($m){
+              case "1":
+              $n="一";
+              break;
+              case "2":
+              $n="二";
+              break;
+              case "3":
+              $n="三";
+              break;
+              case "4":
+              $n="四";
+              break;
+              case "5":
+              $n="五";
+              break;
+              case "6":
+              $n="六";
+              break;
+              }
+              echo $n;
+              {/php}、 名词解释题（每题5分，共{$Explains}题）</span> </td>
+    </tr>
+    {section name=exp_id loop=$arrayExplain}
+    <tr>
+        <td><span class="kt"> <span class="kt_t"> {php}
+              $i++;
+              echo $i;
+              {/php}、{$arrayExplain[exp_id].content} </span> </span> <span style="float:left; padding-left:25px;">
+              <textarea name="explain{$arrayExplain[exp_id].id}" id="explain{$arrayExplain[exp_id].id}" style="width:780px; padding-left:5px; float:left; line-height:25px; border:1px solid #AAAAAA; height:200px;" rows=""></textarea>
+              </span></td>
+    </tr>
+    {/section}
+    {/if}
+
+    {if $Answer==T}
+  <tr>
+    <td><span style="width:913px; float:left; padding-left:13px; line-height:28px;  color:#000000; margin-bottom:5px; display:inline; border:1px solid #FF0000; font-weight:bold;"> {php}
+              $m++;
+              switch($m){
+              case "1":
+              $n="一";
+              break;
+              case "2":
+              $n="二";
+              break;
+              case "3":
+              $n="三";
+              break;
+              case "4":
+              $n="四";
+              break;
+              case "5":
+              $n="五";
+              break;
+              case "6":
+              $n="六";
+              break;
+              }
+              echo $n;
+              {/php}、 问答题（每题5分，共{$Answers}题）</span> </td>
+  </tr>
+     {section name=ans_id loop=$arrayAnswer}
+  <tr>
+    <td><span class="kt"> <span class="kt_t"> {php}
+              $i++;
+              echo $i;
+              {/php}、{$arrayAnswer[ans_id].content} </span> </span> <span style="float:left; padding-left:25px;">
+              <textarea name="answer{$arrayAnswer[ans_id].id}" id="answer{$arrayAnswer[ans_id].id}" style="width:780px; padding-left:5px; float:left; line-height:25px; border:1px solid #AAAAAA; height:200px;" rows=""></textarea>
+              </span></td>
+  </tr>
+    {/section}
+            {/if}
+            
+            {if $Discourse==T}
+  <tr>
+    <td><span style="width:913px; float:left; padding-left:13px; line-height:28px;  color:#000000; margin-bottom:5px; display:inline; border:1px solid #FF0000; font-weight:bold;"> {php}
+              $m++;
+              switch($m){
+              case "1":
+              $n="一";
+              break;
+              case "2":
+              $n="二";
+              break;
+              case "3":
+              $n="三";
+              break;
+              case "4":
+              $n="四";
+              break;
+              case "5":
+              $n="五";
+              break;
+              case "6":
+              $n="六";
+              break;
+              }
+              echo $n;
+              {/php}、 论述题（每题5分，共{$Discourses}题）</span> </td>
+  </tr>
+      {section name=dis_id loop=$arrayDiscourse}
+  <tr>
+    <td><span class="kt"> <span class="kt_t"> {php}
+              $i++;
+              echo $i;
+              {/php}、{$arrayDiscourse[dis_id].content}</span> </span> <span style="float:left; padding-left:25px;">
+              <textarea name="discourse{$arrayDiscourse[dis_id].id}" style="width:800px; padding-left:5px; float:left; line-height:25px; border:1px solid #AAAAAA; height:300px;" id="discourse{$arrayDiscourse[dis_id].id}" cols="80" rows="15"></textarea>
+              </span></td>
+  </tr>
+     {/section}
+            {/if}
+      </form>
+</table>
+</body>
+</html>

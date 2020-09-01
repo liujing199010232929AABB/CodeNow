@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<title>考勤管理</title>
+	<link href="css/style.css" rel="stylesheet" />
+	<script src="js/client_js.js"></script>
+</head>
+
+<body>
+<table width="765" border="1" cellpadding="0" cellspacing="0" class="big_td">
+	<tr>
+		<td height="33" background="images/list.jpg" id="list">考勤管理</td>
+	</tr>
+</table>
+<table width="765" border="1" cellpadding="0" cellspacing="0" bgcolor="#DEEBEF">
+	<tr>
+		<td height="25" colspan="8" align="center" valign="middle">
+		<a href="#" onclick="javascript:openWin=open('set_time.php' ,'','width=500,height=100,scrollbars=no');">设置时间</a>&nbsp;&nbsp;
+		<a href="del_note_chk.php" onclick="return del_mess();">清空记录</A>
+		</td>
+	</tr>
+	<tr>
+		<td width="75" height="20" align="center" valign="middle">日期</td>
+		<td width="75" height="20" align="center" valign="middle">时间</td>
+  		<td width="75" height="20" align="center" valign="middle">职员姓名</td>
+		<td width="75" align="center" valign="middle">上班签到</td>
+		<td width="75" align="center" valign="middle">下班签退</td>
+		<td width="75" align="center" valign="middle">加班签到</td>
+		<td width="75" align="center" valign="middle">加班签退</td>
+		<td width="75" align="center" valign="middle">病事假</td>
+		
+	</tr>
+	{section name=rec_id loop=$rec}
+		<tr>
+			<td height="25" align="center" valign="middle">{$rec[rec_id].r_date}</td>
+			<td height="25" align="center" valign="middle">{$rec[rec_id].r_time}</td>
+			<td height="25" align="center" valign="middle">
+			{section name=uc_id loop=$uc}
+				{if $rec[rec_id].p_id==$uc[uc_id].id}
+			 		{$uc[uc_id].u_name}
+				{/if}
+			{/section}
+			</td>
+			<td align="center" valign="middle">
+			{if $rec[rec_id].r_type==1 }
+				{if $rec[rec_id].r_state==0 }
+					正点上班
+				{else}
+					迟到
+				{/if}
+			{else}
+			-
+			{/if}
+		</td>
+			<td align="center" valign="middle">
+			{if $rec[rec_id].r_type==0 }
+				{if $rec[rec_id].r_state==0 }
+					早退
+				{else}
+					正点上班
+				{/if}
+			{else}
+			-
+			{/if}
+			</td>
+			<td align="center" valign="middle">
+				{if $rec[rec_id].r_type==2 }
+				{if $rec[rec_id].r_state==0 }
+					正点上班
+				{else}
+					晚点上班
+				{/if}
+			{else}
+			-
+			{/if}
+			</td>
+			<td align="center" valign="middle">
+			{if $rec[rec_id].r_type==3 }
+				{if $rec[rec_id].r_state==0 }
+					早退
+				{else}
+					正点上班
+				{/if}
+			{else}
+			-
+			{/if}
+			</td>
+			<td align="center" valign="middle">
+			{if $rec[rec_id].r_type==4 or $rec[rec_id].r_type==5 }
+				{if $rec[rec_id].r_state==0 }
+					病假
+				{else}
+					事假
+				{/if}
+			{else}
+			-
+			{/if}
+		</td>
+		</tr>
+{/section}
+</table>
+</body>
+</html>

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <link href="css/style.css" rel="stylesheet" />
+<body>
+
+<table style="width:100%;  background:url(images/bg_02.jpg)  no-repeat 0 -12px" >
+    <tr >
+        <td width="80%" height="70">&nbsp;</td>
+        <td height="29" align="center"><a style="color:#ffffff;" href="pub_main.php" target="_parent">首页</a></td>
+        <td height="21" align="center"><a style="color:#ffffff;" href="index.php" target="_parent">重新登录</a></td>
+        <td height="21" align="center"><a style="color:#ffffff;" href="logout.php" target="_parent">退出</a></td>
+        <td height="21">&nbsp;</td>
+    </tr>
+    <!--<tr>-->
+        <!--<td width="55" height="57" align="center" valign="middle">&nbsp;</td>-->
+        <!--<td width="102" align="center" valign="middle">&nbsp;</td>-->
+        <!--<td width="52" align="center" valign="middle">&nbsp;</td>-->
+        <!--<td width="14" align="center" valign="middle">&nbsp;</td>-->
+    <!--</tr>-->
+    <tr>
+        <td width="1">&nbsp;</td>
+        <td width="1" align="left" valign="middle"><font color="#f0f0f0">{$smarty.session.u_name}</font></td>
+        <td width="1" align="left" valign="middle"><font color="#f0f0f0">{$smarty.session.u_depart}</font></td>
+        <td width="1" height="20" align="center" valign="middle"><b><font color="#f0f0f0">
+            {$smarty.now|date_format:"%Y-%m-%d %H:%M:%S"}</font></b></td>
+        <td width="1">&nbsp;</td>
+    </tr>
+</table>
+</body>
+</html>
+

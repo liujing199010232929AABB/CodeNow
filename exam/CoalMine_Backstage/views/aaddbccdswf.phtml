@@ -1,0 +1,111 @@
+<link href="{util->baseUrl}/css/style.css" rel="stylesheet" type="text/css" />
+<link href="{util->baseUrl}/css/reset.css" rel="stylesheet" type="text/css" />
+<div id="con_right">
+  <div class="right_con">
+    <div class="right_con_bt">·{$smarty.get.big_type} < {$smarty.get.small_type}</div>
+    <br />
+    <br />
+    <br />
+    <DIV class="right_con_form">
+     <form name="form_addbccdinfo" method="post" action="" enctype="multipart/form-data" onsubmit="return chkinputbccdinfo(this)">
+      <p><br />
+        所属类别：
+        <select name="pro_class" id="pro_class">
+          <option value="">请选择</option>
+          
+    	{$displayType}
+    
+        </select>
+      </p>
+      <p>题型：
+        <select name="pro_type" id="pro_type">
+         <option value="">请选择</option>
+         	{$tb_exam_type}
+        </select>
+        <br />
+      <br />
+          试题难度：
+      <select name="degree" id="degree">
+          <option value="">请选择</option>
+          {html_options options = $degreeArr}
+      </select>
+      <br />
+      <br />
+        分数：<input type="text" name="fraction" size="15" class="input1" />
+<br/>
+  <br/>
+          是否必须掌握：<input type="radio" name="mustknow" value="1" checked>是 &nbsp;<input type="radio" name="mustknow" value="0">否
+          <br/>
+          <br/>
+          选择语音内容：
+          <input name="sound" type="file" class="input1" id="sound" size="50" />
+          <br/>
+          <br/>
+        问题：{util->editor p0="content" p1="" p2="90%" p3="230"}
+   <br/> <br />
+   注意：在添加“填空题”时，使用“______”填充要填写内容的空格，使用“ ”（空格）来区分每个空的答案。
+  <br/> <br />
+     注意：在添加“多选题”时，使用“ ”（空格）来区分多个答案。  
+   <br/> <br />
+   选项： 
+   <input name="search_list" type="text" id="search_list" size="10" class="input1" />（*在添加单选和多选题时，请注意填写每题的选项数目,其余题目不用填写 ）
+<br/> 
+   <br />  
+  
+ 答案： <textarea name="answer" id="answer" cols="103" rows="10" class="input1"></textarea>
+    <br/> <br />
+    解析： <textarea name="resolve" id="resolve" cols="103" rows="10" class="input1"></textarea>
+   <br/> <br />
+          <input type="radio" name="isactive" value="1" checked/>启用&nbsp;&nbsp;&nbsp;<input type="radio" name="isactive" value="0" />禁用
+  <br/> <br />
+          <input type="submit" value="提交">
+    
+   <br />
+        <br />
+      </p>
+    </form>
+    </DIV>
+    <BR>
+  </div>
+</div>
+<script language="javascript">
+    function chkinputbccdinfo(form){ldelim}
+        if(form.pro_class.value==''){ldelim}
+            alert('请选择工种！');
+            form.pro_class.focus();
+            return false; 
+        {rdelim}
+        if(form.pro_type.value==''){ldelim}
+            alert('请选择题型！');
+            form.pro_type.focus();
+            return false; 
+       {rdelim}
+
+       if(form.fraction.value==''){ldelim}
+           alert('请输入分值！');
+           form.fraction.focus();
+           return false; 
+      {rdelim}
+	  
+	  	var Expression=/^([1-9])([0-9])*[0-9]$|^[1-9]$/;		//判断提交的值是否为正整数的正则表达式
+		var objExp=new RegExp(Expression);
+		if(!objExp.test(form.fraction.value)){ldelim}
+           alert('请输入正确的分值！');
+           form.fraction.focus();
+           return false; 
+      {rdelim}
+	 
+	    if(form.answer.value==''){ldelim}
+          alert('请填写答案！');
+          form.answer.focus();
+          return false; 
+     {rdelim}
+        if(form.degree.value==''){ldelim}
+        alert('请选择试题难度！');
+        form.degree.focus();
+        return false;
+    {rdelim}
+        return true; 
+    {rdelim}
+
+</script>

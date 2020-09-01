@@ -1,0 +1,43 @@
+<script type="text/javascript" src="Scripts/jquery-1.4.2.js"></script>
+
+<script type="text/javascript">
+
+    <!-- 获取服务器时间 -->
+
+$(document).ready(function aafun(){ldelim}
+
+   $.post("times.php",function(tim){ldelim}
+
+	if(tim<"{$before_time}" ){ldelim}
+		alert('考试系统未开通，请开通后在登录');
+		window.close();
+	{rdelim}else if(tim>"{$before_time}" && tim<"{$start_time}" ){ldelim}
+		var sed=({$start_time}-tim)%60 ;
+		if(sed==0){ldelim}
+			var as=({$start_time}-tim)/60 ;
+			var ad=as + ": 00" ;
+		{rdelim}else{ldelim}
+			var as=parseInt(({$start_time}-tim)/60);
+			var ad=as + ": " + sed;
+		{rdelim}
+		var wait='考试在'+ad+' 分钟后开始，请等待！';
+		document.getElementById("tm").innerHTML = wait;						//将获取的当前时间赋值给指定的Div标签
+	{rdelim}else if(tim>"{$start_time}"  && tim<"{$game_over}"){ldelim}		//判断考试的开始时间，如果当前时间与系统设定时间相同，则开始考试
+		window.open('exams.php?examination_id={$smarty.session.exam_id}');
+		window.close();
+	{rdelim}else if(tim>"{$after_time}" && tim<"{$game_over}" ){ldelim}
+		alert('考试已经开始超过15分钟，您不得进入考场');
+		window.close();
+	{rdelim}else if(tim>"{$game_over}"){ldelim}
+		alert('考试已经结束！');
+		window.close();
+	{rdelim} 	
+
+
+{rdelim});
+
+   setTimeout("aafun()",1000) ;
+
+{rdelim});
+</script>
+<DIV id=tm></DIV>

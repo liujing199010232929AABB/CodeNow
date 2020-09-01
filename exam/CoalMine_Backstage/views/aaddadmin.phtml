@@ -1,0 +1,52 @@
+<link href="{util->baseUrl}/css/style.css" rel="stylesheet" type="text/css" />
+<link href="{util->baseUrl}/css/reset.css" rel="stylesheet" type="text/css" />
+<!--右侧-->
+<div id="con_right">
+  <div class="right_con">
+    <div class="right_con_bt">·{$smarty.get.big_type} < {$smarty.get.small_type}</div>
+    <div class="right_con_form">
+      <form name="form" method="post" id="form" action="" onsubmit="return chklogin(this)" >
+        <p>选择员工：
+          <select name="name" id="name">
+          <option selected>请选择员工</option>
+            {html_options options=$arrayBccdnames}       
+          </select>
+          <br />
+          <br />
+          权限： 
+          <input name="permissions" type="radio" id="permissions" value="1" />
+          队长
+          <input name="permissions" type="radio" id="permissions" value="2"  />
+          管理员
+          <input name="permissions" type="radio" id="permissions" value="3"  />
+          超级管理员<br/>
+          <br/>
+          冻结/解冻：
+          <input type="radio" name="freeze" id="freeze" value="1"  />
+          冻结
+          <input name="freeze" type="radio" id="freeze" value="0" checked  />
+          解冻 <br/>
+          <br/>
+          <input type="submit" name="submit" id="submit" value="提交" />
+          &nbsp;&nbsp;
+          <input type="reset" value="重写" />
+        </p>
+      </form>
+    </div>
+   </div>
+</div>
+<script language="javascript">
+function chklogin(form){ldelim}  
+	if(form.name.value=='' ){ldelim}
+    	alert('请选择管理员！');
+        form.name.focus();
+        return false; 
+  	{rdelim}
+	if(form.permissions.value=='' ){ldelim}
+    	alert('请设置管理员权限！');
+        form.permissions.focus();
+        return false; 
+  	{rdelim}
+    	return true;
+{rdelim}
+</script>

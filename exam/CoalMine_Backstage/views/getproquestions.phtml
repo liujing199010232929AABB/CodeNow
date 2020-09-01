@@ -1,0 +1,77 @@
+<script>
+    {literal}
+    $(document).ready(function(){
+        $("input[type='checkbox'][name!='exam_user[]']")
+            .each(function(){
+                if(strArr.in_array($(this).attr("name")+$(this).val())){
+                    $(this).attr('checked',true);
+                }
+            })
+    });
+
+    function deleteElem(obj){
+        if(!obj.checked){
+            strArr.remove(obj.name+obj.value);
+            $("#checkedquestions").attr("value",strArr.join('@'));
+        }
+    }
+    Array.prototype.indexOf = function(val){
+        for(var i=0;i<this.length;i++){
+            if(this[i] == val){
+                return i;
+            }
+        }
+    }
+    Array.prototype.remove = function(val){
+        var index = this.indexOf(val);
+        if(index > -1){
+            this.splice(index,1)
+        }
+    }
+
+    {/literal}
+</script>
+{section name=id loop=$tb_exam_type}
+<DIV class=section title={$tb_exam_type[id].chinese}>
+    <TABLE border=0 cellSpacing=0 cellPadding=0 width="697" style="margin-top:8px; display:inline; background-color:#f6f5f5; border:1px solid #c6c4c4;">
+        <TBODY>
+        <TR>
+            <TD class=bt-tdleft><H5>{$tb_exam_type[id].chinese}</H5></TD>
+            <TD class=bt-tdm><DIV>
+                <DIV class=right2-bt><SPAN class=Text-t12>{$tb_exam_type[id].chinese}题题库。</SPAN><BR>
+                    <DIV><IMG src="images/row.jpg" width=4
+                              height=10>&nbsp;提示：在展开后的列表中存储了所有{$tb_exam_type[id].chinese}的内容，管理员可以根据需要进行选择......</DIV>
+                </DIV>
+            </DIV></TD>
+            <TD class=bt-tdr><SPAN class=control><A onfocus=this.blur() onclick="openShutManager(this,'{$tb_exam_type[id].id}',false,'折叠','展开');">展开</A></SPAN></TD>
+        </TR>
+        </TBODY>
+    </TABLE>
+    <DIV style="DISPLAY: {if $emtype == $tb_exam_type[id].english} block {else}none{/if}" id={$tb_exam_type[id].id}>
+        <DIV> &nbsp;&nbsp; </DIV>
+        <DIV class=nr-2>
+                    <PRE class=brush:java>
+<div style="width: 95%; border: 1px solid #21de26; ">
+
+    {foreach from=$problem key=k item=v}
+    {if $k == $tb_exam_type[id].english}
+    {section name=ids loop=$v}
+    <div style="width:100%; border-top: 1px solid #21de26; ">
+        <ul>
+            <li style="width:10%; line-height:23px; float:left; text-align:center; border-right: 1px solid #21de26;"><input type="checkbox"  name="{$v[ids].pro_type}[]" value="{$v[ids].id}" onchange="deleteElem(this)"/>
+            </li>
+            <li style="float:left; padding-left:6px;">{$v[ids].content}</li>
+        </ul>
+    </div>
+    {/section}
+    {/if}
+    {/foreach}
+</div>
+<div id="pager{$tb_exam_type[id].english}"></div>
+</PRE>
+        </DIV>
+    </DIV>
+</DIV>
+
+<!--section 二叉树的性质-->
+{/section}

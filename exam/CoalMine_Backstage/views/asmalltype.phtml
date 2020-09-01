@@ -1,0 +1,41 @@
+﻿<link href="{util->baseUrl}/css/style.css" rel="stylesheet" type="text/css" />
+<link href="{util->baseUrl}/css/reset.css" rel="stylesheet" type="text/css" />
+<div id="con_right">
+  <div class="right_con">
+    <div class="right_con_bt">·{$smarty.get.big_type} < {$smarty.get.small_type}</div>
+    <br />
+    <br />
+    <br />
+    <DIV class="right_con_form">
+         <form name="form_addsmalltype" method="post" action="{util->baseUrl}/asmalltype.php" onSubmit="return chkInputSmalltype(this)">
+            <div style="width:100%; text-align:left; padding-top:5px; padding-left:50px">
+                  小类名称：<input type="text" name="typename" size="30" class="input"/><br /><br /> 
+                  所属大类：<select name="bigtypeid">
+                     <option value="">-请选择-</option>
+                     {html_options options = $arrayBtypeOption}
+                  </select><br /><br /> 
+                <input type="submit" value="添加" />&nbsp;&nbsp;<input type="reset" value="重置" />
+            </div> 
+            </form>   
+    </DIV>
+    <BR>
+  </div>
+</div>
+
+<script language="javascript">
+    
+    function chkInputSmalltype (form) {ldelim}
+	if (form.typename.value == ""){ldelim}
+		alert("请输入类别名称！");
+		form.typename.focus();
+		return false;
+	 {rdelim}
+	if (form.bigtypeid.value == ""){ldelim}
+		alert("请选择所属父类！");
+		form.bigtypeid.focus();
+		return false;
+	 {rdelim}
+	return true;
+ {rdelim}
+
+</script> 

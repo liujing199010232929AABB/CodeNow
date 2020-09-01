@@ -1,0 +1,117 @@
+<link href="{util->baseUrl}/css/style.css" rel="stylesheet" type="text/css" />
+<link href="{util->baseUrl}/css/reset.css" rel="stylesheet" type="text/css" />
+<!--右侧-->
+<div id="con_right">
+  <div class="right_con">
+    <div class="right_con_bt">·{$smarty.get.big_type} < {$smarty.get.small_type}</div>
+    <br />
+    <br />
+    <br />
+
+    {if $edit=='t'}
+    <div class="right_con_form">
+  <form name="form_addbcjyz" method="post" action="" enctype="multipart/form-data" onsubmit="return chkinputbccdinfo(this)">
+       <p><br />
+        所属类别：
+        <select name="pro_class" id="pro_class">
+
+      {section name=bccdnameid loop=$arrayBccdnames1}
+       {if $arrayBccdnames1[bccdnameid].id==$bcjyz[0].pro_class}
+        <option selected="selected" value="{$arrayBccdnames1[bccdnameid].id}">{$arrayBccdnames1[bccdnameid].typename}</option>
+        {/if}
+        {/section}
+    	{$displayType}
+    
+        </select>
+      </p>
+      <p>题型：
+        <select name="pro_type" id="pro_type">
+
+         	{$tb_exam_type}
+        </select>
+        <br />
+      <br />
+          试题难度：
+          <select name="degree" id="degree">
+              <option value="">请选择</option>
+              {html_options options = $degreeArr selected=$bcjyz[0].degreeid}
+          </select>
+          <br />
+          <br />
+        分数：<input type="text" name="fraction" size="15" value="{$bcjyz[0].fraction}" class="input1" />
+<br/>
+  <br/>
+          是否必须掌握：<input type="radio" name="mustknow" value="1" {if $bcjyz[0].mustknown == 1}checked{/if}>是 &nbsp;<input type="radio" name="mustknow" value="0" {if $bcjyz[0].mustknown == 0}checked{/if}>否
+          <br/>
+          <br/>
+          语音上传：
+          <input name="sound" type="file" class="input1" id="sound" size="45" />
+          <br/>
+          <br/>
+        问题：{util->editor p0="content" p1=$bcjyz[0].content p2="90%" p3="230"}
+          <br/> <br />
+   选项： 
+   <input name="search_list" type="text" id="search_list" value="{$bcjyz[0].search_list}" size="10" class="input1" />（*在添加单选和多选题时，请注意填写每题的选项数目 ）
+  <br/> <br />
+ 答案： <textarea name="answer" id="answer" cols="103" rows="10" class="input1">{$bcjyz[0].answer}</textarea>
+   <br/> <br />  
+    解析： <textarea name="resolve" id="resolve" cols="103" rows="10" class="input1">{$bcjyz[0].resolve}</textarea>
+   <br/> <br />
+          {if $bcjyz[0].isactive == 1}
+          <input type="radio" name="isactive" value="1" checked/>启用&nbsp;&nbsp;&nbsp;<input type="radio" name="isactive" value="0"/>禁用
+          {else}
+          <input type="radio" name="isactive" value="1"/>启用&nbsp;&nbsp;&nbsp;<input type="radio" name="isactive" value="0" checked/>禁用
+          {/if}
+          <br/> <br />
+    <input type="hidden" name="bcjyzid" value="{$bcjyz[0].id}">
+      <input type="submit" value="提交">&nbsp;&nbsp;&nbsp;{if $q != 't'}<input type="button" value="返回" onclick="javascript:history.go(-1)">{else}<input type="button" value="返回" onclick="javascript:history.go(-2)">{/if}
+    
+   <br />
+        <br />
+    
+
+    </form>
+    </div>
+    {/if} </div>
+</div>
+
+<script language="javascript">
+    function chkinputbccdinfo(form){ldelim}
+    if(form.pro_class.value==''){ldelim}
+    alert('请选择工种！');
+    form.pro_class.focus();
+    return false;
+    {rdelim}
+    if(form.pro_type.value==''){ldelim}
+    alert('请选择题型！');
+    form.pro_type.focus();
+    return false;
+    {rdelim}
+
+    if(form.fraction.value==''){ldelim}
+    alert('请输入分值！');
+    form.fraction.focus();
+    return false;
+    {rdelim}
+
+    var Expression=/^([1-9])([0-9])*[0-9]$|^[1-9]$/;		//判断提交的值是否为正整数的正则表达式
+    var objExp=new RegExp(Expression);
+    if(!objExp.test(form.fraction.value)){ldelim}
+    alert('请输入正确的分值！');
+    form.fraction.focus();
+    return false;
+    {rdelim}
+    if(form.answer.value==''){ldelim}
+    alert('请填写答案！');
+    form.answer.focus();
+    return false;
+    {rdelim}
+    if(form.degree.value==''){ldelim}
+    alert('请选择试题难度！');
+    form.degree.focus();
+    return false;
+    {rdelim}
+    return true;
+    {rdelim}
+
+</script>

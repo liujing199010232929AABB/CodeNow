@@ -1,0 +1,68 @@
+<script src="Scripts/Random_Answer.js" type="text/javascript"></script>
+<!--内容开始 -->
+
+<div id="sub">
+  <div id="sub_left">
+    <div class="left_fl">
+      <div class="left_fl_bt"><img src="images/384.jpg" alt="" /></div>
+      <div id="PARENT">
+        <ul id="left_fl_con1">
+          {section name=exa_id loop=$Examination}
+          <li><a href="Fraction.php?fra_id={$Examination[exa_id].id}&exa_title={$Examination[exa_id].title}" title="{$Examination[exa_id].title}">{util->msubstr p=$Examination[exa_id].title p1=0 p2=20 p3="..."}</a> </li>
+          {/section}
+        </ul>
+      </div>
+    </div>
+    <!-- <div style="line-height:8;">&nbsp;</div>
+    <div class="left_fl">
+      <div class="left_fl_bt"><img src="images/38.jpg" alt="" /></div>
+      <div id="PARENT">
+        <ul id="left_fl_con1">
+          {section name=bul_id loop=$Bulletins}
+          <li><a href="News_Bulletin.php?bulletin_id={$Bulletins[bul_id].id}&new_bulletin=公告" title="{$Bulletins[bul_id].title}">{util->msubstr p=$Bulletins[bul_id].title p1=0 p2=18 p3="..."}</a> </li>
+          {/section}
+        </ul>
+      </div>
+    </div>--> 
+  </div>
+  {if $Fraction.data!=false}
+  <div id="sub_right">
+    <div class="right">
+      <div class="right_bt">{util->msubstr p=$smarty.get.exa_title p1=0 p2=48 p3="..."}</div>
+      <div class="right_con">
+        <div class="right_con_text">
+          <div style="width:100%; height:20px; background-color:#EDEFE3; text-align:center;">
+            <ul>
+              <li style="width:18%; height:20px; line-height:20px; float:left; border-left: 1px solid #0A8DA5;">ID</li>
+              <li style="width:20%; height:20px; line-height:20px; float:left; border-right: 1px solid #0A8DA5;">姓名</li>
+              <li style="width:20%; height:20px; line-height:20px; float:left; border-right: 1px solid #0A8DA5;">工种</li>
+              <li style="width:18%; height:20px; line-height:20px; float:left; border-right: 1px solid #0A8DA5;">成绩</li>
+              <li style="width:20%; height:20px; line-height:20px; float:right; border-right: 1px solid #0A8DA5;">考试时间</li>
+            </ul>
+          </div>
+          {section name=fra_id loop=$Fraction.data}
+          <div style="width:100%; height:20px; border-top: 1px solid #0A8DA5; text-align:center; ">
+            <ul>
+              <li style="width:18%; height:20px; line-height:20px; float:left; border-left: 1px solid #0A8DA5;"> {$Fraction.data[fra_id].id} </li>
+              <li style="width:20%; height:20px; line-height:20px; float:left; border-right: 1px solid #0A8DA5;">{$Fraction.data[fra_id].name}</li>
+              <li style="width:20%; height:20px; line-height:20px; float:left; border-right: 1px solid #0A8DA5;">{$Fraction.data[fra_id].pro_class}</li>
+              <li style="width:18%; height:20px; line-height:20px; float:left; border-right: 1px solid #0A8DA5;">{$Fraction.data[fra_id].fraction}</li>
+              <li style="width:20%; height:20px; line-height:20px; float:right; border-right: 1px solid #0A8DA5;">{$Fraction.data[fra_id].sub_time}</li>  
+            </ul>
+          </div>
+          {/section} <br/>
+          <div style="width:97%; height:22px">
+            <div style="height:22px;  float:left">
+              <div style="width:365px; height:22px; border:1px solid #AED4EB; float:left; padding-top:3px; padding-bottom:3px; padding-left:6px;"> <strong> 共{$Fraction.countRs}篇&nbsp;&nbsp;每页{$Fraction.pageSize}篇&nbsp;&nbsp;第{$Fraction.page}页/共{$Fraction.countPage}页&nbsp;&nbsp;<a href="{util->baseUrl}/Fraction.php?fra_id={$smarty.get.fra_id}&exa_title={$smarty.get.exa_title}&page={$Fraction.first}" class="a1">首页</a>&nbsp;&nbsp;<a href="{util->baseUrl}/Fraction.php?fra_id={$smarty.get.fra_id}&exa_title={$smarty.get.exa_title}&page={$Fraction.previous}" class="a1">上页</a>&nbsp;&nbsp;<a href="{util->baseUrl}/Fraction.php?fra_id={$smarty.get.fra_id}&exa_title={$smarty.get.exa_title}&page={$Fraction.next}" class="a1">下页</a>&nbsp;&nbsp;<a href="{util->baseUrl}/Fraction.php?fra_id={$smarty.get.fra_id}&exa_title={$smarty.get.exa_title}&page={$Fraction.last}" class="a1">尾页</a></strong> </div>
+              {section name=numId loop=$Fraction.arrayNum}
+              <div style="width:3px; height:22px; float:left"></div>
+              <div style="width:23px; height:22px; float:left; border:1px solid #AED4EB; text-align:center; {if $Fraction.arrayNum[numId]==$Fraction.page} background-color:#51D26B {/if} "> <a href="{util->baseUrl}/Fraction.php?fra_id={$smarty.get.fra_id}&exa_title={$smarty.get.exa_title}&page={$Fraction.arrayNum[numId]}" class="{if $Fraction.arrayNum[numId]==$Fraction.page}a2{else}a6{/if}">{$Fraction.arrayNum[numId]}{if $Fraction.arrayNum[numId]==$Fraction.page}{/if}</a> </div>
+              {/section} </div>
+            </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  {else}
+ 	<div class="right">  <img src="images/none2.jpg" alt="" /></div>
+  {/if} </div>

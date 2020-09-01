@@ -1,0 +1,53 @@
+<link href="{util->baseUrl}/css/style.css" rel="stylesheet" type="text/css" />
+<link href="{util->baseUrl}/css/reset.css" rel="stylesheet" type="text/css" />
+<!--右侧-->
+<div id="con_right">
+  <div class="right_con">
+    <div class="right_con_bt">·{$smarty.get.big_type} < {$smarty.get.small_type}</div>
+    <br />
+    <br />
+    <br />
+    <DIV>
+      <DIV style="padding-left:6px;">
+        <UL>
+          <LI style="LINE-HEIGHT: 25px; WIDTH: 63%; FLOAT: left; text-align:center; HEIGHT: 25px; BORDER-RIGHT: #21de26 1px solid; border-bottom:#21de26 1px solid;">类别名称 </LI>
+          <LI style="LINE-HEIGHT: 25px; WIDTH: 20%; FLOAT: left; text-align:center; HEIGHT: 25px; BORDER-RIGHT: #21de26 1px solid; border-bottom:#21de26 1px solid;">添加时间 </LI>
+          <LI style="LINE-HEIGHT: 25px; WIDTH: 15%; FLOAT: left; text-align:center; HEIGHT: 25px; border-bottom:#21de26 1px solid;">操作 </LI>
+        </UL>
+      </DIV>
+     {section name=tID loop=$typeArr}
+      <DIV style="padding-left:6px;">
+        <UL>
+          <LI style="LINE-HEIGHT: 23px; WIDTH: 63%; padding-left:10px; FLOAT: left; HEIGHT: 23px; BORDER-RIGHT: #21de26 1px solid; border-bottom:#21de26 1px solid;">{$typeArr[tID].name}</LI>
+          <LI style="LINE-HEIGHT: 23px; WIDTH: 20%; FLOAT: left; text-align:center; HEIGHT: 23px; BORDER-RIGHT: #21de26 1px solid; border-bottom:#21de26 1px solid;">{util->unHtml p=$typeArr[tID].addtime} </LI>
+          <LI style="LINE-HEIGHT: 23px; WIDTH: 15%; FLOAT: left; text-align:center; HEIGHT: 23px; border-bottom:#21de26 1px solid;"> 
+           <a href="{util->baseUrl}/manageexamtypes.php?f=edit&id={$bigtypes[tID].id}&pid={$bigtypes[tID].pid}&big_type={$smarty.get.big_type|escape:'hex'}&small_type={$smarty.get.small_type|escape:'hex'}">更改</a>&nbsp;<a href="javascript:if(window.confirm('确定删除？')==true){ldelim}window.location.href='{util->baseUrl}/manageexamtypes.php?f=del&id={$bigtypes[tID].id}&big_type={$smarty.get.big_type|escape:'hex'}&small_type={$smarty.get.small_type|escape:'hex'}';{rdelim}">删除</a>
+          </LI>
+        </UL>
+      </DIV>
+      {/section} 
+   </DIV>
+    <br />
+    <br />
+    <br/>
+     {if $isShow == "T"}
+    <div class="right_con_form">
+      <form name="form_manageexamtypes" method="post" action="{util->baseUrl}/manageexamtypes.php?big_type={$smarty.get.big_type|escape:'hex'}&small_type={$smarty.get.small_type|escape:'hex'}" >
+            <div style="width:100%; text-align:left; padding-top:5px; padding-left:50px">
+                所属分类（不填写为一级分类）：
+                <select name="protype" id="protype" class="input1" >
+                    <option value="">请选择</option>
+                {$tb_exam_type}
+                </select>
+                <br />
+                <br />
+                分类名称：<input type="text" name="chinese" size="30" class="input" value="{$examtype[0].chinese}"/><br/><br/>
+                英文名称：<input type="text" name="english" size="30" class="input" value="{$examtype[0].english}"/><br/><br/>
+                <input type="hidden" name="f" value="edit" />
+                <input type="hidden" name="id" value="{$examtype[0].id}" />
+                <input type="submit" value="更改" />&nbsp;&nbsp;<input type="reset" value="重置" />
+            </div> 
+      </form>  
+    </div>
+    {/if} </div>
+</div>

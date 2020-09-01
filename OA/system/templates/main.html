@@ -1,0 +1,137 @@
+<link href="css/style.css" rel="stylesheet" />
+<link href="css/semantic.css" rel="stylesheet" />
+<script src="js/client_js.js"></script>
+<script src="js/semantic.js"></script>
+<table width="100%" border="0" cellpadding="0" cellspacing="0" style="background-color:#DEEBEF;">
+	<tr>
+		<td id="list" style="height:36px  background:url(images/list.jpg) no-repeat ">最新消息</td>
+	</tr>
+	<tr>
+		<td width="50%" align="center" valign="top">
+			<table width="100%" height="195" border="0" cellpadding="0" cellspacing="0" class="big_td">
+				<tr>
+					<td height="20" align="center" valign="middle">企业公告</td>
+				</tr>
+				<tr>
+					<td align="center" valign="top">
+						<!--公告-->
+						<table width="100%" border="0" cellpadding="0" cellspacing="0" bgcolor="#DEEBEF">
+							<tr>
+								<td height="25" align="center" valign="middle">发布时间</td>
+								<td align="center" valign="middle">标题</td>
+							</tr>
+							{section name=per_id loop=$per}
+							<tr>
+								<td height=30 align=center valign=middle>{$per[per_id].p_time}</td>
+								<td align="center" valign="middle" style='text-indent: 30px;'>
+									<a href="show_message.php?id={$per[per_id].id}" target='_blank'>{$per[per_id].p_title|truncate:20:"...":false}</a>
+								</td>
+							</tr>
+							{/section}
+						</table>
+					</td>
+				</tr>
+			</table>
+	</td>
+	<td align="center" valign="top">
+		<table width="100%" height="195" border="0" cellpadding="0" cellspacing="0" class="big_td">
+			<tr>
+			<td height="20" align="center" valign="middle" scope="col">活动安排</td>
+			</tr>
+			<tr>
+				<td align="center" valign="top">
+				<!--活动-->
+					<table width="100%" border="0" cellpadding="0" cellspacing="0" bgcolor="#DEEBEF">
+						<tr>
+						<td height="25" align="center" valign="middle">发布时间</td>
+						<td align="center" valign="middle">标题</td>
+						</tr>
+						{section name=pers_id loop=$pers}
+						<tr>
+							<td height=30 style='text-indent: 30px;' align=left valign=middle>{$pers[pers_id].p_time}</td>
+							<td align="left" valign="middle" style='text-indent: 30px;'>
+								<a href="show_message.php?id={$pers[pers_id].id}" target='_blank'>
+								{$pers[pers_id].p_title|truncate:20:"...":false}
+								</a>
+							</td>
+						</tr>
+						{/section}
+					</table>
+				</td>
+			</tr>
+		</table>
+		</td>
+	</tr>
+	<tr>
+	<td width="50%" align="center" valign="top">
+		<table width="100%" height="195" border="0" cellpadding="0" cellspacing="0" class="big_td">
+			<tr>
+				<td height="20" align="center" valign="middle">个人计划</td>
+			</tr>
+			<tr>
+			<td align="center" valign="top">
+			<!--个人计划-->
+				<table width="100%" border="0" cellpadding="0" cellspacing="0" bgcolor="#DEEBEF">
+					<tr>
+					<td width="75" height="25" align="center" valign="middle">日期</td>
+					<td align="center" valign="middle">内容提要</td>
+					<td align="center" valign="middle">类型</td>
+					</tr>
+					{section name=psql_id loop=$psql}
+						{section name=list_id loop=$list}
+							{if $psql[psql_id].p_type==$list[list_id].id}
+								<tr>
+								<td height="30" align="center" valign="middle">{$psql[psql_id].p_time} </td>
+								<td align="left" valign="middle">{$psql[psql_id].p_plan|truncate:10:"...":false}&nbsp;&nbsp;&nbsp;&nbsp;<a href='show_plan.php?id={$psql[psql_id].id}' target='_blank'>查看全文</a></td>
+								<td width="50" align="center" valign="middle">{$list[list_id].f_name}</td>
+								</tr>
+							{/if}
+						{/section}
+					{/section}
+					{$rst1_page}
+				</table>
+			</td>
+			</tr>
+		</table>
+	</td>
+	<td align="center" valign="top">
+		<table width="100%" height="195" border="0" cellpadding="0" cellspacing="0" class="big_td">
+			<tr>
+				<td height="20" align="center" valign="middle" scope="col">审核批示</td>
+			</tr>
+			<tr>
+				<td align="center" valign="top">
+				<!--审核批示-->
+				<table width="100%" border="0" cellpadding="0" cellspacing="0" bgcolor="#DEEBEF">
+					<tr>
+					<td width="75" height="25" align="center" valign="middle">日期</td>
+					<td height="25" align="center" valign="middle">标题</td>
+					<td width="50" height="25" align="center" valign="middle">是否批示</td>
+					<td width="75" height="25" align="center" valign="middle">操作</td>
+					</tr>
+					{section name=asql_id loop=$asql}
+					<tr>
+						<td height="30" align="center" valign="middle">{$asql[asql_id].i_time}</td>
+						<td height="30" align="left" valign="middle">{$asql[asql_id].i_title}</td>
+						<td height="30" align="center" valign="middle">
+							{if $asql[asql_id].i_state==3}
+							未审核
+							{elseif $asql[asql_id].i_state == 0}
+							未通过
+							{else}
+							通过
+							{/if}
+						</td>
+						<td height="30" align="center" valign="middle">
+							<a href="modify_issuance.php?id={$asql[asql_id].id}">修改</a>||
+							<a href="del_issuance_chk.php?id={$asql[asql_id].id}">删除</a>
+						</td>
+					</tr>
+					{/section}
+				</table>
+				</td>
+			</tr>
+		</table>
+	</td>
+</tr>
+</table>

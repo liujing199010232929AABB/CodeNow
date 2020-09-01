@@ -1,0 +1,100 @@
+<link href="{util->baseUrl}/css/style.css" rel="stylesheet" type="text/css" />
+<link href="{util->baseUrl}/css/reset.css" rel="stylesheet" type="text/css" />
+<SCRIPT src="{util->baseUrl}/Scripts/word_print.js"></SCRIPT>
+<div id="con_right">
+  <div class="right_con">
+    <div class="right_con_bt">·{$smarty.get.big_type} < {$smarty.get.small_type}</div>
+    <br />
+    <br />
+    <br />
+    <DIV class="right_con_form">
+        <br />
+        <form id="form1" name="form1" method="post" action="" onSubmit="return chkselect(this)">
+            考试名称：
+        <select name="examid" id="examid" class="input1" onchange="setlink(this)">
+            <option value="">请选择</option>
+            {html_options options=$titles}
+        </select>
+            <br/>
+            <br/>
+            <input name="examination_id" type="hidden"  id="chkid" value="{$examination_id}"/>
+
+        <div  style="padding-top:18px; padding-bottom:4px; padding-left:6px;">成绩统计分析：<a href="" target="_blank" id="ape" onclick="return chkselect()">成绩统计与分析</a>&nbsp;&nbsp;<a href="" id="aepe" target="_blank" onclick="return chkselect()">考试通过率分析</a>&nbsp;&nbsp; <a id="aspe" href="" onclick="return chkselect()">部门成绩统计分析</a>&nbsp;&nbsp; <a href="" id="adpe" onclick="return chkselect()">部门通过率分析</a>
+    </form>
+    </DIV>
+      {if $pros=="T"}
+      <DIV class="right_con_bt" style="width:725px; height:100px; line-height:22px; padding-left:10px; padding-top:5px; padding-bottom:5px;">
+          <form name="form_addbccdbb" method="post" action="departments.php" target="_blank" enctype="multipart/form-data">
+              <p>
+                  {php}
+                  $i=0;
+                  {/php}
+                  {section name=type_id loop=$pro}
+                  {php}
+                  $i++;
+                  {/php}
+                  <label> <input type="checkbox" name="types[]" value="{$pro[type_id].pro_class}" id="types" {php}if($i<=9){ echo "checked='checked'";}{/php} />
+                      {$pro[type_id].typename} </label>
+                  {$pro[type_id].counts} 人
+                  &nbsp;&nbsp;
+                  {/section} <br />
+              </p>
+              （注意：每次最多只能对9个部门的成绩进行统计分析！）
+              <input name="examination_id" type="hidden"  id="" value="{$examination_id}"/>
+              <input type="submit" value="统计分析各部门的考核成绩">
+              </p>
+          </form>
+      </div>
+      {/if}
+
+      {if $prof=="F"}
+      <DIV class="right_con_bt" style="padding-left:10px; padding-top:5px; padding-bottom:5px; padding-right:10px;">
+          <form name="form_addserver" method="post" action="department.php" target="_blank" enctype="multipart/form-data" style="margin:0px; padding:0px;">
+              选择部门：
+              <select name="pro_class" id="pro_class">
+                  <option value=''>请选择</option>
+                  {$displayType}
+
+              </select>
+              <input name="examination_id" type="hidden" value="{$examination_id}" />
+              <input type="submit" value="部门成绩统计分析" />
+
+          </form>
+      </DIV>
+      {/if}
+      <BR>
+  </div>
+</div>
+
+<script language="javascript">
+    var chkid = document.getElementById("chkid").value;
+    var s = document.getElementById("examid");
+    if(chkid != ""){ldelim}
+        selectOption(s);
+        setlink(s);
+    {rdelim}
+
+    function chkselect(){ldelim}
+        if(s.value==''){ldelim}
+        alert('请选择考试名称！');
+        s.focus();
+        return false;
+        {rdelim}
+        return true;
+    {rdelim}
+
+    function selectOption(s){ldelim}
+        for(var i=0;i< s.options.length;i++){ldelim}
+            if(chkid == s.options[i].value){ldelim}
+                s.options[i].selected = true;
+            {rdelim}
+        {rdelim}
+    {rdelim}
+    function setlink(s){ldelim}
+        var examid = s.value;
+        document.getElementById('ape').href ="aeditbccdbbs.php?examination_id="+examid+"&big_type={$smarty.get.big_type|escape:'hex'}&small_type={$smarty.get.small_type|escape:'hex'}";
+        document.getElementById('aepe').href = "aaddbccdbbs.php?examination_id="+examid+"&big_type={$smarty.get.big_type|escape:'hex'}&small_type={$smarty.get.small_type|escape:'hex'}";
+        document.getElementById('aspe').href = "?pro=F&examination_id="+examid+"&big_type={$smarty.get.big_type|escape:'hex'}&small_type={$smarty.get.small_type|escape:'hex'}";
+        document.getElementById('adpe').href = "?pro=T&examination_id="+examid+"&big_type={$smarty.get.big_type|escape:'hex'}&small_type={$smarty.get.small_type|escape:'hex'}";
+    {rdelim}
+</script>

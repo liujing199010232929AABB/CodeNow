@@ -1,0 +1,34 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+	<meta charset=utf-8" />
+	<title>优秀员工</title>
+	<link href="css/style.css" rel="stylesheet" />
+	<script src="js/client_js.js"></script>
+</head>
+
+<body>
+	<table width="765" border="1" cellpadding="0" cellspacing="0" class="big_td">
+		<tr>
+			<td height="33" background="images/list.jpg" id="list">优秀员工</td>
+		</tr>
+	</table>
+	<table width="765" border="1" cellpadding="0" cellspacing="0" class="big_td">
+		{section name=res_id loop=$res}
+			<tr>
+				<td height="25" width="654">
+					<a href="exc_staf.php?cont={$res[res_id].id}">
+						{$res[res_id].s_fmonth} 到 {$res[res_id].s_lmonth}优秀员工
+					</a>
+				</td>
+				<td width="105" align="center" valign="middle">
+					<a href="del_exc_chk.php?id={$res[res_id].id}">删除</a>
+				</td>
+			</tr>
+		{/section}
+		<tr>
+			<td height="33" colspan="2" >{$cont}</td>
+		</tr>
+	</table>
+</body>
+</html>

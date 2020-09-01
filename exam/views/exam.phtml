@@ -1,0 +1,605 @@
+<script type="text/javascript" xmlns="http://www.w3.org/1999/html" src="Scripts/jquery-1.4.2.js"></script>
+<SCRIPT language=javascript>
+
+window.onbeforeunload = function(){ldelim}	//完成退出操作
+	var n = window.event.screenX - window.screenLeft;
+	var b = n > document.documentElement.scrollWidth-20;
+	if(b && window.event.clientY < 0 || window.event.altKey){ldelim}
+		window.event.returnValue="  退出考试系统?  ";
+	{rdelim}
+	//else{ldelim}
+	//	alert("是刷新而非关闭");
+	//{rdelim}
+{rdelim}
+
+function SubPaper(){ldelim}
+	if(window.confirm("\n\n\t  提交试卷后将不能修改答案！\n\n\t  确实要提交试卷吗?  \n\n\n点  [确定]  提交试卷,  点  [取消]  返回试卷  \t\n\n")){ldelim}
+		return true;
+	{rdelim}else{ldelim}
+		return false;
+	{rdelim}
+{rdelim}
+
+function createSign(inputobj){ldelim}
+    signname = inputobj.name;
+    sign = signname + inputobj.value;
+    if($("div[id^="+signname+"][id$='rectdiv']").length != 0){ldelim}
+        $("div[id^="+signname+"][id$='rectdiv']").remove();
+    {rdelim}
+    if($('#'+sign+'circlediv').length == 0){ldelim}
+        var objDiv = document.createElement('div');
+        objDiv.id = sign +'circlediv';
+        objDiv.className = 'circle';
+        $('#'+sign).append(objDiv);
+    {rdelim}
+{rdelim}
+
+function createEnd(inputobj){ldelim}
+    signname = inputobj.name;
+    sign = signname + inputobj.value;
+    $("#"+sign+'circlediv').remove();
+    if($("div[id^="+signname+"][id$='rectdiv']").length == 0){ldelim}
+        var objDiv = document.createElement('div');
+        objDiv.id = sign+'rectdiv';
+        objDiv.className = 'rectangle';
+        $('#'+sign).append(objDiv);
+    {rdelim}
+{rdelim}
+
+function createCheckboxSign(inputobj){ldelim}
+    signid = inputobj.id;
+    sign = signid + inputobj.value;
+    if($('#'+sign+'circlediv').length == 0){ldelim}
+        var objDiv = document.createElement('div');
+        objDiv.id = sign +'circlediv';
+        objDiv.className = 'checkboxcircle';
+        $('#'+sign).append(objDiv);
+    {rdelim}
+{rdelim}
+
+function createCheckboxEnd(inputobj){ldelim}
+    signid = inputobj.id;
+    sign = signid + inputobj.value;
+    if($('#'+sign+'circlediv').length != 0){ldelim}
+        $('#'+sign+'circlediv').remove();
+        {rdelim}
+    if($('#'+sign+'rectdiv').length == 0){ldelim}
+        var objDiv = document.createElement('div');
+        objDiv.id = sign+'rectdiv';
+        objDiv.className = 'checkboxrectangle';
+        $('#'+sign).append(objDiv);
+    {rdelim}
+    if($('#'+sign+'rectdiv').length != 0){ldelim}
+        if($('#'+signid).attr("checked") == true){ldelim}
+            $('#'+sign+'rectdiv').remove();
+        {rdelim}
+    {rdelim}
+{rdelim}
+</SCRIPT>
+<!--内容开始 -->
+<form name="form_addbccdinfo" id="form_addbccdinfo" method="post" action="">
+
+  <div id="sub">
+    <div id="sub_left">
+      <div class="left_zl">
+        <div class="left_zl_1">
+          <div class="left_zl_1_t"><img src="images/63.jpg" alt="" /></div>
+          <div class="left_zl_1_c">
+            <div class="left_zl_a">
+              <div class="left_zl_a_img">{if $smarty.session.picture != ''}<img src="CoalMine_Backstage/{$smarty.session.picture}" width="145" height="174" alt="" />{else}<img src="CoalMine_Backstage/upfiles/userface/none.jpg" width="145" height="174" alt="" />{/if}</div>
+              <div class="left_zl_a_t" id="sparetime"> 
+<script type="text/javascript" src="Scripts/createxmlhttp.js"></script>
+<script type="text/javascript">
+time = window.setInterval("sparetime()",1000);								//重复更新
+function sparetime(){ldelim}
+	xmlHttp.open("post","sparetime.php", true);
+	xmlHttp.onreadystatechange = function(){ldelim}
+		if(xmlHttp.readyState == 4){ldelim}
+			tet = xmlHttp.responseText;
+			if(tet=="剩余时间：00:00:00"){ldelim}
+				alert('考试时间到，系统将自动交卷！');
+				form_addbccdinfo.submit();					
+			{rdelim}
+			document.getElementById("sparetime").innerHTML = tet;	
+		{rdelim}
+	{rdelim}
+	xmlHttp.send(null);
+{rdelim}
+</script>
+              </div>
+            </div>
+            <div class="left_zl_a">
+              <div class="left_zl_a_b">
+                <ul>
+                  <li><span class="font9">考生姓名：</span><span class="font10">{$smarty.session.name}
+                    <input type="hidden" name="name" id="name" value="{$smarty.session.name}" />
+                  </span></li>
+                  <li><span class="font9">准考证号：</span><span class="font10">{$smarty.session.admission}
+                  <input type="hidden" name="admission" id="admission" value="{$smarty.session.admission}" />
+                  </span></li>
+                  <li><span class="font9">考核类型：</span><span class="font10">{$typename}
+                  <input type="hidden" name="pro_class" id="pro_class" value="{$smarty.session.proid}" />
+                  </span></li>
+                </ul>
+              </div>
+            </div>
+            <div class="left_zl_a">
+              <div class="left_zl_a_c">
+                <div class="left_zl_xs"><input type="image" name="submit" id="submit" src="images/52.jpg" onclick="return SubPaper(this)" value="提交考卷"/></div>
+              </div>
+            </div>
+            <div class="left_zl_b">
+              <ul>
+                <li><a href="#radio"><img src="images/58.jpg" alt="" border="0" /></a></li>
+                <li><a href="#judgment"><img src="images/59.jpg" alt="" border="0" /></a></li>
+                <li><a href="#judgment"><img src="images/60.jpg" alt="" border="0" /></a></li>
+                <li><a href="#radio"><img src="images/61.jpg" alt="" border="0" /></a></li>
+                <li><a href="#checkbox"><img src="images/62.jpg" alt="" border="0" /></a></li>
+              </ul>
+                <div class="left_zl_xs">&nbsp;&nbsp;<input type="button" name="checkpaper" value="检查试卷" onclick="checkanswer()" /></div>
+                <div class="left_zl_b" id="answerstate"></div>
+            </div>
+          <script>
+              {literal}
+              function checkanswer(){
+                  $.ajax({
+                      url:"answerstates.php",
+                      type:"post",
+                      data:$('#form_addbccdinfo').serialize(),
+                      success:function(res){
+                          $('#answerstate').html(res);
+                      }
+                  });
+              }
+              {/literal}
+          </script>
+            <div class="left_zl_c" style="display:none" id="one">
+              <ul>
+                <li>{$answer}</li>
+              </ul>
+            </div>
+          </div>
+          <div class="left_zl_1_t"><img src="images/64.jpg" alt="" /></div>
+        </div>
+      </div>
+    </div>
+    <div id="sub_right">
+      <div class="right">
+        <div class="sub_c" style="padding-bottom:20px;">
+          <div class="sub_c_bt" style="padding-top:28px; color:#000000; line-height:10px; font-size:14px; font-weight:bold;"><span style="margin-left: 350px">{$examination[0].title}</span><br>
+              <span style="padding-left:25px;font-size:12px"><select onchange="changeFont()" id="selectfont"><option value="default">默认字号</option><option value="big">大字号</option></select><span style="padding-left: 500px;"><a href="#" onclick="javascript:window.location.reload();">刷新</a> &nbsp;<a href="#" onclick="if(confirm('确实要退出考试吗？'))window.close();">退出</a></span></span>
+              <div style="padding-left: 605px;padding-top: 15px">总分：{$attr[0].totalscore}分</div>
+              <input type="hidden" name="title" id="title" value="{$examination[0].title}" /><br />
+            <span style=" color:#ff6101; font-weight:normal; padding-top:14px;padding-right:30px; font-size:12px; float:right;" id="sparetimes"><script type="text/javascript">
+times = window.setInterval("sparetimes()",1000);								//重复更新
+function sparetimes(){ldelim}
+	xmlHttp.open("post","sparetimes.php", true);
+	xmlHttp.onreadystatechange = function(){ldelim}
+		if(xmlHttp.readyState == 4){ldelim}
+			tet = xmlHttp.responseText;
+			document.getElementById("sparetimes").innerHTML = tet;	
+		{rdelim}
+	{rdelim}
+	xmlHttp.send(null);
+{rdelim}
+</script></span> </div>
+          <div class="k_con">
+            <ul>
+              <li> {php}
+                $i=0;
+                $m=0;
+                {/php}
+                <p>{if $Radio==T}
+              <li> <span style="width:660px; float:left; padding-left:13px; line-height:28px;  background-color:#ffffff;  color:#000000; margin-bottom:5px; display:inline; border:1px solid #19b10a; font-weight:bold;"> {php}
+                $m++;
+                switch($m){
+                case "1":
+                $n="一";
+                break;
+                case "2":
+                $n="二";
+                break;
+                case "3":
+                $n="三";
+                break;
+                case "4":
+                $n="四";
+                break;
+                case "5":
+                $n="五";
+                break;
+                case "6":
+                $n="六";
+                break;
+                }
+                echo $n;
+                {/php}、 单选题（选择一个正确答案字母）每题{$radioFraction}分，共{$Radios}题</span><a name="radio"></a> </li>
+              {section name=rad_id loop=$arrayRadio}
+              <li> <span class="kt" onmouseover="this.className='ktover'" onmouseout="this.className='kt'"> <span class="kt_t" id="ktchange_r">   {php}
+                $i++;
+                echo $i;
+                echo "<a name=" .$i. "></a>";
+              
+                {/php}、
+                  <input type="hidden" name="i[]" value="radio@{$arrayRadio[rad_id].id}@{php}echo $i;{/php}">
+                  {$arrayRadio[rad_id].content}</span> </span> <span class="kt_a">
+                  {if $arrayRadio[rad_id].search_list==6 } <span class="kt_a_1" id='radio{$arrayRadio[rad_id].id}A'>
+                <input type="radio" name="radio{$arrayRadio[rad_id].id}" style="margin-top:2px; margin-left:2px; float:left; display:inline;" value="A" onmousedown="createSign(this)" onmouseup="createEnd(this)">
+                </span><span class="kt_a_1">A</span> <span class="kt_a_1" id='radio{$arrayRadio[rad_id].id}B'>
+                <input type="radio" name="radio{$arrayRadio[rad_id].id}" style="margin-top:2px; margin-left:2px; float:left; display:inline;" value="B" onmousedown="createSign(this)" onmouseup="createEnd(this)">
+                </span><span class="kt_a_1">B</span> <span class="kt_a_1" id='radio{$arrayRadio[rad_id].id}C'>
+                <input type="radio" name="radio{$arrayRadio[rad_id].id}" style="margin-top:2px; margin-left:2px; float:left; display:inline;" value="C" onmousedown="createSign(this)" onmouseup="createEnd(this)">
+                </span><span class="kt_a_1">C</span> <span class="kt_a_1" id='radio{$arrayRadio[rad_id].id}D'>
+                <input type="radio" name="radio{$arrayRadio[rad_id].id}" style="margin-top:2px; margin-left:2px; float:left; display:inline;" value="D" onmousedown="createSign(this)" onmouseup="createEnd(this)">
+                </span><span class="kt_a_1">D</span><span class="kt_a_1" id='radio{$arrayRadio[rad_id].id}E'>
+                  <input type="radio" name="radio{$arrayRadio[rad_id].id}" style="margin-top:2px; margin-left:2px; float:left; display:inline;" value="E" onmousedown="createSign(this)" onmouseup="createEnd(this)">
+                </span><span class="kt_a_1">E</span> <span class="kt_a_1" id='radio{$arrayRadio[rad_id].id}F'>
+                <input type="radio" name="radio{$arrayRadio[rad_id].id}" style="margin-top:2px; margin-left:2px; float:left; display:inline;" value="F" onmousedown="createSign(this)" onmouseup="createEnd(this)">
+                </span><span class="kt_a_1">F</span>
+                  {elseif $arrayRadio[rad_id].search_list==5 } <span class="kt_a_1" id='radio{$arrayRadio[rad_id].id}'>
+                <input type="radio" name="radio{$arrayRadio[rad_id].id}" style="margin-top:2px; margin-left:2px; float:left; display:inline;" value="A" onmousedown="createSign(this)" onmouseup="createEnd(this)">
+                </span><span class="kt_a_1">A</span> <span class="kt_a_1" id='radio{$arrayRadio[rad_id].id}'>
+                <input type="radio" name="radio{$arrayRadio[rad_id].id}" style="margin-top:2px; margin-left:2px; float:left; display:inline;" value="B" onmousedown="createSign(this)" onmouseup="createEnd(this)">
+                </span><span class="kt_a_1">B</span> <span class="kt_a_1" id='radio{$arrayRadio[rad_id].id}C'>
+                <input type="radio" name="radio{$arrayRadio[rad_id].id}" style="margin-top:2px; margin-left:2px; float:left; display:inline;" value="C" onmousedown="createSign(this)" onmouseup="createEnd(this)">
+                </span><span class="kt_a_1">C</span> <span class="kt_a_1" id='radio{$arrayRadio[rad_id].id}D'>
+                <input type="radio" name="radio{$arrayRadio[rad_id].id}" style="margin-top:2px; margin-left:2px; float:left; display:inline;" value="D" onmousedown="createSign(this)" onmouseup="createEnd(this)">
+                </span><span class="kt_a_1">D</span><span class="kt_a_1" id='radio{$arrayRadio[rad_id].id}E'>
+                  <input type="radio" name="radio{$arrayRadio[rad_id].id}" style="margin-top:2px; margin-left:2px; float:left; display:inline;" value="E" onmousedown="createSign(this)" onmouseup="createEnd(this)">
+                  </span><span class="kt_a_1">E</span>
+                  {elseif $arrayRadio[rad_id].search_list==4 } <span class="kt_a_1" id='radio{$arrayRadio[rad_id].id}A'>
+                <input type="radio" name="radio{$arrayRadio[rad_id].id}" style="margin-top:2px; margin-left:2px; float:left; display:inline;" value="A" onmousedown="createSign(this)" onmouseup="createEnd(this)">
+                </span><span class="kt_a_1">A</span> <span class="kt_a_1" id='radio{$arrayRadio[rad_id].id}B'>
+                <input type="radio" name="radio{$arrayRadio[rad_id].id}" style="margin-top:2px; margin-left:2px; float:left; display:inline;" value="B" onmousedown="createSign(this)" onmouseup="createEnd(this)">
+                </span><span class="kt_a_1">B</span> <span class="kt_a_1" id='radio{$arrayRadio[rad_id].id}C'>
+                <input type="radio" name="radio{$arrayRadio[rad_id].id}" style="margin-top:2px; margin-left:2px; float:left; display:inline;" value="C" onmousedown="createSign(this)" onmouseup="createEnd(this)">
+                </span><span class="kt_a_1">C</span> <span class="kt_a_1" id='radio{$arrayRadio[rad_id].id}D'>
+                <input type="radio" name="radio{$arrayRadio[rad_id].id}" style="margin-top:2px; margin-left:2px; float:left; display:inline;" value="D" onmousedown="createSign(this)" onmouseup="createEnd(this)">
+                </span><span class="kt_a_1">D</span>
+                  {elseif $arrayRadio[rad_id].search_list==3} <span class="kt_a_1" id='radio{$arrayRadio[rad_id].id}A'>
+                <input type="radio" name="radio{$arrayRadio[rad_id].id}" style="margin-top:2px; margin-left:2px; float:left; display:inline;" value="A"  onmousedown="createSign(this)" onmouseup="createEnd(this)">
+                </span><span class="kt_a_1">A</span> <span class="kt_a_1" id='radio{$arrayRadio[rad_id].id}B'>
+                <input type="radio" name="radio{$arrayRadio[rad_id].id}" style="margin-top:2px; margin-left:2px; float:left; display:inline;" value="B" onmousedown="createSign(this)" onmouseup="createEnd(this)">
+                </span><span class="kt_a_1">B</span> <span class="kt_a_1" id='radio{$arrayRadio[rad_id].id}C'>
+                <input type="radio" name="radio{$arrayRadio[rad_id].id}" style="margin-top:2px; margin-left:2px; float:left; display:inline;" value="C" onmousedown="createSign(this)" onmouseup="createEnd(this)">
+                </span><span class="kt_a_1">C</span> {else} <span class="kt_a_1" id='radio{$arrayRadio[rad_id].id}A'>
+                <input type="radio" name="radio{$arrayRadio[rad_id].id}" style="margin-top:2px; margin-left:2px; float:left; display:inline;" value="A" onmousedown="createSign(this)" onmouseup="createEnd(this)">
+                </span><span class="kt_a_1">A</span> <span class="kt_a_1" id='radio{$arrayRadio[rad_id].id}B'>
+                <input type="radio" name="radio{$arrayRadio[rad_id].id}" style="margin-top:2px; margin-left:2px; float:left; display:inline;" value="B" onmousedown="createSign(this)" onmouseup="createEnd(this)">
+                </span><span class="kt_a_1">B</span> {/if} </span> </li>
+              {/section}
+              {/if}
+              
+              
+              {if $Checkbox==T}
+              <li> <span style="width:660px; float:left; padding-left:13px; line-height:28px;  background-color:#ffffff;  color:#000000; margin-bottom:5px; display:inline; border:1px solid #19b10a; font-weight:bold;"> {php}
+                $m++;
+                switch($m){
+                case "1":
+                $n="一";
+                break;
+                case "2":
+                $n="二";
+                break;
+                case "3":
+                $n="三";
+                break;
+                case "4":
+                $n="四";
+                break;
+                case "5":
+                $n="五";
+                break;
+                case "6":
+                $n="六";
+                break;
+                }
+                echo $n;
+                {/php}、 多选题（选择两个或两个以上正确答案字母）每题{$checkboxFraction}分，共{$Checkboxs}题</span><a name="checkbox"></a> </li>
+              {section name=chk_id loop=$arrayCheckbox}
+              <li> <span class="kt" onmouseover="this.className='ktover'" onmouseout="this.className='kt'"> <span class="kt_t" id="ktchange_c"> {php}
+                $i++;
+                echo $i;
+                echo "<a name=" .$i. "></a>";
+                {/php}、
+                <input type="hidden" name="i[]" value="checkbox@{$arrayCheckbox[chk_id].id}@{php}echo $i;{/php}">
+                  {$arrayCheckbox[chk_id].content}</span> </span> <span class="kt_a">
+                   {if $arrayCheckbox[chk_id].search_list==8} <span class="kt_a_1" id="checkbox{$arrayCheckbox[chk_id].id}AA">
+                <input type="checkbox" name="checkbox{$arrayCheckbox[chk_id].id}[]" style=" margin-left:2px; margin-top:2px; float; display:inline;" value="A" id="checkbox{$arrayCheckbox[chk_id].id}A" onmousedown="createCheckboxSign(this)" onmouseup="createCheckboxEnd(this)">
+                </span><span class="kt_a_1">A</span> <span class="kt_a_1" id="checkbox{$arrayCheckbox[chk_id].id}BB">
+                <input type="checkbox" name="checkbox{$arrayCheckbox[chk_id].id}[]" style=" margin-left:2px; margin-top:2px; float; display:inline;" value="B" id="checkbox{$arrayCheckbox[chk_id].id}B" onmousedown="createCheckboxSign(this)" onmouseup="createCheckboxEnd(this)">
+                </span><span class="kt_a_1">B</span> <span class="kt_a_1" id="checkbox{$arrayCheckbox[chk_id].id}CC">
+                <input type="checkbox" name="checkbox{$arrayCheckbox[chk_id].id}[]" style=" margin-left:2px; margin-top:2px; float; display:inline;" value="C" id="checkbox{$arrayCheckbox[chk_id].id}C" onmousedown="createCheckboxSign(this)" onmouseup="createCheckboxEnd(this)">
+                </span><span class="kt_a_1">C</span> <span class="kt_a_1" id="checkbox{$arrayCheckbox[chk_id].id}DD">
+                <input type="checkbox" name="checkbox{$arrayCheckbox[chk_id].id}[]" style=" margin-left:2px; margin-top:2px; float; display:inline;" value="D" id="checkbox{$arrayCheckbox[chk_id].id}D" onmousedown="createCheckboxSign(this)" onmouseup="createCheckboxEnd(this)">
+                </span><span class="kt_a_1">D</span> <span class="kt_a_1" id="checkbox{$arrayCheckbox[chk_id].id}EE">
+                <input type="checkbox" name="checkbox{$arrayCheckbox[chk_id].id}[]" style=" margin-left:2px; margin-top:2px; float; display:inline;" value="E" id="checkbox{$arrayCheckbox[chk_id].id}E" onmousedown="createCheckboxSign(this)" onmouseup="createCheckboxEnd(this)">
+                </span><span class="kt_a_1">E</span> <span class="kt_a_1" id="checkbox{$arrayCheckbox[chk_id].id}FF">
+                <input type="checkbox" name="checkbox{$arrayCheckbox[chk_id].id}[]" style=" margin-left:2px; margin-top:2px; float; display:inline;" value="F" id="checkbox{$arrayCheckbox[chk_id].id}F" onmousedown="createCheckboxSign(this)" onmouseup="createCheckboxEnd(this)">
+                </span><span class="kt_a_1">F</span><span class="kt_a_1" id="checkbox{$arrayCheckbox[chk_id].id}GG">
+                  <input type="checkbox" name="checkbox{$arrayCheckbox[chk_id].id}[]" style=" margin-left:2px; margin-top:2px; float; display:inline;" value="G" id="checkbox{$arrayCheckbox[chk_id].id}G" onmousedown="createCheckboxSign(this)" onmouseup="createCheckboxEnd(this)">
+                </span><span class="kt_a_1">G</span> <span class="kt_a_1" id="checkbox{$arrayCheckbox[chk_id].id}HH">
+                <input type="checkbox" name="checkbox{$arrayCheckbox[chk_id].id}[]" style=" margin-left:2px; margin-top:2px; float; display:inline;" value="H" id="checkbox{$arrayCheckbox[chk_id].id}H" onmousedown="createCheckboxSign(this)" onmouseup="createCheckboxEnd(this)">
+                </span><span class="kt_a_1">H</span>
+                  {elseif $arrayCheckbox[chk_id].search_list==7} <span class="kt_a_1" id="checkbox{$arrayCheckbox[chk_id].id}AA">
+                <input type="checkbox" name="checkbox{$arrayCheckbox[chk_id].id}[]" style=" margin-left:2px; margin-top:2px; float; display:inline;" value="A" id="checkbox{$arrayCheckbox[chk_id].id}A" onmousedown="createCheckboxSign(this)" onmouseup="createCheckboxEnd(this)">
+                </span><span class="kt_a_1">A</span> <span class="kt_a_1" id="checkbox{$arrayCheckbox[chk_id].id}BB">
+                <input type="checkbox" name="checkbox{$arrayCheckbox[chk_id].id}[]" style=" margin-left:2px; margin-top:2px; float; display:inline;" value="B" id="checkbox{$arrayCheckbox[chk_id].id}B" onmousedown="createCheckboxSign(this)" onmouseup="createCheckboxEnd(this)">
+                </span><span class="kt_a_1">B</span> <span class="kt_a_1" id="checkbox{$arrayCheckbox[chk_id].id}CC">
+                <input type="checkbox" name="checkbox{$arrayCheckbox[chk_id].id}[]" style=" margin-left:2px; margin-top:2px; float; display:inline;" value="C" id="checkbox{$arrayCheckbox[chk_id].id}C" onmousedown="createCheckboxSign(this)" onmouseup="createCheckboxEnd(this)">
+                </span><span class="kt_a_1">C</span> <span class="kt_a_1" id="checkbox{$arrayCheckbox[chk_id].id}DD">
+                <input type="checkbox" name="checkbox{$arrayCheckbox[chk_id].id}[]" style=" margin-left:2px; margin-top:2px; float; display:inline;" value="D" id="checkbox{$arrayCheckbox[chk_id].id}D" onmousedown="createCheckboxSign(this)" onmouseup="createCheckboxEnd(this)">
+                </span><span class="kt_a_1">D</span> <span class="kt_a_1" id="checkbox{$arrayCheckbox[chk_id].id}EE">
+                <input type="checkbox" name="checkbox{$arrayCheckbox[chk_id].id}[]" style=" margin-left:2px; margin-top:2px; float; display:inline;" value="E" id="checkbox{$arrayCheckbox[chk_id].id}E" onmousedown="createCheckboxSign(this)" onmouseup="createCheckboxEnd(this)">
+                </span><span class="kt_a_1">E</span> <span class="kt_a_1" id="checkbox{$arrayCheckbox[chk_id].id}FF">
+                <input type="checkbox" name="checkbox{$arrayCheckbox[chk_id].id}[]" style=" margin-left:2px; margin-top:2px; float; display:inline;" value="F" id="checkbox{$arrayCheckbox[chk_id].id}F" onmousedown="createCheckboxSign(this)" onmouseup="createCheckboxEnd(this)">
+                </span><span class="kt_a_1">F</span><span class="kt_a_1" id="checkbox{$arrayCheckbox[chk_id].id}GG">
+                  <input type="checkbox" name="checkbox{$arrayCheckbox[chk_id].id}[]" style=" margin-left:2px; margin-top:2px; float; display:inline;" value="G" id="checkbox{$arrayCheckbox[chk_id].id}G" onmousedown="createCheckboxSign(this)" onmouseup="createCheckboxEnd(this)">
+                  </span><span class="kt_a_1">G</span>
+                  {elseif $arrayCheckbox[chk_id].search_list==6} <span class="kt_a_1" id="checkbox{$arrayCheckbox[chk_id].id}AA">
+                <input type="checkbox" name="checkbox{$arrayCheckbox[chk_id].id}[]" style=" margin-left:2px; margin-top:2px; float; display:inline;" value="A" id="checkbox{$arrayCheckbox[chk_id].id}A" onmousedown="createCheckboxSign(this)" onmouseup="createCheckboxEnd(this)">
+                </span><span class="kt_a_1">A</span> <span class="kt_a_1" id="checkbox{$arrayCheckbox[chk_id].id}BB">
+                <input type="checkbox" name="checkbox{$arrayCheckbox[chk_id].id}[]" style=" margin-left:2px; margin-top:2px; float; display:inline;" value="B" id="checkbox{$arrayCheckbox[chk_id].id}B" onmousedown="createCheckboxSign(this)" onmouseup="createCheckboxEnd(this)">
+                </span><span class="kt_a_1">B</span> <span class="kt_a_1" id="checkbox{$arrayCheckbox[chk_id].id}CC">
+                <input type="checkbox" name="checkbox{$arrayCheckbox[chk_id].id}[]" style=" margin-left:2px; margin-top:2px; float; display:inline;" value="C" id="checkbox{$arrayCheckbox[chk_id].id}C" onmousedown="createCheckboxSign(this)" onmouseup="createCheckboxEnd(this)">
+                </span><span class="kt_a_1">C</span> <span class="kt_a_1" id="checkbox{$arrayCheckbox[chk_id].id}DD">
+                <input type="checkbox" name="checkbox{$arrayCheckbox[chk_id].id}[]" style=" margin-left:2px; margin-top:2px; float; display:inline;" value="D" id="checkbox{$arrayCheckbox[chk_id].id}D" onmousedown="createCheckboxSign(this)" onmouseup="createCheckboxEnd(this)">
+                </span><span class="kt_a_1">D</span> <span class="kt_a_1" id="checkbox{$arrayCheckbox[chk_id].id}EE">
+                <input type="checkbox" name="checkbox{$arrayCheckbox[chk_id].id}[]" style=" margin-left:2px; margin-top:2px; float; display:inline;" value="E" id="checkbox{$arrayCheckbox[chk_id].id}E" onmousedown="createCheckboxSign(this)" onmouseup="createCheckboxEnd(this)">
+                </span><span class="kt_a_1">E</span> <span class="kt_a_1" id="checkbox{$arrayCheckbox[chk_id].id}FF">
+                <input type="checkbox" name="checkbox{$arrayCheckbox[chk_id].id}[]" style=" margin-left:2px; margin-top:2px; float; display:inline;" value="F" id="checkbox{$arrayCheckbox[chk_id].id}F" onmousedown="createCheckboxSign(this)" onmouseup="createCheckboxEnd(this)">
+                </span><span class="kt_a_1">F</span>
+                  {elseif $arrayCheckbox[chk_id].search_list==5} <span class="kt_a_1" id="checkbox{$arrayCheckbox[chk_id].id}AA">
+                <input type="checkbox" name="checkbox{$arrayCheckbox[chk_id].id}[]" style=" margin-left:2px; margin-top:2px; float; display:inline;" value="A" id="checkbox{$arrayCheckbox[chk_id].id}A" onmousedown="createCheckboxSign(this)" onmouseup="createCheckboxEnd(this)">
+                </span><span class="kt_a_1">A</span> <span class="kt_a_1" id="checkbox{$arrayCheckbox[chk_id].id}BB">
+                <input type="checkbox" name="checkbox{$arrayCheckbox[chk_id].id}[]" style=" margin-left:2px; margin-top:2px; float; display:inline;" value="B" id="checkbox{$arrayCheckbox[chk_id].id}B" onmousedown="createCheckboxSign(this)" onmouseup="createCheckboxEnd(this)">
+                </span><span class="kt_a_1">B</span> <span class="kt_a_1" id="checkbox{$arrayCheckbox[chk_id].id}CC">
+                <input type="checkbox" name="checkbox{$arrayCheckbox[chk_id].id}[]" style=" margin-left:2px; margin-top:2px; float; display:inline;" value="C" id="checkbox{$arrayCheckbox[chk_id].id}C" onmousedown="createCheckboxSign(this)" onmouseup="createCheckboxEnd(this)">
+                </span><span class="kt_a_1">C</span> <span class="kt_a_1" id="checkbox{$arrayCheckbox[chk_id].id}DD">
+                <input type="checkbox" name="checkbox{$arrayCheckbox[chk_id].id}[]" style=" margin-left:2px; margin-top:2px; float; display:inline;" value="D" id="checkbox{$arrayCheckbox[chk_id].id}D" onmousedown="createCheckboxSign(this)" onmouseup="createCheckboxEnd(this)">
+                </span><span class="kt_a_1">D</span> <span class="kt_a_1" id="checkbox{$arrayCheckbox[chk_id].id}EE">
+                <input type="checkbox" name="checkbox{$arrayCheckbox[chk_id].id}[]" style=" margin-left:2px; margin-top:2px; float; display:inline;" value="E" id="checkbox{$arrayCheckbox[chk_id].id}E" onmousedown="createCheckboxSign(this)" onmouseup="createCheckboxEnd(this)">
+                </span><span class="kt_a_1">E</span> {else} <span class="kt_a_1" id="checkbox{$arrayCheckbox[chk_id].id}AA">
+                <input type="checkbox" name="checkbox{$arrayCheckbox[chk_id].id}[]" style=" margin-left:2px; margin-top:2px; float; display:inline;" value="A" onmousedown="createCheckboxSign(this)" onmouseup="createCheckboxEnd(this)" id="checkbox{$arrayCheckbox[chk_id].id}A" />
+                </span><span class="kt_a_1">A</span> <span class="kt_a_1" id="checkbox{$arrayCheckbox[chk_id].id}BB">
+                <input type="checkbox" name="checkbox{$arrayCheckbox[chk_id].id}[]" style=" margin-left:2px; margin-top:2px; float; display:inline;" value="B" onmousedown="createCheckboxSign(this)" onmouseup="createCheckboxEnd(this)" id="checkbox{$arrayCheckbox[chk_id].id}B" />
+                </span><span class="kt_a_1">B</span> <span class="kt_a_1" id="checkbox{$arrayCheckbox[chk_id].id}CC">
+                <input type="checkbox" name="checkbox{$arrayCheckbox[chk_id].id}[]" style=" margin-left:2px; margin-top:2px; float; display:inline;" value="C" onmousedown="createCheckboxSign(this)" onmouseup="createCheckboxEnd(this)" id="checkbox{$arrayCheckbox[chk_id].id}C" />
+                </span><span class="kt_a_1">C</span> <span class="kt_a_1" id="checkbox{$arrayCheckbox[chk_id].id}DD">
+                <input type="checkbox" name="checkbox{$arrayCheckbox[chk_id].id}[]" style=" margin-left:2px; margin-top:2px; float; display:inline;" value="D" onmousedown="createCheckboxSign(this)" onmouseup="createCheckboxEnd(this)" id="checkbox{$arrayCheckbox[chk_id].id}D" />
+                </span><span class="kt_a_1">D</span> {/if} </span> </li>
+              {/section}
+              {/if}
+              
+              {if $Fill==T}
+              <li> <span style="width:660px; float:left; padding-left:13px; line-height:28px;  background-color:#ffffff;  color:#000000; margin-bottom:5px; display:inline; border:1px solid #19b10a; font-weight:bold;"> {php}
+                $m++;
+                switch($m){
+                case "1":
+                $n="一";
+                break;
+                case "2":
+                $n="二";
+                break;
+                case "3":
+                $n="三";
+                break;
+                case "4":
+                $n="四";
+                break;
+                case "5":
+                $n="五";
+                break;
+                case "6":
+                $n="六";
+                break;
+                }
+                echo $n;
+                {/php}、 填空题（每空{$fillFraction}分，共{$Fills}题）</span> <a name="fill"></a></li>
+              {section name=fil_id loop=$arrayFill}
+              <li> <span class="kt" onmouseover="this.className='ktover'" onmouseout="this.className='kt'"> <span style="padding-top:4px; float:left;"><span class="kt_t" id="ktchange_f"> {php}
+         
+                $i++;
+                echo $i;
+                     echo "<a name=" .$i. "></a>";
+                {/php}、
+               <input type="hidden" name="i[]" value="fill@{$arrayFill[fil_id].id}@{php}echo $i;{/php}">
+            {util->mreplace p=$arrayFill[fil_id].content p2=$arrayFill[fil_id].id }
+             
+              </span> </span></span></li>
+              {/section}
+              {/if}
+              
+              {if $Judgment==T}
+              <li> <span style="width:660px; float:left; padding-left:13px; line-height:28px;  background-color:#ffffff;  color:#000000; margin-bottom:5px; display:inline; border:1px solid #19b10a; font-weight:bold;"> {php}
+                $m++;
+                switch($m){
+                case "1":
+                $n="一";
+                break;
+                case "2":
+                $n="二";
+                break;
+                case "3":
+                $n="三";
+                break;
+                case "4":
+                $n="四";
+                break;
+                case "5":
+                $n="五";
+                break;
+                case "6":
+                $n="六";
+                break;
+                }
+                echo $n;
+                {/php}、 判断题（正确的选正确；错误的选错误）每题{$judgmentFraction}分，共{$Judgments}题</span> <a name="judgment"></a></li>
+              {section name=jud_id loop=$arrayJudgment}
+              <li> <span class="kt" onmouseover="this.className='ktover'" onmouseout="this.className='kt'"> <span class="kt_t" id="ktchange_j"> {php}
+            
+                $i++;
+                echo $i;
+                  echo "<a name=" .$i. "></a>";
+                {/php}、
+                  <input type="hidden" name="i[]" value="judgment@{$arrayJudgment[jud_id].id}@{php}echo $i;{/php}">
+                {$arrayJudgment[jud_id].content}</span> </span> 
+                <!--  <span class="kt_a">
+            
+                        <span class="kt_a_2">A.接口是一种用来定义程序的协议</span>                    </span>--> 
+                <span class="kt_a"> <span class="kt_a_1" id='judgment{$arrayJudgment[jud_id].id}正确'>
+                <input type="radio" name="judgment{$arrayJudgment[jud_id].id}" style="margin-top:2px; margin-left:2px; float:left; display:inline;" value="正确" id="judgment{$arrayJudgment[jud_id].id}" onmousedown="createSign(this)" onmouseup="createEnd(this)">
+                </span><span class="kt_a_1" style="width:55px;font-size: 22px;">正确</span><span class="kt_a_1" id='judgment{$arrayJudgment[jud_id].id}错误'>
+                <input type="radio" name="judgment{$arrayJudgment[jud_id].id}" style="margin-top:2px; margin-left:2px; float:left; display:inline;" value="错误" id="judgment{$arrayJudgment[jud_id].id}" onmousedown="createSign(this)" onmouseup="createEnd(this)">
+                </span><span class="kt_a_1" style="width:55px;font-size: 22px;">错误</span></span></li>
+              {/section}
+              {/if}
+              </p>
+              <p> </p>
+
+              <p>{if $Explain==T}
+              <li> <span style="width:660px; float:left; padding-left:13px; line-height:28px;  background-color:#ffffff;  color:#000000; margin-bottom:5px; display:inline; border:1px solid #19b10a; font-weight:bold;"> {php}
+                $m++;
+                switch($m){
+                case "1":
+                $n="一";
+                break;
+                case "2":
+                $n="二";
+                break;
+                case "3":
+                $n="三";
+                break;
+                case "4":
+                $n="四";
+                break;
+                case "5":
+                $n="五";
+                break;
+                case "6":
+                $n="六";
+                break;
+                }
+                echo $n;
+                {/php}、 名词解释题（每题{$explainFraction}分，共{$Explains}题）</span><a name="explain"></a> </li>
+              {section name=exp_id loop=$arrayExplain}
+              <li> <span class="kt"> <span class="kt_t" style="word-wrap: break-word"> {php}
+
+                $i++;
+                echo $i;
+                  echo "<a name=" .$i. "></a>";
+                {/php}、
+                {$arrayExplain[exp_id].content} </span> </span> <span style="float:left; padding-left:25px;">
+                <textarea name="explain{$arrayExplain[exp_id].id}" id="explain{$arrayExplain[exp_id].id}" style="width:630px; padding-left:5px; float:left; line-height:25px; border:1px solid #AAAAAA; height:200px;" cols="" rows=""></textarea>
+                </span> </li>
+              {/section}
+              {/if}
+
+              <p>{if $Answer==T}
+              <li> <span style="width:660px; float:left; padding-left:13px; line-height:28px;  background-color:#ffffff;  color:#000000; margin-bottom:5px; display:inline; border:1px solid #19b10a; font-weight:bold;"> {php}
+                $m++;
+                switch($m){
+                case "1":
+                $n="一";
+                break;
+                case "2":
+                $n="二";
+                break;
+                case "3":
+                $n="三";
+                break;
+                case "4":
+                $n="四";
+                break;
+                case "5":
+                $n="五";
+                break;
+                case "6":
+                $n="六";
+                break;
+                }
+                echo $n;
+                {/php}、 简答题（每题{$answerFraction}分，共{$Answers}题）</span><a name="answer"></a> </li>
+              {section name=ans_id loop=$arrayAnswer}
+              <li> <span class="kt"> <span class="kt_t" style="word-wrap: break-word"> {php}
+            
+                $i++;
+                echo $i;
+                  echo "<a name=" .$i. "></a>";
+                {/php}、
+                {$arrayAnswer[ans_id].content} </span> </span> <span style="float:left; padding-left:25px;">
+                <textarea name="answer{$arrayAnswer[ans_id].id}" id="answer{$arrayAnswer[ans_id].id}" style="width:630px; padding-left:5px; float:left; line-height:25px; border:1px solid #AAAAAA; height:200px;" cols="" rows=""></textarea>
+                </span> </li>
+              {/section}
+              {/if}
+              
+              {if $Discourse==T}
+              <li> <span style="width:660px; float:left; padding-left:13px; line-height:28px; background-color:#ffffff;  color:#000000; margin-bottom:5px; display:inline; border:1px solid #19b10a; font-weight:bold;"> {php}
+                $m++;
+                switch($m){
+                case "1":
+                $n="一";
+                break;
+                case "2":
+                $n="二";
+                break;
+                case "3":
+                $n="三";
+                break;
+                case "4":
+                $n="四";
+                break;
+                case "5":
+                $n="五";
+                break;
+                case "6":
+                $n="六";
+                break;
+                }
+                echo $n;
+                {/php}、 论述题（每题{$discourseFraction}分，共{$Discourses}题）</span><a name="discourse"></a> </li>
+              {section name=dis_id loop=$arrayDiscourse}
+              <li> <span class="kt"> <span class="kt_t"> {php}
+           
+                $i++;
+                echo $i;
+                   echo "<a name=" .$i. "></a>";
+                {/php}、
+                {$arrayDiscourse[dis_id].content}</span> </span> <span style="float:left; padding-left:25px;">
+                <textarea name="discourse{$arrayDiscourse[dis_id].id}" style="width:630px; padding-left:5px; float:left; line-height:25px; border:1px solid #AAAAAA; height:300px;" id="discourse{$arrayDiscourse[dis_id].id}" rows="15"></textarea>
+                </span></li>
+              {/section}
+              {/if}
+            </ul>
+          </div>
+          <div class="k_x">
+          	<input type="image" name="submits" id="submits" src="images/SubPager.jpg" />
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</form>
+<!--内容结束 -->
+<script type="text/javascript">
+    {literal}
+    function changeFont(){
+        obj = document.getElementById("selectfont");
+        $("span[id^='ktchange_']").each(
+            function(){
+                if(obj.value=="default"){
+                    if($(this).hasClass("kt_t1")){
+                        $(this).removeClass("kt_t1");
+                    }
+                    $(this).addClass("kt_t");
+                }else{
+                    if($(this).hasClass("kt_t")){
+                        $(this).removeClass("kt_t");
+                    }
+                    $(this).addClass("kt_t1");
+                }
+            }
+        )
+    }
+    {/literal}
+</script>

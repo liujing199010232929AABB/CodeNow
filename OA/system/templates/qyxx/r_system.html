@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset=utf-8" />
+	<title>规章制度</title>
+	<link href="css/style.css" rel="stylesheet" />
+	<script src="js/client_js.js"></script>
+</head>
+
+<body>
+<table width="765" border="1" cellpadding="0" cellspacing="0" style="border: 1px solid #9CBED6; margin-top:15px; background-color:#CCCCCC;">
+	<tr>
+		<td height="36" background="images/list.jpg" id="list">规章制度</td>
+	</tr>
+</table>
+<table width="768" border="1" cellpadding="0" cellspacing="0" bgcolor="#DEEBEF" class="big_td">
+{section name=com_id loop=$com}
+	<tr>
+		<td height=25 align=center valign=middle>
+			<a href='r_system.php?id={$com[com_id].id}'>{$com[com_id].f_name}</a>
+		</td>
+	</tr>	
+{/section}
+	
+</table>
+<table width="768" border="0" cellpadding="0" cellspacing="0" bgcolor="#DEEBEF">
+	<tr>
+		<td align="center" valign="top">		
+		<textarea readonly='readonly' cols=90 rows=25>{$company}</textarea>
+		</td>
+	</tr>
+</table>
+</body>
+</html>

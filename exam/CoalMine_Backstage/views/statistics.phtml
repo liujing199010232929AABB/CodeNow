@@ -1,0 +1,87 @@
+<link href="{util->baseUrl}/css/style.css" rel="stylesheet" type="text/css" />
+<link href="{util->baseUrl}/css/reset.css" rel="stylesheet" type="text/css" />
+<div id="con_right">
+  <div class="right_con">
+    <div class="right_con_bt">·{$smarty.get.big_type} < {$smarty.get.small_type}</div>
+    <br />
+    <br />
+    <br />
+    <DIV class="right_con_form">
+    <form name="form_statistics" method="post" action="">
+    <div style="width:100%; text-align:left; padding-top:5px; padding-left:50px">
+        请选择工种（不填写为统计全部）：<select name="pro_class" id="pro_class" class="input1">
+        <option value=0>请选择</option>
+        {$displayType}
+    </select>
+
+        <br />
+        <br />
+        <input type="submit" name="submit" value="统计题型"/>
+    </div>
+    </form>
+    {if $isshow == 'F'}
+        {if $bcjyzs.data!=false}
+        <DIV style="padding-left:6px;">
+            <UL>
+                <LI style="LINE-HEIGHT: 25px; WIDTH: 6%; FLOAT: left; text-align:center; HEIGHT: 25px; BORDER-RIGHT: #21de26 1px solid; border-bottom:#21de26 1px solid;">序号</LI>
+                <LI style="LINE-HEIGHT: 25px; WIDTH: 42%; FLOAT: left; text-align:center; HEIGHT: 25px; BORDER-RIGHT: #21de26 1px solid; border-bottom:#21de26 1px solid;">所属类别</LI>
+                <LI style="LINE-HEIGHT: 25px; WIDTH: 31%; FLOAT: left; text-align:center; HEIGHT: 25px; BORDER-RIGHT: #21de26 1px solid; border-bottom:#21de26 1px solid;">题型</LI>
+                <LI style="LINE-HEIGHT: 25px; WIDTH: 18%; FLOAT: left; text-align:center; HEIGHT: 25px; border-bottom:#21de26 1px solid;">题目数量</LI>
+            </UL>
+        </DIV>
+        {section name=tnid loop=$bcjyzs.data}
+        <DIV style="padding-left:6px;">
+            <UL>
+
+                <LI style="LINE-HEIGHT: 23px; WIDTH: 6%; FLOAT: left; text-align:center; HEIGHT: 23px; BORDER-RIGHT: #21de26 1px solid; border-bottom:#21de26 1px solid;">{$i}</LI>
+                <LI style="LINE-HEIGHT: 23px; WIDTH: 42%; FLOAT: left; text-align:center;padding-left:10px; HEIGHT: 23px; BORDER-RIGHT: #21de26 1px solid; border-bottom:#21de26 1px solid;">{$bcjyzs.data[tnid].typename}</LI>
+                <LI style="LINE-HEIGHT: 23px; WIDTH: 31%; FLOAT: left; text-align:center;padding-left:10px; HEIGHT: 23px; BORDER-RIGHT: #21de26 1px solid; border-bottom:#21de26 1px solid;">{$bcjyzs.data[tnid].chinese}</LI>
+                <LI style="LINE-HEIGHT: 23px; WIDTH: 18%; FLOAT: left; text-align:center; HEIGHT: 23px; border-bottom:#21de26 1px solid;">{$bcjyzs.data[tnid].c}</LI>
+                {assign var="i" value=$i+1}
+
+            </UL>
+         </DIV>
+        {/section}
+        <div style="padding-left:6px; padding-top:6px; padding-bottom:6px;">
+            <div style="height:22px;  float:left">
+                <div style="width:400px; height:22px; border:1px solid #AED4EB; padding-left:5px; float:left; padding-top:3px"> <strong> 共{$bcjyzs.countRs}篇&nbsp;&nbsp;每页{$bcjyzs.pageSize}篇&nbsp;&nbsp;第{$bcjyzs.page}页/共{$bcjyzs.countPage}页&nbsp;&nbsp;<a href="?page={$bcjyzs.first}&i=1&big_type={$smarty.get.big_type|escape:'hex'}&small_type={$smarty.get.small_type|escape:'hex'}" class="a1">首页</a>&nbsp;&nbsp;<a href="?page={$bcjyzs.previous}&i={if $bcjyzs.page==1}1{else}{math equation='(x-2)*y+1' x=$bcjyzs.page y=$bcjyzs.pageSize}{/if}&big_type={$smarty.get.big_type|escape:'hex'}&small_type={$smarty.get.small_type|escape:'hex'}" class="a1">上页</a>&nbsp;&nbsp;<a href="?page={$bcjyzs.next}&i={if $bcjyzs.page==$bcjyzs.countPage}{math equation='(x-1)*y+1' x=$bcjyzs.page y=$bcjyzs.pageSize}{else}{math equation='(x*y)+1' x=$bcjyzs.pageSize y=$bcjyzs.page}{/if}&big_type={$smarty.get.big_type|escape:'hex'}&small_type={$smarty.get.small_type|escape:'hex'}" class="a1">下页</a>&nbsp;&nbsp;<a href="?page={$bcjyzs.last}&i={math equation='(x-1)*y+1' x=$bcjyzs.countPage y=$bcjyzs.pageSize}&big_type={$smarty.get.big_type|escape:'hex'}&small_type={$smarty.get.small_type|escape:'hex'}" class="a1">尾页</a></strong> </div>
+                {section name=numId loop=$bcjyzs.arrayNum}
+                <div style="width:3px; height:22px; float:left"></div>
+
+                <div style="width:23px; height:22px; padding-left:5px; float:left; border:1px solid #AED4EB; padding-top:3px ;{if $bcjyzs.arrayNum[numId]==$bcjyzs.page} background-color:#51D26B {/if} "> <a href="?page={$bcjyzs.arrayNum[numId]}&i={if $bcjyzs.arrayNum[numId] == 1}1{else}{math equation='(x-1)*y+1' x=$bcjyzs.arrayNum[numId] y=$bcjyzs.pageSize}{/if}&big_type={$smarty.get.big_type|escape:'hex'}&small_type={$smarty.get.small_type|escape:'hex'}" class="{if $bcjyzs.arrayNum[numId]==$bcjyzs.page}a2{else}a6{/if}">{$bcjyzs.arrayNum[numId]}{if $bcjyzs.arrayNum[numId]==$bcjyzs.page}{/if}</a> </div>
+                {/section} </div>
+        </div>
+        {/if}
+    {/if}
+    {if $isshow == 'T'}
+        {if $exam_problem!=false}
+        <DIV style="padding-left:6px;">
+            <UL>
+                <LI style="LINE-HEIGHT: 25px; WIDTH: 6%; FLOAT: left; text-align:center; HEIGHT: 25px; BORDER-RIGHT: #21de26 1px solid; border-bottom:#21de26 1px solid;">序号</LI>
+                <LI style="LINE-HEIGHT: 25px; WIDTH: 42%; FLOAT: left; text-align:center; HEIGHT: 25px; BORDER-RIGHT: #21de26 1px solid; border-bottom:#21de26 1px solid;">所属类别</LI>
+                <LI style="LINE-HEIGHT: 25px; WIDTH: 31%; FLOAT: left; text-align:center; HEIGHT: 25px; BORDER-RIGHT: #21de26 1px solid; border-bottom:#21de26 1px solid;">题型</LI>
+                <LI style="LINE-HEIGHT: 25px; WIDTH: 18%; FLOAT: left; text-align:center; HEIGHT: 25px; border-bottom:#21de26 1px solid;">题目数量</LI>
+            </UL>
+        </DIV>
+        {php}$i = 1;{/php}
+        {section name=emid loop=$emtypes}
+        {section name=tnid loop=$exam_problem}
+        {if $exam_problem[tnid].pro_type == $emtypes[emid].english}
+        <DIV style="padding-left:6px;">
+            <UL>
+                <LI style="LINE-HEIGHT: 23px; WIDTH: 6%; FLOAT: left; text-align:center; HEIGHT: 23px; BORDER-RIGHT: #21de26 1px solid; border-bottom:#21de26 1px solid;">{php}echo $i {/php}</LI>
+                <LI style="LINE-HEIGHT: 23px; WIDTH: 42%; FLOAT: left; text-align:center;padding-left:10px; HEIGHT: 23px; BORDER-RIGHT: #21de26 1px solid; border-bottom:#21de26 1px solid;">{$exam_problem[tnid].typename}</LI>
+                <LI style="LINE-HEIGHT: 23px; WIDTH: 31%; FLOAT: left; text-align:center;padding-left:10px; HEIGHT: 23px; BORDER-RIGHT: #21de26 1px solid; border-bottom:#21de26 1px solid;">{$exam_problem[tnid].chinese}</LI>
+                <LI style="LINE-HEIGHT: 23px; WIDTH: 18%; FLOAT: left; text-align:center; HEIGHT: 23px; border-bottom:#21de26 1px solid;">{$exam_problem[tnid].c}</LI>
+                {php}$i++;{/php}
+            </UL>
+        </DIV>
+        {/if}
+        {/section}
+        {/section}
+        {/if}
+    {/if}
+    </DIV>
+    <BR>
+  </div>
+</div>

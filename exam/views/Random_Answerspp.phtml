@@ -1,0 +1,312 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title> ==========煤矿=============</title>
+    <link href="css/base.css" rel="stylesheet" type="text/css" />
+    <link href="css/reset.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+
+<!--内容开始 -->
+	<div style="background-color: #fff;width: 1259px;margin-left: auto;margin-right: auto;">
+
+        <div id="sub_right">
+        <form name="form_addbccdinfo" method="post" >
+      <div class="right1">
+        <div class="sub_c" style="padding-bottom:20px;">
+          <div class="sub_c_bt1" style="padding-top:12px; color:#000000; line-height:48px; font-size:48px; font-weight:bold; text-align:center;">{$pro_class}  随机问答<a name="radio"></a></div>
+          <div class="k_con">
+            <ul>
+              <li>
+                <p>{if $Radio==T}
+              <li> <span style="width:1180px; float:left; padding-left:5px; background-color:#ffffff;  color:#000000; margin-bottom:5px; display:inline; border:1px solid #19b10a; font-weight:bold;font-size: 48px;">
+            随机问答： 单选题（选择一个正确答案字母）每题{$radioFraction}分</span></li>
+              {section name=rad_id loop=$arrayRadio}
+              {assign var=ss value=$arrayRadio[rad_id].content}{calStyle str=$ss}
+              <li> <span class="kt1"> <span style="font-size: {$size}line-height: {$size}">
+
+                {delbr str=$ss}</span> </span> <span class="kt_a1">
+                   {if $arrayRadio[rad_id].search_list==6 } <span class="kt_a_1">
+                <input type="radio" name="radio{$arrayRadio[rad_id].id}" style="margin-top:2px; margin-left:2px; float:left; display:inline;" value="A" id="radio{$arrayRadio[rad_id].id}">
+                </span><span class="kt_a_1">A</span> <span class="kt_a_1">
+                <input type="radio" name="radio{$arrayRadio[rad_id].id}" style="margin-top:2px; margin-left:2px; float:left; display:inline;" value="B" id="radio{$arrayRadio[rad_id].id}">
+                </span><span class="kt_a_1">B</span> <span class="kt_a_1">
+                <input type="radio" name="radio{$arrayRadio[rad_id].id}" style="margin-top:2px; margin-left:2px; float:left; display:inline;" value="C" id="radio{$arrayRadio[rad_id].id}">
+                </span><span class="kt_a_1">C</span> <span class="kt_a_1">
+                <input type="radio" name="radio{$arrayRadio[rad_id].id}" style="margin-top:2px; margin-left:2px; float:left; display:inline;" value="D" id="radio{$arrayRadio[rad_id].id}">
+                </span><span class="kt_a_1">D</span><span class="kt_a_1">
+                  <input type="radio" name="radio{$arrayRadio[rad_id].id}" style="margin-top:2px; margin-left:2px; float:left; display:inline;" value="E" id="radio{$arrayRadio[rad_id].id}">
+                </span><span class="kt_a_1">E</span> <span class="kt_a_1">
+                <input type="radio" name="radio{$arrayRadio[rad_id].id}" style="margin-top:2px; margin-left:2px; float:left; display:inline;" value="F" id="radio{$arrayRadio[rad_id].id}">
+                </span><span class="kt_a_1">F</span>
+                  {elseif $arrayRadio[rad_id].search_list==5 } <span class="kt_a_1">
+                <input type="radio" name="radio{$arrayRadio[rad_id].id}" style="margin-top:2px; margin-left:2px; float:left; display:inline;" value="A" id="radio{$arrayRadio[rad_id].id}">
+                </span><span class="kt_a_1">A</span> <span class="kt_a_1">
+                <input type="radio" name="radio{$arrayRadio[rad_id].id}" style="margin-top:2px; margin-left:2px; float:left; display:inline;" value="B" id="radio{$arrayRadio[rad_id].id}">
+                </span><span class="kt_a_1">B</span> <span class="kt_a_1">
+                <input type="radio" name="radio{$arrayRadio[rad_id].id}" style="margin-top:2px; margin-left:2px; float:left; display:inline;" value="C" id="radio{$arrayRadio[rad_id].id}">
+                </span><span class="kt_a_1">C</span> <span class="kt_a_1">
+                <input type="radio" name="radio{$arrayRadio[rad_id].id}" style="margin-top:2px; margin-left:2px; float:left; display:inline;" value="D" id="radio{$arrayRadio[rad_id].id}">
+                </span><span class="kt_a_1">D</span><span class="kt_a_1">
+                  <input type="radio" name="radio{$arrayRadio[rad_id].id}" style="margin-top:2px; margin-left:2px; float:left; display:inline;" value="E" id="radio{$arrayRadio[rad_id].id}">
+                  </span><span class="kt_a_1">E</span>
+                  {elseif $arrayRadio[rad_id].search_list==4 } <span class="kt_a_1">
+                <input type="radio" name="radio{$arrayRadio[rad_id].id}" style="margin-top:22px; margin-left:2px; float:left; display:inline;" value="A" id="radio{$arrayRadio[rad_id].id}">
+                </span><span class="kt_a_1" style="font-size: 48px;line-height: 48px;">A</span> <span class="kt_a_1">
+                <input type="radio" name="radio{$arrayRadio[rad_id].id}" style="margin-top:22px; margin-left:2px; float:left; display:inline;" value="B" id="radio{$arrayRadio[rad_id].id}">
+                </span><span class="kt_a_1" style="font-size: 48px;line-height: 48px;">B</span> <span class="kt_a_1">
+                <input type="radio" name="radio{$arrayRadio[rad_id].id}" style="margin-top:22px; margin-left:2px; float:left; display:inline;" value="C" id="radio{$arrayRadio[rad_id].id}">
+                </span><span class="kt_a_1" style="font-size: 48px;line-height: 48px;">C</span> <span class="kt_a_1">
+                <input type="radio" name="radio{$arrayRadio[rad_id].id}" style="margin-top:22px; margin-left:2px; float:left; display:inline;" value="D" id="radio{$arrayRadio[rad_id].id}">
+                </span><span class="kt_a_1" style="font-size: 48px;line-height: 48px;">D</span>
+                  {elseif $arrayRadio[rad_id].search_list==3} <span class="kt_a_1">
+                <input type="radio" name="radio{$arrayRadio[rad_id].id}" style="margin-top:22px; margin-left:2px; float:left; display:inline;" value="A" id="radio{$arrayRadio[rad_id].id}">
+                </span><span class="kt_a_1" style="font-size: 48px;line-height: 48px;">A</span> <span class="kt_a_1">
+                <input type="radio" name="radio{$arrayRadio[rad_id].id}" style="margin-top:22px; margin-left:2px; float:left; display:inline;" value="B" id="radio{$arrayRadio[rad_id].id}">
+                </span><span class="kt_a_1" style="font-size: 48px;line-height: 48px;">B</span> <span class="kt_a_1">
+                <input type="radio" name="radio{$arrayRadio[rad_id].id}" style="margin-top:22px; margin-left:2px; float:left; display:inline;" value="C" id="radio{$arrayRadio[rad_id].id}">
+                </span><span class="kt_a_1" style="font-size: 48px;line-height: 48px;">C</span> {else} <span class="kt_a_1">
+                <input type="radio" name="radio{$arrayRadio[rad_id].id}" style="margin-top:22px; margin-left:2px; float:left; display:inline;" value="A" id="radio{$arrayRadio[rad_id].id}">
+                </span><span class="kt_a_1" style="font-size: 48px;line-height: 48px;">A</span> <span class="kt_a_1">
+                <input type="radio" name="radio{$arrayRadio[rad_id].id}" style="margin-top:22px; margin-left:2px; float:left; display:inline;" value="B" id="radio{$arrayRadio[rad_id].id}">
+                </span><span class="kt_a_1" style="font-size: 48px;line-height: 48px;">B</span> {/if} </span> </li>
+             {if $arrayRadio[rad_id].right_error!="" }
+              <embed src="{$arrayRadio[rad_id].sounds}" style="width:1%;height: 1%"/>
+                <li> <span style="width:1160px; float:left; padding-left:13px;  background-color:#ffffff;  color:#000000; margin-bottom:5px; margin-top:40px;display:inline; border:1px solid #19b10a; font-weight:bold;font-size: 68px;">您的答案：{$arrayRadio[rad_id].sub}&nbsp;{$arrayRadio[rad_id].right_error}&nbsp;正确答案：{$arrayRadio[rad_id].answer}</span>
+                 {if $arrayRadio[rad_id].resolve!=""}
+                <br>问题解析：{$arrayRadio[rad_id].resolve}
+                {/if}
+                </li>
+              {/if}
+              
+              {/section}
+              {/if}
+              
+              
+              {if $Checkbox==T}
+              <li> <span style="width:1180px; float:left; padding-left:5px; background-color:#ffffff;  color:#000000; margin-bottom:5px; display:inline; border:1px solid #19b10a; font-weight:bold;font-size: 48px;">
+              随机问答： 多选题       每题{$checkboxFraction}分</span></li>
+              {section name=chk_id loop=$arrayCheckbox}
+              {assign var=ss value=$arrayCheckbox[chk_id].content}{calStyle str=$ss}
+              <li> <span class="kt1"> <span  style="font-size: {$size}line-height: {$size}">
+
+                {delbr str=$ss}</span> </span> <span class="kt_a">
+                  {if $arrayCheckbox[chk_id].search_list==8} <span class="kt_a_1">
+                <input type="checkbox" name="checkbox{$arrayCheckbox[chk_id].id}[]" style=" margin-left:2px; margin-top:2px; float; display:inline;" value="A" id="checkbox{$arrayCheckbox[chk_id].id}">
+                </span><span class="kt_a_1" style="font-size: 68px;line-height: 68px;">A</span> <span class="kt_a_1">
+                <input type="checkbox" name="checkbox{$arrayCheckbox[chk_id].id}[]" style=" margin-left:2px; margin-top:2px; float; display:inline;" value="B" id="checkbox{$arrayCheckbox[chk_id].id}">
+                </span><span class="kt_a_1">B</span> <span class="kt_a_1">
+                <input type="checkbox" name="checkbox{$arrayCheckbox[chk_id].id}[]" style=" margin-left:2px; margin-top:2px; float; display:inline;" value="C" id="checkbox{$arrayCheckbox[chk_id].id}">
+                </span><span class="kt_a_1">C</span> <span class="kt_a_1">
+                <input type="checkbox" name="checkbox{$arrayCheckbox[chk_id].id}[]" style=" margin-left:2px; margin-top:2px; float; display:inline;" value="D" id="checkbox{$arrayCheckbox[chk_id].id}">
+                </span><span class="kt_a_1">D</span> <span class="kt_a_1">
+                <input type="checkbox" name="checkbox{$arrayCheckbox[chk_id].id}[]" style=" margin-left:2px; margin-top:2px; float; display:inline;" value="E" id="checkbox{$arrayCheckbox[chk_id].id}">
+                </span><span class="kt_a_1">E</span> <span class="kt_a_1">
+                <input type="checkbox" name="checkbox{$arrayCheckbox[chk_id].id}[]" style=" margin-left:2px; margin-top:2px; float; display:inline;" value="F" id="checkbox{$arrayCheckbox[chk_id].id}">
+                </span><span class="kt_a_1">F</span><span class="kt_a_1">
+                  <input type="checkbox" name="checkbox{$arrayCheckbox[chk_id].id}[]" style=" margin-left:2px; margin-top:2px; float; display:inline;" value="G" id="checkbox{$arrayCheckbox[chk_id].id}">
+                </span><span class="kt_a_1">G</span> <span class="kt_a_1">
+                <input type="checkbox" name="checkbox{$arrayCheckbox[chk_id].id}[]" style=" margin-left:2px; margin-top:2px; float; display:inline;" value="H" id="checkbox{$arrayCheckbox[chk_id].id}">
+                </span><span class="kt_a_1">H</span>
+                  {elseif $arrayCheckbox[chk_id].search_list==7} <span class="kt_a_1">
+                <input type="checkbox" name="checkbox{$arrayCheckbox[chk_id].id}[]" style=" margin-left:2px; margin-top:2px; float; display:inline;" value="A" id="checkbox{$arrayCheckbox[chk_id].id}">
+                </span><span class="kt_a_1">A</span> <span class="kt_a_1">
+                <input type="checkbox" name="checkbox{$arrayCheckbox[chk_id].id}[]" style=" margin-left:2px; margin-top:2px; float; display:inline;" value="B" id="checkbox{$arrayCheckbox[chk_id].id}">
+                </span><span class="kt_a_1">B</span> <span class="kt_a_1">
+                <input type="checkbox" name="checkbox{$arrayCheckbox[chk_id].id}[]" style=" margin-left:2px; margin-top:2px; float; display:inline;" value="C" id="checkbox{$arrayCheckbox[chk_id].id}">
+                </span><span class="kt_a_1">C</span> <span class="kt_a_1">
+                <input type="checkbox" name="checkbox{$arrayCheckbox[chk_id].id}[]" style=" margin-left:2px; margin-top:2px; float; display:inline;" value="D" id="checkbox{$arrayCheckbox[chk_id].id}">
+                </span><span class="kt_a_1">D</span> <span class="kt_a_1">
+                <input type="checkbox" name="checkbox{$arrayCheckbox[chk_id].id}[]" style=" margin-left:2px; margin-top:2px; float; display:inline;" value="E" id="checkbox{$arrayCheckbox[chk_id].id}">
+                </span><span class="kt_a_1">E</span> <span class="kt_a_1">
+                <input type="checkbox" name="checkbox{$arrayCheckbox[chk_id].id}[]" style=" margin-left:2px; margin-top:2px; float; display:inline;" value="F" id="checkbox{$arrayCheckbox[chk_id].id}">
+                </span><span class="kt_a_1">F</span><span class="kt_a_1">
+                  <input type="checkbox" name="checkbox{$arrayCheckbox[chk_id].id}[]" style=" margin-left:2px; margin-top:2px; float; display:inline;" value="G" id="checkbox{$arrayCheckbox[chk_id].id}">
+                  </span><span class="kt_a_1">G</span>
+                  {elseif $arrayCheckbox[chk_id].search_list==6} <span class="kt_a_1">
+                <input type="checkbox" name="checkbox{$arrayCheckbox[chk_id].id}[]" style=" margin-left:2px; margin-top:22px; float; display:inline;" value="A" id="checkbox{$arrayCheckbox[chk_id].id}">
+                </span><span class="kt_a_1" style="font-size: 48px;line-height: 48px;">A</span> <span class="kt_a_1">
+                <input type="checkbox" name="checkbox{$arrayCheckbox[chk_id].id}[]" style=" margin-left:2px; margin-top:22px; float; display:inline;" value="B" id="checkbox{$arrayCheckbox[chk_id].id}">
+                </span><span class="kt_a_1" style="font-size: 48px;line-height: 48px;">B</span> <span class="kt_a_1">
+                <input type="checkbox" name="checkbox{$arrayCheckbox[chk_id].id}[]" style=" margin-left:2px; margin-top:22px; float; display:inline;" value="C" id="checkbox{$arrayCheckbox[chk_id].id}">
+                </span><span class="kt_a_1" style="font-size: 48px;line-height: 48px;">C</span> <span class="kt_a_1">
+                <input type="checkbox" name="checkbox{$arrayCheckbox[chk_id].id}[]" style=" margin-left:2px; margin-top:22px; float; display:inline;" value="D" id="checkbox{$arrayCheckbox[chk_id].id}">
+                </span><span class="kt_a_1" style="font-size: 48px;line-height: 48px;">D</span> <span class="kt_a_1">
+                <input type="checkbox" name="checkbox{$arrayCheckbox[chk_id].id}[]" style=" margin-left:2px; margin-top:22px; float; display:inline;" value="E" id="checkbox{$arrayCheckbox[chk_id].id}">
+                </span><span class="kt_a_1" style="font-size: 48px;line-height: 48px;">E</span> <span class="kt_a_1">
+                <input type="checkbox" name="checkbox{$arrayCheckbox[chk_id].id}[]" style=" margin-left:2px; margin-top:22px; float; display:inline;" value="F" id="checkbox{$arrayCheckbox[chk_id].id}">
+                </span><span class="kt_a_1" style="font-size: 48px;line-height: 48px;">F</span>
+                  {elseif $arrayCheckbox[chk_id].search_list==5} <span class="kt_a_1">
+                <input type="checkbox" name="checkbox{$arrayCheckbox[chk_id].id}[]" style=" margin-left:2px; margin-top:22px; float; display:inline;" value="A" id="checkbox{$arrayCheckbox[chk_id].id}">
+                </span><span class="kt_a_1" style="font-size: 48px;line-height: 48px;">A</span> <span class="kt_a_1">
+                <input type="checkbox" name="checkbox{$arrayCheckbox[chk_id].id}[]" style=" margin-left:2px; margin-top:22px; float; display:inline;" value="B" id="checkbox{$arrayCheckbox[chk_id].id}">
+                </span><span class="kt_a_1" style="font-size: 48px;line-height: 48px;">B</span> <span class="kt_a_1">
+                <input type="checkbox" name="checkbox{$arrayCheckbox[chk_id].id}[]" style=" margin-left:2px; margin-top:22px; float; display:inline;" value="C" id="checkbox{$arrayCheckbox[chk_id].id}">
+                </span><span class="kt_a_1" style="font-size: 48px;line-height: 48px;">C</span> <span class="kt_a_1">
+                <input type="checkbox" name="checkbox{$arrayCheckbox[chk_id].id}[]" style=" margin-left:2px; margin-top:22px; float; display:inline;" value="D" id="checkbox{$arrayCheckbox[chk_id].id}">
+                </span><span class="kt_a_1" style="font-size: 48px;line-height: 48px;">D</span> <span class="kt_a_1">
+                <input type="checkbox" name="checkbox{$arrayCheckbox[chk_id].id}[]" style=" margin-left:2px; margin-top:22px; float; display:inline;" value="E" id="checkbox{$arrayCheckbox[chk_id].id}">
+                </span><span class="kt_a_1" style="font-size: 48px;line-height: 48px;">E</span> {else} <span class="kt_a_1">
+                <input type="checkbox" name="checkbox{$arrayCheckbox[chk_id].id}[]" style=" margin-left:2px; margin-top:22px; float; display:inline;" value="A" id="checkbox{$arrayCheckbox[chk_id].id}">
+                </span><span class="kt_a_1" style="font-size: 48px;line-height: 48px;">A</span> <span class="kt_a_1">
+                <input type="checkbox" name="checkbox{$arrayCheckbox[chk_id].id}[]" style=" margin-left:2px; margin-top:22px; float; display:inline;" value="B" id="checkbox{$arrayCheckbox[chk_id].id}">
+                </span><span class="kt_a_1" style="font-size: 48px;line-height: 48px;">B</span> <span class="kt_a_1">
+                <input type="checkbox" name="checkbox{$arrayCheckbox[chk_id].id}[]" style=" margin-left:2px; margin-top:22px; float; display:inline;" value="C" id="checkbox{$arrayCheckbox[chk_id].id}">
+                </span><span class="kt_a_1" style="font-size: 48px;line-height: 48px;">C</span> <span class="kt_a_1">
+                <input type="checkbox" name="checkbox{$arrayCheckbox[chk_id].id}[]" style=" margin-left:2px; margin-top:22px; float; display:inline;" value="D" id="checkbox{$arrayCheckbox[chk_id].id}">
+                </span><span class="kt_a_1" style="font-size: 48px;line-height: 48px;">D</span> {/if} </span> </li>
+                 {if $arrayCheckbox[chk_id].right_error!="" }
+              <embed src="{$arrayCheckbox[chk_id].sounds}" style="display: none;"/>
+                <li> <span style="width:1180px; float:left; padding-left:5px; margin-top: 30px;  background-color:#ffffff;  color:#000000; margin-bottom:5px; display:inline; border:1px solid #19b10a; font-weight:bold;font-size: 48px;line-height: 48px;">您的答案：{$arrayCheckbox[chk_id].sub}&nbsp;{$arrayCheckbox[chk_id].right_error}&nbsp;正确答案：{$arrayCheckbox[chk_id].answer}
+                {if $arrayCheckbox[chk_id].resolve!=""}
+                <br>问题解析：{$arrayCheckbox[chk_id].resolve}
+                {/if}
+                </span></li>
+                {/if}
+              {/section}
+              {/if}
+              
+              {if $Fill==T}
+              <li> <span style="width:660px; float:left; padding-left:13px;background-color:#ffffff;  color:#000000; margin-bottom:5px; display:inline; border:1px solid #19b10a; font-weight:bold;font-size: 32px;"> 随机问答： 填空题（每空{$fillFraction}分）</span></li>
+              {section name=fil_id loop=$arrayFill}
+              <li> <span class="kt" style="background-color:#FFFFFF; border:1px dashed #FF6600; color:#333333;"> <span style="padding-top:4px; float:left;font-size: 68px;line-height: 68px;">
+               
+            {util->mreplace p=$arrayFill[fil_id].content p2=$arrayFill[fil_id].id }
+             
+              </span> </span></li>
+                 {if $arrayFill[fil_id].right_error!="" }
+                 <li> <span style="width:660px; float:left; padding-left:13px; background-color:#ffffff;  color:#000000; margin-bottom:5px; display:inline; border:1px solid #19b10a; font-weight:bold;font-size: 68px;margin-top: 30px;">正确答案：{$arrayFill[fil_id].answer}<br>您的答案：{$arrayFill[fil_id].sub}&nbsp;&nbsp;&nbsp;&nbsp;{$arrayFill[fil_id].right_error}
+                   {if $arrayFill[fil_id].resolve!=""}
+                <br>问题解析：{$arrayFill[fil_id].resolve}
+                {/if}
+                 </span></li>
+                 {/if}
+              {/section}
+              {/if}
+              
+              {if $Judgment==T}
+              <li> <span style="width:1180px; float:left; padding-left:5px; background-color:#ffffff;  color:#000000; margin-bottom:5px; display:inline; border:1px solid #19b10a; font-weight:bold;font-size: 48px;"> 随机问答： 判断题 每题{$judgmentFraction}分</span> </li>
+              {section name=jud_id loop=$arrayJudgment}
+              {calStyle str=$arrayJudgment[jud_id].content t='text'}
+              <li> <span class="kt1"> <span  style="font-size: {$size}line-height: {$size}">
+                {$arrayJudgment[jud_id].content}</span> </span> 
+                <!--  <span class="kt_a">
+            
+                        <span class="kt_a_2">A.接口是一种用来定义程序的协议</span>                    </span>--> 
+                <span class="kt_a" style="margin-top: 30px;"> <span class="kt_a_1">
+                <input type="radio" name="judgment{$arrayJudgment[jud_id].id}" style="margin-top:2px; margin-left:2px; float:left; display:inline;" value="正确" id="judgment{$arrayJudgment[jud_id].id}">
+                </span><span class="kt_a_1" style="width:185px;font-size: 68px;line-height: 68px;">正确</span><span class="kt_a_1">
+                <input type="radio" name="judgment{$arrayJudgment[jud_id].id}" style="margin-top:2px; margin-left:2px; float:left; display:inline;" value="错误" id="judgment{$arrayJudgment[jud_id].id}">
+                </span><span class="kt_a_1" style="width:185px;font-size: 68px;line-height: 68px;">错误</span></span></li>
+                    {if $arrayJudgment[jud_id].right_error!="" }
+              <embed src="{$arrayJudgment[jud_id].sounds}" style="display: none;"/>
+                 <li> <span style="width:1180px; float:left; padding-left:5px;  background-color:#ffffff;  color:#000000; margin-bottom:5px;margin-top: 32px; display:inline; border:1px solid #19b10a; font-weight:bold;font-size: 68px;">您的答案：{$arrayJudgment[jud_id].sub}&nbsp;&nbsp;&nbsp;&nbsp;{$arrayJudgment[jud_id].right_error}    正确答案：{$arrayJudgment[jud_id].answer}
+                   {if $arrayJudgment[jud_id].resolve!=""}
+                <br>问题解析：{$arrayJudgment[jud_id].resolve}
+                {/if}
+                 </span></li>
+                 {/if}
+              {/section}
+              {/if}
+              </p>
+              <p> </p>
+              <p>
+                  {if $Explain==T}
+              <li> <span style="width:1180px; float:left; padding-left:5px; font-size: 48px;  background-color:#ffffff;  color:#000000; margin-bottom:5px; display:inline; border:1px solid #19b10a; font-weight:bold;"> 随机问答： 名词解释题（每题{$ExplainFraction}分，共{$Explains}题）</span></li>
+              {section name=exp_id loop=$arrayExplain}{calStyle str=$arrayExplain[exp_id].content t='text'}
+              <li> <span class="kt1"> <span style="font-size: {$size}line-height: {$size}">
+                {$arrayExplain[exp_id].content} </span> </span> <span style="float:left; padding-left:25px;">
+                </span>
+
+              </li>
+              {if $arrayExplain[exp_id].flag == 1}
+              {calStyle str=$arrayExplain[exp_id].sub t='text'}
+              <li> <span style="width:1180px; float:left; padding-left:5px;  background-color:#ffffff;  color:#000000; margin-bottom:5px;margin-top: 32px; display:inline; border:1px solid #19b10a; font-weight:bold;font-size: {$size}">您的答案：{$arrayExplain[exp_id].sub}&nbsp;&nbsp;&nbsp;&nbsp;{$arrayExplain[exp_id].right_error}
+{if $arrayExplain[exp_id].resolve!=""}
+                 <br> <br>问题解析：{$arrayExplain[exp_id].resolve}
+                  {/if}
+                </span></li>
+              {else}{calStyle str=$arrayExplain[exp_id].sub t='text'}
+              <li> <span style="width:1180px; float:left; padding-left:5px;  background-color:#ffffff;  color:#000000; margin-bottom:5px;margin-top: 32px; display:inline; border:1px solid #19b10a; font-weight:bold;font-size: {$size}word-wrap: break-word;">您的答案：{$arrayExplain[exp_id].sub}&nbsp;&nbsp;&nbsp;&nbsp;{$arrayExplain[exp_id].right_error}
+
+                </span></li>{calStyle str=$arrayExplain[exp_id].answer t='text'}
+              <li> <span style="width:1180px; float:left; padding-left:5px;  background-color:#ffffff;  color:#000000; margin-bottom:5px;margin-top: 32px; display:inline; border:1px solid #19b10a; font-weight:bold;font-size: {$size}word-wrap: break-word;">正确答案：{$arrayExplain[exp_id].answer}
+             {if $arrayExplain[exp_id].resolve!=""}
+                 <br> <br>问题解析：{$arrayExplain[exp_id].resolve}
+                  {/if}
+                </span></li>
+              {/if}
+              <embed src="{$arrayExplain[exp_id].sounds}" style="display: none;"/>
+              {/section}
+              {/if}
+
+                  {if $Answer==T}
+              <li> <span style="width:1180px; float:left; padding-left:5px; font-size: 48px;  background-color:#ffffff;  color:#000000; margin-bottom:5px; display:inline; border:1px solid #19b10a; font-weight:bold;"> 随机问答： 问答题（每题{$answerFraction}分，共{$Answers}题）</span></li>
+              {section name=ans_id loop=$arrayAnswer}{calStyle str=$arrayAnswer[ans_id].content t='text'}
+              <li> <span class="kt1"> <span style="font-size: {$size}line-height: {$size} word-wrap: break-word;">
+                {$arrayAnswer[ans_id].content} </span> </span> <span style="float:left; padding-left:25px;">
+                </span>
+
+              </li>
+                {if $arrayAnswer[ans_id].flag == 1}{calStyle str=$arrayAnswer[ans_id].sub t='text'}
+              <li> <span style="width:1180px; float:left; padding-left:5px;  background-color:#ffffff;  color:#000000; margin-bottom:5px;margin-top: 32px; display:inline; border:1px solid #19b10a; font-weight:bold;font-size: {$size}">您的答案：{$arrayAnswer[ans_id].sub}&nbsp;&nbsp;&nbsp;&nbsp;{$arrayAnswer[ans_id].right_error}
+{if $arrayAnswer[ans_id].resolve!=""}
+                 <br> <br>问题解析：{$arrayAnswer[ans_id].resolve}
+                  {/if}
+                </span></li>
+                {else}{calStyle str=$arrayAnswer[ans_id].sub t='text'}
+                <li> <span style="width:1180px; float:left; padding-left:5px;  background-color:#ffffff;  color:#000000; margin-bottom:5px;margin-top: 32px; display:inline; border:1px solid #19b10a; font-weight:bold;word-wrap: break-word;font-size: {$size}">您的答案：{$arrayAnswer[ans_id].sub}&nbsp;&nbsp;&nbsp;&nbsp;{$arrayAnswer[ans_id].right_error}
+
+                </span></li>{calStyle str=$arrayAnswer[ans_id].answer t='text'}
+              <li> <span style="width:1180px; float:left; padding-left:5px;  background-color:#ffffff;  color:#000000; margin-bottom:5px;margin-top: 32px; display:inline; border:1px solid #19b10a; font-weight:bold;word-wrap: break-word;font-size: {$size} ">正确答案：{$arrayAnswer[ans_id].answer}
+             {if $arrayAnswer[ans_id].resolve!=""}
+                 <br> <br>问题解析：{$arrayAnswer[ans_id].resolve}
+                  {/if}
+                </span></li>
+                
+                
+                {/if}
+              <embed src="{$arrayAnswer[ans_id].sounds}" style="display: none;"/>
+              {/section}
+              {/if}
+              
+              {if $Discourse==T}
+              <li> <span style="width:660px; float:left; padding-left:13px; line-height:28px; background-color:#ffffff;  color:#000000; margin-bottom:5px; display:inline; border:1px solid #19b10a; font-weight:bold;"> 随机问答： 论述题（每题{$discourseFraction}分，共{$Discourses}题）</span></li>
+              {section name=dis_id loop=$arrayDiscourse}
+              <li> <span class="kt"> <span class="kt_t"> {php}
+           
+                $i++;
+                echo $i;
+                   echo "<a name=" .$i. "></a>";
+                {/php}、
+                {$arrayDiscourse[dis_id].content}</span> </span> <span style="float:left; padding-left:25px;">
+                <textarea name="discourse{$arrayDiscourse[dis_id].id}" style="width:630px; padding-left:5px; float:left; line-height:25px; border:1px solid #AAAAAA; height:300px;" id="discourse{$arrayDiscourse[dis_id].id}" rows="15"></textarea>
+                </span></li>
+                     {if $arrayDiscourse[dis_id].right_error!="" }
+                    <li> <span style="width:660px; float:left; padding-left:13px; padding-right:10px; line-height:28px;  background-color:#ffffff;  color:#000000; margin-bottom:5px; display:inline; border:1px solid #19b10a; ">正确答案：{$arrayDiscourse[dis_id].answer}</span></li>
+                    <li> <span style="width:660px; float:left; padding-left:13px; padding-right:10px; line-height:28px;  background-color:#ffffff;  color:#000000; margin-bottom:5px; display:inline; border:1px solid #19b10a; ">您的答案：{$arrayDiscourse[dis_id].sub}&nbsp;&nbsp;&nbsp;&nbsp;{$arrayDiscourse[dis_id].right_error}
+                      {if $arrayDiscourse[dis_id].resolve!=""}
+                <br>问题解析：{$arrayDiscourse[dis_id].resolve}
+                {/if}
+                    </span></li>
+
+                    {/if}
+              {/section}
+              {/if}
+            </ul>
+          </div>
+          <div class="k_x"><a name="judgment"></a>
+            <input type="hidden" name="type_id" id="type_id" value="{$type_id}" />
+            <input type="hidden" name="exam_id" id="exam_id" value="{$exam_id}" />
+            <input type="hidden" name="arrayValue" id="arrayValue" value="{$arrayValue}" />
+          </div>
+          <div style="text-align: center;margin-bottom: 20px;padding-top: 50px;"> <a href="Random_Answerpp.php?type_id={$type_id}&exam_id={$exam_id}"><img src="images/xyt.jpg" /> </a></div>
+        </div>
+      </div>
+    	</form>
+    </div>
+    </div>
+<!--内容结束 -->
+</body>
+</html>

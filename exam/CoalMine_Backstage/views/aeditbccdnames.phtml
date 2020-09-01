@@ -1,0 +1,222 @@
+<link href="{util->baseUrl}/css/style.css" rel="stylesheet" type="text/css" />
+<link href="{util->baseUrl}/css/reset.css" rel="stylesheet" type="text/css" />
+<script src="{util->baseUrl}/Scripts/common.js"></script>
+<SCRIPT src="{util->baseUrl}/Scripts/jquery.js"></SCRIPT>
+<script>
+    {literal}
+    $(document).ready(function(){
+        strArr = Array();
+        if(document.getElementById("typestr")){
+            typestr = document.getElementById("typestr").value;
+            strArr = typestr.split("@");
+        }
+        changeProClass();
+    });
+    function changeProClass(){
+        getCheckboxValue();
+        var str = $('#form_addbccdinfo').serialize();
+        $.post('getproquestions.php',str,function(data){
+            var pagerString = '';
+            var htmlContentString = ''
+            var pageSize = 20;
+            d = data.split('"***"');
+            pagestr = d[0];
+            aa = eval("("+pagestr+")");
+
+            $('#displayquestions').html(d[1]);
+            for(k in aa){
+                pagerString = "";
+                var countPage = Math.ceil(aa[k] / pageSize);
+                for(i = 1;i <= countPage && 10 >= i;i++){
+                    if(1 == i){
+                        pagerString +='<a>'+i+'</a> '
+                    } else {
+                        pagerString += '&nbsp;<a href="javascript:void(0)" onclick="paging('
+                            +i+','+'\''+k+'\''+')">'+i+'</a>&nbsp;'
+                    }
+                }
+                $("#pager"+k).html(pagerString);
+            }
+            $("#checkedquestions").attr("value",strArr.join('@'));
+        });
+    }
+    function paging(page,k){
+        getCheckboxValue();
+        var str = $('#form_addbccdinfo').serialize()+"&offset="+page+"&type="+k;
+        $.post('getproquestions.php',str,function(data){
+            var pagerString = '';
+            var htmlContentString = ''
+            var pageSize = 20;
+            d = data.split("\"***\"");
+            pagestr = d[0];
+            aa = eval("("+pagestr+")");
+
+            $('#displayquestions').html(d[1]);
+            for(m in aa){
+                pagerString = "";
+                var countPage = Math.ceil(aa[m] / pageSize);
+                if(m == k){
+                    for(i = page - 5;i <= page + 5 && i <= countPage;i++){
+                        if(0 < i){
+                            if(i == page){
+                                pagerString += '<a>'+i+'</a>'
+                            } else {
+                                pagerString += '&nbsp;<a href="javascript:void(0)" onclick="paging('
+                                    +i+','+'\''+m+'\''+')">'+i+'</a>&nbsp;'
+                            }
+                        }
+                    }
+                    $("#pager"+m).html(pagerString);
+                }else{
+                    pagerString = "";
+                    var countPage = Math.ceil(aa[m] / pageSize);
+                    for(i = 1;i <= countPage && 10 >= i;i++){
+                        if(1 == i){
+                            pagerString +='<a>'+i+'</a> '
+                        } else {
+                            pagerString += '&nbsp;<a href="javascript:void(0)" onclick="paging('
+                                +i+','+'\''+m+'\''+')">'+i+'</a>&nbsp;'
+                        }
+                    }
+                    $("#pager"+m).html(pagerString);
+                }
+            }
+            $("#checkedquestions").attr("value",strArr.join('@'));
+        });
+    }
+    function checkall(){
+        return chkinputbccdinfo() && chknumber();
+    }
+    function chkinputbccdinfo(){
+        if($('#pro_class').val() == 0){
+            alert('请选择所属类别！');
+            $('#pro_class').focus();
+            return false;
+        }
+        if($('#title').val() == ''){
+            alert('请输入标题！');
+            $('#title').focus();
+            return false;
+        }
+
+        if($('#template').val() == ''){
+            alert('请选择考卷模板！');
+            $('#template').focus();
+            return false;
+        }
+        return true;
+    }
+
+    function chknumber(){
+        var result = false;
+        param = $('#form_addbccdinfo').serialize()+"&flag=1";
+        $.ajax({
+            type:'post',
+            url:'chknumber.php',
+            data:param,
+            async:false,
+            success:function(data){
+                if(data != ''){
+                    alert(data);
+                }else{
+                    result = true;
+                }
+            }
+        })
+        return result;
+    }
+
+    function getCheckboxValue(){
+        $("input[type='checkbox'][name!='exam_user']:checked")
+            .each(function(){
+                if(!strArr.in_array($(this).attr('name')+$(this).val())){
+                    strArr.push($(this).attr('name')+$(this).val());
+                }
+            })
+    }
+
+    Array.prototype.in_array = function(e){
+        for(i=0;i<this.length;i++){
+            if(this[i] == e){
+                return true;
+            }
+        }
+        return false;
+    }
+    {/literal}
+
+</script>
+<!--右侧-->
+<div id="con_right">
+  <div class="right_con">
+    <div class="right_con_bt">·{$smarty.get.big_type} < {$smarty.get.small_type}</div>
+    <br />
+    <br />
+    <br />
+    <DIV>
+      <DIV style="padding-left:6px;">
+        <UL>
+          <LI style="LINE-HEIGHT: 25px; WIDTH: 58%; FLOAT: left; text-align:center; HEIGHT: 25px; BORDER-RIGHT: #21de26 1px solid; border-bottom:#21de26 1px solid;">标题 </LI>
+          <LI style="LINE-HEIGHT: 25px; WIDTH: 20%; FLOAT: left; text-align:center; HEIGHT: 25px; BORDER-RIGHT: #21de26 1px solid; border-bottom:#21de26 1px solid;">添加时间 </LI>
+          <LI style="LINE-HEIGHT: 25px; WIDTH: 20%; FLOAT: left; text-align:center; HEIGHT: 25px; border-bottom:#21de26 1px solid;">操作 </LI>
+        </UL>
+      </DIV>
+      {section name=id loop=$bcjyzs.data}
+      <DIV style="padding-left:6px;">
+        <UL>
+          <LI style="LINE-HEIGHT: 23px; WIDTH: 58%; padding-left:10px; FLOAT: left; HEIGHT: 23px; BORDER-RIGHT: #21de26 1px solid; border-bottom:#21de26 1px solid;"> {util->msubstr p=$bcjyzs.data[id].title p1=0 p2=60 p3="..."}</LI>
+          <LI style="LINE-HEIGHT: 23px; WIDTH: 20%; FLOAT: left; text-align:center; HEIGHT: 23px; BORDER-RIGHT: #21de26 1px solid; border-bottom:#21de26 1px solid;">{$bcjyzs.data[id].dates}</LI>
+          <LI style="LINE-HEIGHT: 23px; WIDTH: 20%; FLOAT: left; text-align:center; HEIGHT: 23px; border-bottom:#21de26 1px solid;"> <a href="look_examinations.php?look=l&id={$bcjyzs.data[id].id}" target="_blank" class="a1">预览试卷&nbsp;|&nbsp;<a href="?edit=t&id={$bcjyzs.data[id].id}&big_type={$smarty.get.big_type|escape:'hex'}&small_type={$smarty.get.small_type|escape:'hex'}" class="a1">更改&nbsp;|&nbsp;<a href="?delete=t&id={$bcjyzs.data[id].id}&big_type={$smarty.get.big_type|escape:'hex'}&small_type={$smarty.get.small_type|escape:'hex'}" class="a1">删除</a></LI>
+        </UL>
+      </DIV>
+      {/section} </DIV>
+    <br />
+    <div style="padding-left:6px; padding-top:6px;"> {if $bcjyzs.data!=false}
+      <div style="height:22px;  float:left">
+        <div style="width:400px; height:22px; border:1px solid #AED4EB; padding-left:5px; float:left; padding-top:3px"> <strong> 共{$bcjyzs.countRs}条&nbsp;&nbsp;每页{$bcjyzs.pageSize}条&nbsp;&nbsp;第{$bcjyzs.page}页/共{$bcjyzs.countPage}页&nbsp;&nbsp;<a href="{util->baseUrl}/aeditbccdnames.php?page={$bcjyzs.first}&big_type={$smarty.get.big_type|escape:'hex'}&small_type={$smarty.get.small_type|escape:'hex'}" class="a1">首页</a>&nbsp;&nbsp;<a href="{util->baseUrl}/aeditbccdnames.php?page={$bcjyzs.previous}&big_type={$smarty.get.big_type|escape:'hex'}&small_type={$smarty.get.small_type|escape:'hex'}" class="a1">上页</a>&nbsp;&nbsp;<a href="{util->baseUrl}/aeditbccdnames.php?page={$bcjyzs.next}&big_type={$smarty.get.big_type|escape:'hex'}&small_type={$smarty.get.small_type|escape:'hex'}" class="a1">下页</a>&nbsp;&nbsp;<a href="{util->baseUrl}/aeditbccdnames.php?page={$bcjyzs.last}&big_type={$smarty.get.big_type|escape:'hex'}&small_type={$smarty.get.small_type|escape:'hex'}" class="a1">尾页</a></strong> </div>
+        {section name=numId loop=$bcjyzs.arrayNum}
+        <div style="width:3px; height:22px; float:left"></div>
+        <div style="width:23px; height:22px; padding-left:5px; float:left; border:1px solid #AED4EB; padding-top:3px ;{if $bcjyzs.arrayNum[numId]==$bcjyzs.page} background-color:#51D26B {/if} "> <a href="{util->baseUrl}/aeditbccdnames.php?page={$bcjyzs.arrayNum[numId]}&big_type={$smarty.get.big_type|escape:'hex'}&small_type={$smarty.get.small_type|escape:'hex'}" class="{if $bcjyzs.arrayNum[numId]==$bcjyzs.page}a2{else}a6{/if}">{$bcjyzs.arrayNum[numId]}{if $bcjyzs.arrayNum[numId]==$bcjyzs.page}{/if}</a> </div>
+        {/section} 
+        </div>
+      {/if} </div>
+    <br />
+    {if $edit=='t'}
+    <div class="right_con_form">
+      <form id="form_addbccdinfo" name="form_addbccdinfo" method="post" action="" enctype="multipart/form-data">
+        <br />
+        所属类别：
+        <select name="pro_class" id="pro_class" class="input1">
+            <option value=0>请选择</option>
+        {$displayType}
+    
+        </select>
+        <br />
+        <br />
+        试卷标题：
+        <input type="text" name="title" size="65" class="input1" value="{$bccdname[0].title}" class="input1" />
+        <br/>
+        <br/>
+        开始时间：
+        <input type="text" name="start_exam" id="start_exam" value="{$bccdname[0].start_exam}" class="input1" />
+        &nbsp;&nbsp;
+        结束时间：
+        <input type="text" name="over_exam" id="over_exam" value="{$bccdname[0].over_exam}" class="input1" />
+        &nbsp;&nbsp;
+          <br/><br/>
+
+          <input type="hidden" id="typestr" name="typestr" value="{$typeStr}" />
+          <input type="hidden" id="checkedquestions" name="checkedquestions" value="" />
+          <br/>
+          <br/>
+
+        <input type="hidden" name="exam_id" id="exam_id" value="{$bccdname[0].id}" />
+
+          <input type="image" name="submit" id="submit" src="images/submit.jpg" />
+        <br />
+        <br />
+        </p>
+      </form>
+    </div>
+    {/if} </div>
+</div>

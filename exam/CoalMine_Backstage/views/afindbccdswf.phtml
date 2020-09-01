@@ -1,0 +1,139 @@
+<link rel=stylesheet type=text/css href="{util->baseUrl}/css/examinations.css">
+<script type="text/javascript">
+    function chksearch(){ldelim}
+    if(form1.pro_class.value=='' && form1.pro_type.value==''&& form1.id.value==''&& form1.content.value==''){ldelim}
+    alert('请输入查询关键字！');
+    form1.pro_class.focus();
+    return false;
+    {rdelim}
+    return true;
+    {rdelim}
+</script>
+<!--右侧-->
+<div id="con_right">
+    <div class="right_con">
+        <div class="right_con_bt">·{$smarty.get.big_type} < {$smarty.get.small_type}</div>
+        <div class="right_con_bt" style=" height:35px; padding-top:4px; padding-bottom:4px; padding-left:6px; ">
+            <form id="form1" name="form1" method="get" action="afindbccdswf.php?big_type={$smarty.get.big_type}&small_type={$smarty.get.small_type}" >
+            所属分类：
+            <select name="pro_class" id="pro_class" class="input1" style="width: 133px;" {if $smarty.session.back_permissions == 1}disabled{/if}>
+            <option value="">请选择</option>
+            {$displayType}
+            </select>
+            题型：
+            <select name="pro_type" id="pro_type" class="input1" >
+                <option value="">请选择</option>
+                <option value="radio" {if $pro_type == 'radio'} selected {/if}>单选</option>
+                <option value="checkbox" {if $pro_type == 'checkbox'} selected {/if}>多选</option>
+				<option value="fill" {if $pro_type == 'fill'} selected {/if}>填空</option>
+                <option value="judgment" {if $pro_type == 'judgment'} selected {/if}>判断</option>
+                <!--<option value="explain" {if $pro_type == 'explain'} selected {/if}>名词解释</option>
+                <option value="answer" {if $pro_type == 'answer'} selected {/if}>问答</option>-->
+                <!--          <option value="discourse">论述</option>-->
+            </select>
+            试题ID：
+            <input name="id" id="id" type="text" size="5" value="{$id}"/>
+            试题内容：
+            <input name="content" id="content" type="text" size="20" value="{$content}"/>
+            <input type="submit" id="submit" value="查询" name="submit" onclick="return chksearch()">
+        </div>
+        <div>
+            {if $bcjyzs.data!=false}
+            <DIV style="padding-left:6px;">
+                <ul>
+
+                </ul>
+                <ul style="margin-top: 50px">
+                    <li><input type="checkbox" name="all" id="checkall" onclick="checkAll()"/>&nbsp;&nbsp;&nbsp;全选&nbsp;&nbsp;&nbsp;<input type="checkbox" name="all" id="uncheckall" onclick="uncheckAll()"/>&nbsp;&nbsp;&nbsp;取消&nbsp;&nbsp;&nbsp;<input type="submit" name="active" value="启用" onclick="return ischecked(1)"/>&nbsp;&nbsp;&nbsp;<input type="submit" name="inactive" value="禁用" onclick="return ischecked(0)"/>&nbsp;&nbsp;&nbsp;<input type="submit" name="deltogether" value="删除" onclick="return ischecked(2)"/></li>
+                </ul>
+                <UL>
+                    <LI style="LINE-HEIGHT: 25px; WIDTH: 23%; FLOAT: left; text-align:center; HEIGHT: 25px; BORDER-RIGHT: #21de26 1px solid; border-bottom:#21de26 1px solid;">ID</LI>
+                    <LI style="LINE-HEIGHT: 25px; WIDTH: 30%; FLOAT: left; text-align:center; HEIGHT: 25px; BORDER-RIGHT: #21de26 1px solid; border-bottom:#21de26 1px solid;">所属分类</LI>
+
+                    <LI style="LINE-HEIGHT: 25px; WIDTH: 20%; FLOAT: left; text-align:center; HEIGHT: 25px; BORDER-RIGHT: #21de26 1px solid; border-bottom:#21de26 1px solid;">题型</LI>
+                    <LI style="LINE-HEIGHT: 25px; WIDTH: 25%; FLOAT: left; text-align:center; HEIGHT: 25px; border-bottom:#21de26 1px solid;">操作 </LI>
+                </UL>
+            </DIV>
+            {section name=id loop=$bcjyzs.data}
+            <DIV style="padding-left:6px;">
+                <UL><LI style="LINE-HEIGHT: 23px;  HEIGHT: 23px;"> <input type="checkbox" name="isactive[]" id="isactive_{$bcjyzs.data[id].id}" value="{$bcjyzs.data[id].id}"/>
+                </LI>
+
+
+                    <LI style="LINE-HEIGHT: 23px; WIDTH: 23%; padding-left:10px; FLOAT: left;text-align:center; HEIGHT: 23px; BORDER-RIGHT: #21de26 1px solid; border-bottom:#21de26 1px solid;"> {$bcjyzs.data[id].id}
+                    </LI>
+                    <LI style="LINE-HEIGHT: 23px; WIDTH: 30%; FLOAT: left; text-align:center; HEIGHT: 23px; BORDER-RIGHT: #21de26 1px solid; border-bottom:#21de26 1px solid;">{section name=bccdnameids loop=$arrayBccdnames1}
+                        {if $arrayBccdnames1[bccdnameids].id==$bcjyzs.data[id].pro_class}
+                        {$arrayBccdnames1[bccdnameids].typename}
+                        {/if}
+                        {/section}</LI>
+
+                    <LI style="LINE-HEIGHT: 23px; WIDTH: 20%; FLOAT: left; text-align:center; HEIGHT: 23px; BORDER-RIGHT: #21de26 1px solid; border-bottom:#21de26 1px solid;">{$bcjyzs.data[id].chinese}</LI>
+                    <LI style="LINE-HEIGHT: 23px; WIDTH: 25%; FLOAT: left; text-align:center; HEIGHT: 23px; border-bottom:#21de26 1px solid;">
+                        <a href="aeditbccdswf.php?edit=t&id={$bcjyzs.data[id].id}&q={$q}&big_type={$smarty.get.big_type|escape:'hex'}&small_type={'更改试题'|escape:'hex'}" class="a1">更改&nbsp;|&nbsp;<a href="alookbccdswf.php?delete=t&id={$bcjyzs.data[id].id}&big_type={$smarty.get.big_type|escape:'hex'}&small_type={'更改试题'|escape:'hex'}" class="a1">删除</a>
+                    </LI>
+                </UL>
+            </DIV>
+            {/section}
+            </form>
+
+            <div style="padding-left:6px; padding-top:6px; padding-bottom:6px;">
+                <div style="height:22px;  float:left">
+                    <div style="width:400px; height:22px; border:1px solid #AED4EB; padding-left:5px; float:left; padding-top:3px"> <strong> 共{$bcjyzs.countRs}篇&nbsp;&nbsp;每页{$bcjyzs.pageSize}篇&nbsp;&nbsp;第{$bcjyzs.page}页/共{$bcjyzs.countPage}页&nbsp;&nbsp;<a href="{util->baseUrl}/afindbccdswf.php?page={$bcjyzs.first}&big_type={$smarty.get.big_type|escape:'hex'}&small_type={$smarty.get.small_type|escape:'hex'}{if $pro_class != ''}&pro_class={$pro_class}{/if}{if $pro_type != ''}&pro_type={$pro_type}{/if}{if $id != ''}&id={$id}{/if}{if $content != ''}&content={$content}{/if}" class="a1">首页</a>&nbsp;&nbsp;<a href="{util->baseUrl}/afindbccdswf.php?page={$bcjyzs.previous}&big_type={$smarty.get.big_type|escape:'hex'}&small_type={$smarty.get.small_type|escape:'hex'}{if $pro_class != ''}&pro_class={$pro_class}{/if}{if $pro_type != ''}&pro_type={$pro_type}{/if}{if $id != ''}&id={$id}{/if}{if $content != ''}&content={$content}{/if}" class="a1">上页</a>&nbsp;&nbsp;<a href="{util->baseUrl}/afindbccdswf.php?page={$bcjyzs.next}&big_type={$smarty.get.big_type|escape:'hex'}&small_type={$smarty.get.small_type|escape:'hex'}{if $pro_class != ''}&pro_class={$pro_class}{/if}{if $pro_type != ''}&pro_type={$pro_type}{/if}{if $id != ''}&id={$id}{/if}{if $content != ''}&content={$content}{/if}" class="a1">下页</a>&nbsp;&nbsp;<a href="{util->baseUrl}/afindbccdswf.php?page={$bcjyzs.last}&big_type={$smarty.get.big_type|escape:'hex'}&small_type={$smarty.get.small_type|escape:'hex'}{if $pro_class != ''}&pro_class={$pro_class}{/if}{if $pro_type != ''}&pro_type={$pro_type}{/if}{if $id != ''}&id={$id}{/if}{if $content != ''}&content={$content}{/if}" class="a1">尾页</a></strong> </div>
+                    {section name=numId loop=$bcjyzs.arrayNum}
+                    <div style="width:3px; height:22px; float:left"></div>
+                    <div style="width:23px; height:22px; padding-left:5px; float:left; border:1px solid #AED4EB; padding-top:3px ;{if $bcjyzs.arrayNum[numId]==$bcjyzs.page} background-color:#51D26B {/if} "> <a href="{util->baseUrl}/afindbccdswf.php?page={$bcjyzs.arrayNum[numId]}&big_type={$smarty.get.big_type|escape:'hex'}&small_type={$smarty.get.small_type|escape:'hex'}{if $pro_class != ''}&pro_class={$pro_class}{/if}{if $pro_type != ''}&pro_type={$pro_type}{/if}{if $id != ''}&id={$id}{/if}{if $content != ''}&content={$content}{/if}" class="{if $bcjyzs.arrayNum[numId]==$bcjyzs.page}a2{else}a6{/if}">{$bcjyzs.arrayNum[numId]}{if $bcjyzs.arrayNum[numId]==$bcjyzs.page}{/if}</a> </div>
+                    {/section} </div>
+            </div>
+            {/if}
+
+        </div>
+    </div>
+</div>
+
+<script language="javascript">
+    function checkAll () {ldelim}
+    var input = document.getElementsByTagName("input");
+    for(i=0;i<input.length;i++){ldelim}
+    if(input[i].type == "checkbox"){ldelim}
+    if(input[i].id == "uncheckall"){ldelim}
+    continue;
+    {rdelim}
+    input[i].checked = true;
+    {rdelim}
+    {rdelim}
+    {rdelim}
+
+    function uncheckAll () {ldelim}
+    var input = document.getElementsByTagName("input");
+    for(i=0;i<input.length;i++){ldelim}
+    if(input[i].type == "checkbox"){ldelim}
+    input[i].checked = false;
+    {rdelim}
+    {rdelim}
+    {rdelim}
+
+    function ischecked(num){ldelim}
+    var input = document.getElementsByTagName("input");
+    var message = "";
+    var chk = false;
+    for(i=0;i<input.length;i++){ldelim}
+    if(input[i].type == "checkbox" && input[i].checked == true){ldelim}
+    chk = true;
+    {rdelim}
+    {rdelim}
+    if(chk == false){ldelim}
+    if(num == 0){ldelim}
+    message = "请至少选择一项要禁用的试题！";
+    {rdelim}else if(num == 1){ldelim}
+    message = "请至少选择一项要启用的试题！";
+    {rdelim} else {ldelim}
+    message = "请至少选择一项要删除的试题！";
+    {rdelim}
+    alert(message);
+    return false;
+    {rdelim}
+    return true;
+    {rdelim}
+
+</script>

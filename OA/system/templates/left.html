@@ -1,0 +1,27 @@
+<script language="javascript" src="js/left.js"></script>
+<link href="css/style.css" rel="stylesheet" />
+<table width="203" height="505" border="0" cellpadding="0" cellspacing="0" background="images/left.jpg">
+	<tr>
+		<td align="center" valign="top">&nbsp;
+			{foreach from=$left item="data"}
+			<a href="javascript:;">
+				<div id="s{$data.id}" style="width:150px; padding-top:5px; color:#FFFFFF; height:24px; background:url(images/jia.gif)" align="center" onclick="javascript:change(e{$data.id},s{$data.id})">
+					{$data.f_type}
+				</div>
+			</a>
+			<div id="e{$data.id}" style="display:none;">
+				{foreach from=$data.child item='child_lists'}
+				<div>
+					<a href="{$child_lists.o_url}?u_id={$child_lists.id}" target="mainFrame">
+						{$child_lists.f_name}
+					</a>
+				</div>
+				{/foreach}
+			</div>
+			{/foreach}
+		</td>
+	</tr>
+	<tr>
+		<td colspan="2" height="54" background="images/left_top.gif">&nbsp;</td>
+	</tr>
+</table>

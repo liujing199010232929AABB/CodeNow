@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>个人设定</title>
+    <link href="css/style.css" rel="stylesheet" />
+    <script src="js/client_js.js"></script>
+</head>
+<body>
+<table width="765" border="0" cellpadding="0" cellspacing="0" style="margin-top:15px; border: 1px;">
+    <tr>
+        <td height="33" background="images/list.jpg" id="list" style=" border: inset 1px; ">{$f_name}</td>
+    </tr>
+    <tr>
+        <td align="center" valign="top">
+        {if $u_id==6}   <!--职员浏览-->
+            <table width="300" border="1" cellpadding="0" cellspacing="0" bgcolor="#DEEBEF" class="big_td">
+                <tr>
+                    <td width="75" height="25" align="center" valign="middle" scope="col">编号</td>
+                    <td width="75" align="center" valign="middle" scope="col">姓名</td>
+                    <td width="75" align="center" valign="middle" scope="col">性别</td>
+                    <td width="75" align="center" valign="middle" scope="col">部门</td>
+                </tr>
+                {section name=usr_id loop=$usr}
+                <tr>
+                    <td align="center" valign="middle">{$usr[usr_id].id}</td>
+                    <td align="center" valign="middle">{$usr[usr_id].u_name}</td>
+                    <td align="center" valign="middle">{$usr[usr_id].u_sex}</td>
+                    <td align="center" valign="middle">&nbsp;
+                    {section name=dep_id loop=$dep}
+                        {if $usr[usr_id].u_depart==$dep[dep_id].id}
+                            {$dep[dep_id].d_name}
+                        {/if}
+                    {/section}
+                    </td>
+                </tr>
+                {/section}
+            </table>
+        {elseif $u_id==4}  <!--个人设定-->
+
+            {section name=t_id loop=$t_user}
+                <table width="765" border="1" cellpadding="0" cellspacing="0" bgcolor="#DEEBEF" class="big_td">
+                    <form name="form1" method="post" action="personnel_air_chk.php">
+                        <tr>
+                            <td width="100" height="25" align="right" valign="middle" scope="col"><span class="STYLE1">*</span>员工昵称：</td>
+                            <td width="150" height="25" align="left" valign="middle" scope="col"><input name="u_user" type="text" size="10" value="{$t_user[t_id].u_user}" readonly="readonly" /></td>
+                            <td width="100" height="25" align="right" valign="middle" scope="col"><span class="STYLE1">*</span>姓名：</td>
+                            <td width="300" height="25" align="left" valign="middle" scope="col"><input type="text" name="u_name" size="15" value="{$t_user[t_id].u_name}" /></td>
+                        </tr>
+                        <tr>
+                            <td width="100" height="25" align="right" valign="middle">性别：</td>
+                            <td width="150" height="25" align="left" valign="middle">
+                                <select name="u_sex">
+                                {if $t_user[t_id].u_sex=="男"}
+                                <option value="男" selected="selected">男</option>
+                                <option value="女">女</option>
+                                {else}
+                                <option value="男">男</option>
+                                <option value="女" selected="selected">女</option>
+                                {/if}
+                                </select>
+                            </td>
+                            <td width="100" height="25" align="right" valign="middle">出生日期：</td>
+                            <td width="300" align="left" valign="middle"><input type="text" name="u_birth" size="15" value="{$t_user[t_id].u_birth}"  /></td>
+                        </tr>
+                        <tr>
+                            <td width="100" height="25" align="right" valign="middle">E-mail：</td>
+                            <td width="150" height="25" align="left" valign="middle">
+                                <input type="text" name="u_email" size="15" value="{$t_user[t_id].u_email}" />
+                            </td>
+                            <td width="100" height="25" align="right" valign="middle">员工电话：</td>
+                            <td width="300" height="25" align="left" valign="middle">
+                                <input type="text" name="u_tel" size="15" value="{$t_user[t_id].u_tel}"  />
+                            </td>
+                        </tr>
+                        <tr>
+                            <td height="25" colspan="2" align="center" valign="middle">
+                                <input type="hidden" name="id" value="{$t_user[t_id].id}" />
+                                <input name="submit" type="submit" value="修改" />
+                                <input name="reset" type="reset" value="重置" />
+                            </td>
+                            <td height="25" align="right" valign="middle">地址：      </td>
+                            <td height="25" align="left" valign="middle">
+                                <input type="text" name="u_address" size="40" value="{$t_user[t_id].u_address}" />
+                            </td>
+                        </tr>
+                    </form>
+                </table>
+            {/section}
+        {/if}
+    </td>
+    </tr>
+</table>
+</body>
+</html>

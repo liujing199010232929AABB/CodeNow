@@ -1,0 +1,414 @@
+<link rel=stylesheet type=text/css href="{util->baseUrl}/css/examinations.css">
+<!--右侧-->
+<div id="con_right">
+  <div class="right_con">
+    <div class="right_con_bt">·{$smarty.get.big_type} < {$smarty.get.small_type} ——————<a href="{util->baseUrl}/alookbccdswf.php?page={$arrayRadio.first}&pid={$arrayRadio.pid}&big_type={$smarty.get.big_type|escape:'hex'}&small_type={$smarty.get.small_type|escape:'hex'}&pro_type={'radio'|escape:'hex'}" class="a1"> 单选</a>  /  <a href="{util->baseUrl}/alookbccdswf.php?page={$arrayRadio.first}&big_type={$smarty.get.big_type|escape:'hex'}&small_type={$smarty.get.small_type|escape:'hex'}&pro_type={'checkbox'|escape:'hex'}" class="a1"> 多选</a>   /  <a href="{util->baseUrl}/alookbccdswf.php?page={$arrayRadio.first}&big_type={$smarty.get.big_type|escape:'hex'}&small_type={$smarty.get.small_type|escape:'hex'}&pro_type={'judgment'|escape:'hex'}" class="a1"> 判断</a> /  <a href="{util->baseUrl}/alookbccdswf.php?page={$arrayRadio.first}&big_type={$smarty.get.big_type|escape:'hex'}&small_type={$smarty.get.small_type|escape:'hex'}&pro_type={'fill'|escape:'hex'}" class="a1"> 填空</a>
+<!--	 /  <a href="{util->baseUrl}/alookbccdswf.php?page={$arrayRadio.first}&big_type={$smarty.get.big_type|escape:'hex'}&small_type={$smarty.get.small_type|escape:'hex'}&pro_type={'answer'|escape:'hex'}" class="a1"> 问答</a>
+        /  <a href="{util->baseUrl}/alookbccdswf.php?page={$arrayRadio.first}&big_type={$smarty.get.big_type|escape:'hex'}&small_type={$smarty.get.small_type|escape:'hex'}&pro_type={'answer'|escape:'hex'}" class="a1"> 简答</a>  /  <a href="{util->baseUrl}/alookbccdswf.php?page={$arrayRadio.first}&big_type={$smarty.get.big_type|escape:'hex'}&small_type={$smarty.get.small_type|escape:'hex'}&pro_type={'discourse'|escape:'hex'}" class="a1"> 论述</a><br>-->
+        {section name=tID loop=$radioTypeArr}
+            <span style="padding-left: 200px;"><a href="{util->baseUrl}/alookbccdswf.php?page={$arrayRadio.first}&pid={$arrayRadio.pid}&big_type={$smarty.get.big_type|escape:'hex'}&small_type={$smarty.get.small_type|escape:'hex'}&pro_type={'radio'|escape:'hex'}&radio_type={$radioTypeArr[tID].english}" class="a1">{$radioTypeArr[tID].name}</a></span><br>
+        {/section}
+        {section name=tID loop=$checkboxTypeArr}
+        <span style="padding-left: 250px;"><a href="{util->baseUrl}/alookbccdswf.php?page={$arrayCheckbox.first}&pid={$arrayCheckbox.pid}&big_type={$smarty.get.big_type|escape:'hex'}&small_type={$smarty.get.small_type|escape:'hex'}&pro_type={'checkbox'|escape:'hex'}&checkbox_type={$checkboxTypeArr[tID].english}" class="a1">{$checkboxTypeArr[tID].name}</a></span><br>
+        {/section}
+        {section name=tID loop=$fillTypeArr}
+        <span style="padding-left: 280px;"><a href="{util->baseUrl}/alookbccdswf.php?page={$arrayFill.first}&pid={$arrayFill.pid}&big_type={$smarty.get.big_type|escape:'hex'}&small_type={$smarty.get.small_type|escape:'hex'}&pro_type={'fill'|escape:'hex'}&fill_type={$fillTypeArr[tID].english}" class="a1">{$fillTypeArr[tID].name}</a></span><br>
+        {/section}
+        {section name=tID loop=$judgmentTypeArr}
+        <span style="padding-left: 330px;"><a href="{util->baseUrl}/alookbccdswf.php?page={$arrayJudgment.first}&pid={$arrayJudgment.pid}&big_type={$smarty.get.big_type|escape:'hex'}&small_type={$smarty.get.small_type|escape:'hex'}&pro_type={'judgment'|escape:'hex'}&judgment_type={$judgmentTypeArr[tID].english}" class="a1">{$judgmentTypeArr[tID].name}</a></span><br>
+        {/section}
+        {section name=tID loop=$answerTypeArr}
+        <span style="padding-left: 370px;"><a href="{util->baseUrl}/alookbccdswf.php?page={$arrayAnswer.first}&pid={$arrayAnswer.pid}&big_type={$smarty.get.big_type|escape:'hex'}&small_type={$smarty.get.small_type|escape:'hex'}&pro_type={'answer'|escape:'hex'}&answer_type={$answerTypeArr[tID].english}" class="a1">{$answerTypeArr[tID].name}</a></span><br>
+        {/section}
+        {section name=tID loop=$discourseTypeArr}
+        <span style="padding-left: 410px;"><a href="{util->baseUrl}/alookbccdswf.php?page={$arrayDiscourse.first}&pid={$arrayDiscourse.pid}&big_type={$smarty.get.big_type|escape:'hex'}&small_type={$smarty.get.small_type|escape:'hex'}&pro_type={'discourse'|escape:'hex'}&discourse_type={$discourseTypeArr[tID].english}" class="a1">{$discourseTypeArr[tID].name}</a></span><br>
+        {/section}
+    </div>
+
+    <div class="right_con_form">
+      <table id="brand" width="100%" border="1" >
+    <tr>
+    <td>&nbsp;</td>
+  </tr>
+              {if $Radio==T}
+  <tr>
+    <td> <span style="width:700px; float:left; padding-left:10px; padding-right:10px; line-height:28px;  color:#000000; margin-bottom:5px; display:inline; border:1px solid #FF0000; font-weight:bold;">{$radioTitle}题（选择一个正确答案字母）每题{$radioFraction}分，共{if $arrayRadio.countRs==''}0{else}{$arrayRadio.countRs}{/if}题。</span></td>
+  </tr>
+   {section name=rad_id loop=$arrayRadio.data}
+  <tr>
+    <td><span class="kt"> <span class="kt_t">{$arrayRadio.data[rad_id].id}、{$arrayRadio.data[rad_id].content}</span> </span> <span class="kt_a">
+        {if $arrayRadio.data[rad_id].search_list==6 } <span class="kt_a_1">
+              <input type="radio" name="radio{$arrayRadio.data[rad_id].id}" style="margin-top:2px; margin-left:2px; float:left; display:inline;" value="A" id="radio{$arrayRadio.data[rad_id].id}">
+              </span><span class="kt_a_1">A</span> <span class="kt_a_1">
+              <input type="radio" name="radio{$arrayRadio.data[rad_id].id}" style="margin-top:2px; margin-left:2px; float:left; display:inline;" value="B" id="radio{$arrayRadio.data[rad_id].id}">
+              </span><span class="kt_a_1">B</span> <span class="kt_a_1">
+              <input type="radio" name="radio{$arrayRadio.data[rad_id].id}" style="margin-top:2px; margin-left:2px; float:left; display:inline;" value="C" id="radio{$arrayRadio.data[rad_id].id}">
+              </span><span class="kt_a_1">C</span> <span class="kt_a_1">
+              <input type="radio" name="radio{$arrayRadio.data[rad_id].id}" style="margin-top:2px; margin-left:2px; float:left; display:inline;" value="D" id="radio{$arrayRadio.data[rad_id].id}">
+              </span><span class="kt_a_1">D</span><span class="kt_a_1">
+              <input type="radio" name="radio{$arrayRadio.data[rad_id].id}" style="margin-top:2px; margin-left:2px; float:left; display:inline;" value="E" id="radio{$arrayRadio.data[rad_id].id}">
+              </span><span class="kt_a_1">E</span><span class="kt_a_1">
+              <input type="radio" name="radio{$arrayRadio.data[rad_id].id}" style="margin-top:2px; margin-left:2px; float:left; display:inline;" value="F" id="radio{$arrayRadio.data[rad_id].id}">
+              </span><span class="kt_a_1">F</span>
+        {elseif $arrayRadio.data[rad_id].search_list==5 } <span class="kt_a_1">
+              <input type="radio" name="radio{$arrayRadio.data[rad_id].id}" style="margin-top:2px; margin-left:2px; float:left; display:inline;" value="A" id="radio{$arrayRadio.data[rad_id].id}">
+              </span><span class="kt_a_1">A</span> <span class="kt_a_1">
+              <input type="radio" name="radio{$arrayRadio.data[rad_id].id}" style="margin-top:2px; margin-left:2px; float:left; display:inline;" value="B" id="radio{$arrayRadio.data[rad_id].id}">
+              </span><span class="kt_a_1">B</span> <span class="kt_a_1">
+              <input type="radio" name="radio{$arrayRadio.data[rad_id].id}" style="margin-top:2px; margin-left:2px; float:left; display:inline;" value="C" id="radio{$arrayRadio.data[rad_id].id}">
+              </span><span class="kt_a_1">C</span> <span class="kt_a_1">
+              <input type="radio" name="radio{$arrayRadio.data[rad_id].id}" style="margin-top:2px; margin-left:2px; float:left; display:inline;" value="D" id="radio{$arrayRadio.data[rad_id].id}">
+              </span><span class="kt_a_1">D</span><span class="kt_a_1">
+              <input type="radio" name="radio{$arrayRadio.data[rad_id].id}" style="margin-top:2px; margin-left:2px; float:left; display:inline;" value="E" id="radio{$arrayRadio.data[rad_id].id}">
+              </span><span class="kt_a_1">E</span>
+        {elseif $arrayRadio.data[rad_id].search_list==4 } <span class="kt_a_1">
+              <input type="radio" name="radio{$arrayRadio.data[rad_id].id}" style="margin-top:2px; margin-left:2px; float:left; display:inline;" value="A" id="radio{$arrayRadio.data[rad_id].id}">
+              </span><span class="kt_a_1">A</span> <span class="kt_a_1">
+              <input type="radio" name="radio{$arrayRadio.data[rad_id].id}" style="margin-top:2px; margin-left:2px; float:left; display:inline;" value="B" id="radio{$arrayRadio.data[rad_id].id}">
+              </span><span class="kt_a_1">B</span> <span class="kt_a_1">
+              <input type="radio" name="radio{$arrayRadio.data[rad_id].id}" style="margin-top:2px; margin-left:2px; float:left; display:inline;" value="C" id="radio{$arrayRadio.data[rad_id].id}">
+              </span><span class="kt_a_1">C</span> <span class="kt_a_1">
+              <input type="radio" name="radio{$arrayRadio.data[rad_id].id}" style="margin-top:2px; margin-left:2px; float:left; display:inline;" value="D" id="radio{$arrayRadio.data[rad_id].id}">
+              </span><span class="kt_a_1">D</span>
+        {elseif $arrayRadio.data[rad_id].search_list==3} <span class="kt_a_1">
+              <input type="radio" name="radio{$arrayRadio.data[rad_id].id}" style="margin-top:2px; margin-left:2px; float:left; display:inline;" value="A" id="radio{$arrayRadio.data[rad_id].id}">
+              </span><span class="kt_a_1">A</span> <span class="kt_a_1">
+              <input type="radio" name="radio{$arrayRadio.data[rad_id].id}" style="margin-top:2px; margin-left:2px; float:left; display:inline;" value="B" id="radio{$arrayRadio.data[rad_id].id}">
+              </span><span class="kt_a_1">B</span> <span class="kt_a_1">
+              <input type="radio" name="radio{$arrayRadio.data[rad_id].id}" style="margin-top:2px; margin-left:2px; float:left; display:inline;" value="C" id="radio{$arrayRadio.data[rad_id].id}">
+              </span><span class="kt_a_1">C</span> {else} <span class="kt_a_1">
+              <input type="radio" name="radio{$arrayRadio.data[rad_id].id}" style="margin-top:2px; margin-left:2px; float:left; display:inline;" value="A" id="radio{$arrayRadio.data[rad_id].id}">
+              </span><span class="kt_a_1">A</span> <span class="kt_a_1">
+              <input type="radio" name="radio{$arrayRadio.data[rad_id].id}" style="margin-top:2px; margin-left:2px; float:left; display:inline;" value="B" id="radio{$arrayRadio.data[rad_id].id}">
+              </span><span class="kt_a_1">B</span> {/if} </span> 
+              <span class="kt"> <span class="kt_t">答案：{$arrayRadio.data[rad_id].answer}</span> </span>
+              {if $arrayRadio.data[rad_id].resolve!=""}
+                <span class="kt"> <span class="kt_t">解析：{$arrayRadio.data[rad_id].resolve}</span> </span>
+              {/if}
+              <span class="kt"> <span class="kt_t">考题类别（
+               	{section name=typ_id loop=$bccdNames}
+           			{if $arrayRadio.data[rad_id].pro_class==$bccdNames[typ_id].id}
+          				{$bccdNames[typ_id].typename}
+					{/if}
+          		{/section}
+              ）&nbsp;&nbsp;&nbsp; 分数（{$arrayRadio.data[rad_id].fraction}）&nbsp;&nbsp;&nbsp; <a href="aeditbccdswf.php?page={$smarty.get.page}&pro_type={$smarty.get.pro_type}&edit=t&id={$arrayRadio.data[rad_id].id}&big_type={$smarty.get.big_type|escape:'hex'}&small_type={'更改考题'|escape:'hex'}" class="a1">更改&nbsp;|&nbsp;<a href="alookbccdswf.php?delete=t&id={$arrayRadio.data[rad_id].id}&big_type={$smarty.get.big_type|escape:'hex'}&small_type={'更改考题'|escape:'hex'}" class="a1">删除</a></span></span> 
+              </td>
+  </tr>
+   {/section}
+       <br /> 
+    <div style="padding-left:6px; padding-top:6px;"> {if $arrayRadio.data!=false}
+      <div style="height:22px;  float:left">
+        <div style="width:400px; height:22px; border:1px solid #AED4EB; padding-left:5px; float:left; padding-top:3px"> <strong> 共{$arrayRadio.countRs}题&nbsp;&nbsp;每页{$arrayRadio.pageSize}题&nbsp;&nbsp;第{$arrayRadio.page}页/共{$arrayRadio.countPage}页&nbsp;&nbsp;<a href="{util->baseUrl}/alookbccdswf.php?page={$arrayRadio.first}&big_type={$smarty.get.big_type|escape:'hex'}&small_type={$smarty.get.small_type|escape:'hex'}&pro_type={$smarty.get.pro_type|escape:'hex'}&radio_type={$radioType}" class="a1">首页</a>&nbsp;&nbsp;<a href="{util->baseUrl}/alookbccdswf.php?page={$arrayRadio.previous}&big_type={$smarty.get.big_type|escape:'hex'}&small_type={$smarty.get.small_type|escape:'hex'}&pro_type={$smarty.get.pro_type|escape:'hex'}&radio_type={$radioType}" class="a1">上页</a>&nbsp;&nbsp;<a href="{util->baseUrl}/alookbccdswf.php?page={$arrayRadio.next}&big_type={$smarty.get.big_type|escape:'hex'}&small_type={$smarty.get.small_type|escape:'hex'}&pro_type={$smarty.get.pro_type|escape:'hex'}&radio_type={$radioType}" class="a1">下页</a>&nbsp;&nbsp;<a href="{util->baseUrl}/alookbccdswf.php?page={$arrayRadio.last}&big_type={$smarty.get.big_type|escape:'hex'}&small_type={$smarty.get.small_type|escape:'hex'}&pro_type={$smarty.get.pro_type|escape:'hex'}&radio_type={$radioType}" class="a1">尾页</a></strong> </div>
+        {section name=numId loop=$arrayRadio.arrayNum}
+        <div style="width:3px; height:22px; float:left"></div>
+        <div style="width:23px; height:22px; padding-left:5px; float:left; border:1px solid #AED4EB; padding-top:3px ;{if $arrayRadio.arrayNum[numId]==$arrayRadio.page} background-color:#51D26B {/if} "> <a href="{util->baseUrl}/alookbccdswf.php?page={$arrayRadio.arrayNum[numId]}&big_type={$smarty.get.big_type|escape:'hex'}&small_type={$smarty.get.small_type|escape:'hex'}&pro_type={$smarty.get.pro_type|escape:'hex'}" class="{if $arrayRadio.arrayNum[numId]==$arrayRadio.page}a2{else}a6{/if}">{$arrayRadio.arrayNum[numId]}{if $arrayRadio.arrayNum[numId]==$arrayRadio.page}{/if}</a> </div>
+        {/section} 
+        </div>
+      {/if} </div> 
+            {/if}
+            
+            
+            {if $Checkbox==T}
+  
+  <tr>
+    <td><span style="width:700px; float:left; padding-left:10px; padding-right:10px; line-height:28px;  color:#000000; margin-bottom:5px; display:inline; border:1px solid #FF0000; font-weight:bold;"> {$checkboxTitle}题（选择两个或两个以上正确答案字母）每题{$checkboxFraction}分，共{if $arrayCheckbox.countRs==''}0{else}{$arrayCheckbox.countRs}{/if}题</span> </td>
+  </tr>
+    {section name=chk_id loop=$arrayCheckbox.data}
+  <tr>
+    <td><span class="kt"> <span class="kt_t"> {$arrayCheckbox.data[chk_id].id}、{$arrayCheckbox.data[chk_id].content}</span> </span> <span class="kt_a">
+        {if $arrayCheckbox.data[chk_id].search_list==8} <span class="kt_a_1">
+              <input type="checkbox" name="checkbox{$arrayCheckbox.data[chk_id].id}[]" style=" margin-left:2px; margin-top:2px; float; display:inline;" value="A" id="checkbox{$arrayCheckbox.data[chk_id].id}">
+              </span><span class="kt_a_1">A</span> <span class="kt_a_1">
+              <input type="checkbox" name="checkbox{$arrayCheckbox.data[chk_id].id}[]" style=" margin-left:2px; margin-top:2px; float; display:inline;" value="B" id="checkbox{$arrayCheckbox.data[chk_id].id}">
+              </span><span class="kt_a_1">B</span> <span class="kt_a_1">
+              <input type="checkbox" name="checkbox{$arrayCheckbox.data[chk_id].id}[]" style=" margin-left:2px; margin-top:2px; float; display:inline;" value="C" id="checkbox{$arrayCheckbox.data[chk_id].id}">
+              </span><span class="kt_a_1">C</span> <span class="kt_a_1">
+              <input type="checkbox" name="checkbox{$arrayCheckbox.data[chk_id].id}[]" style=" margin-left:2px; margin-top:2px; float; display:inline;" value="D" id="checkbox{$arrayCheckbox.data[chk_id].id}">
+              </span><span class="kt_a_1">D</span> <span class="kt_a_1">
+              <input type="checkbox" name="checkbox{$arrayCheckbox.data[chk_id].id}[]" style=" margin-left:2px; margin-top:2px; float; display:inline;" value="E" id="checkbox{$arrayCheckbox.data[chk_id].id}">
+              </span><span class="kt_a_1">E</span> <span class="kt_a_1">
+              <input type="checkbox" name="checkbox{$arrayCheckbox.data[chk_id].id}[]" style=" margin-left:2px; margin-top:2px; float; display:inline;" value="F" id="checkbox{$arrayCheckbox.data[chk_id].id}">
+              </span><span class="kt_a_1">F</span><span class="kt_a_1">
+              <input type="checkbox" name="checkbox{$arrayCheckbox.data[chk_id].id}[]" style=" margin-left:2px; margin-top:2px; float; display:inline;" value="G" id="checkbox{$arrayCheckbox.data[chk_id].id}">
+              </span><span class="kt_a_1">G</span> <span class="kt_a_1">
+              <input type="checkbox" name="checkbox{$arrayCheckbox.data[chk_id].id}[]" style=" margin-left:2px; margin-top:2px; float; display:inline;" value="H" id="checkbox{$arrayCheckbox.data[chk_id].id}">
+              </span><span class="kt_a_1">H</span>
+        {elseif $arrayCheckbox.data[chk_id].search_list==7} <span class="kt_a_1">
+              <input type="checkbox" name="checkbox{$arrayCheckbox.data[chk_id].id}[]" style=" margin-left:2px; margin-top:2px; float; display:inline;" value="A" id="checkbox{$arrayCheckbox.data[chk_id].id}">
+              </span><span class="kt_a_1">A</span> <span class="kt_a_1">
+              <input type="checkbox" name="checkbox{$arrayCheckbox.data[chk_id].id}[]" style=" margin-left:2px; margin-top:2px; float; display:inline;" value="B" id="checkbox{$arrayCheckbox.data[chk_id].id}">
+              </span><span class="kt_a_1">B</span> <span class="kt_a_1">
+              <input type="checkbox" name="checkbox{$arrayCheckbox.data[chk_id].id}[]" style=" margin-left:2px; margin-top:2px; float; display:inline;" value="C" id="checkbox{$arrayCheckbox.data[chk_id].id}">
+              </span><span class="kt_a_1">C</span> <span class="kt_a_1">
+              <input type="checkbox" name="checkbox{$arrayCheckbox.data[chk_id].id}[]" style=" margin-left:2px; margin-top:2px; float; display:inline;" value="D" id="checkbox{$arrayCheckbox.data[chk_id].id}">
+              </span><span class="kt_a_1">D</span> <span class="kt_a_1">
+              <input type="checkbox" name="checkbox{$arrayCheckbox.data[chk_id].id}[]" style=" margin-left:2px; margin-top:2px; float; display:inline;" value="E" id="checkbox{$arrayCheckbox.data[chk_id].id}">
+              </span><span class="kt_a_1">E</span> <span class="kt_a_1">
+              <input type="checkbox" name="checkbox{$arrayCheckbox.data[chk_id].id}[]" style=" margin-left:2px; margin-top:2px; float; display:inline;" value="F" id="checkbox{$arrayCheckbox.data[chk_id].id}">
+              </span><span class="kt_a_1">F</span><span class="kt_a_1">
+              <input type="checkbox" name="checkbox{$arrayCheckbox.data[chk_id].id}[]" style=" margin-left:2px; margin-top:2px; float; display:inline;" value="G" id="checkbox{$arrayCheckbox.data[chk_id].id}">
+              </span><span class="kt_a_1">G</span>
+        {elseif $arrayCheckbox.data[chk_id].search_list==6} <span class="kt_a_1">
+              <input type="checkbox" name="checkbox{$arrayCheckbox.data[chk_id].id}[]" style=" margin-left:2px; margin-top:2px; float; display:inline;" value="A" id="checkbox{$arrayCheckbox.data[chk_id].id}">
+              </span><span class="kt_a_1">A</span> <span class="kt_a_1">
+              <input type="checkbox" name="checkbox{$arrayCheckbox.data[chk_id].id}[]" style=" margin-left:2px; margin-top:2px; float; display:inline;" value="B" id="checkbox{$arrayCheckbox.data[chk_id].id}">
+              </span><span class="kt_a_1">B</span> <span class="kt_a_1">
+              <input type="checkbox" name="checkbox{$arrayCheckbox.data[chk_id].id}[]" style=" margin-left:2px; margin-top:2px; float; display:inline;" value="C" id="checkbox{$arrayCheckbox.data[chk_id].id}">
+              </span><span class="kt_a_1">C</span> <span class="kt_a_1">
+              <input type="checkbox" name="checkbox{$arrayCheckbox.data[chk_id].id}[]" style=" margin-left:2px; margin-top:2px; float; display:inline;" value="D" id="checkbox{$arrayCheckbox.data[chk_id].id}">
+              </span><span class="kt_a_1">D</span> <span class="kt_a_1">
+              <input type="checkbox" name="checkbox{$arrayCheckbox.data[chk_id].id}[]" style=" margin-left:2px; margin-top:2px; float; display:inline;" value="E" id="checkbox{$arrayCheckbox.data[chk_id].id}">
+              </span><span class="kt_a_1">E</span> <span class="kt_a_1">
+              <input type="checkbox" name="checkbox{$arrayCheckbox.data[chk_id].id}[]" style=" margin-left:2px; margin-top:2px; float; display:inline;" value="F" id="checkbox{$arrayCheckbox.data[chk_id].id}">
+              </span><span class="kt_a_1">F</span>
+        {elseif $arrayCheckbox.data[chk_id].search_list==5} <span class="kt_a_1">
+              <input type="checkbox" name="checkbox{$arrayCheckbox.data[chk_id].id}[]" style=" margin-left:2px; margin-top:2px; float; display:inline;" value="A" id="checkbox{$arrayCheckbox.data[chk_id].id}">
+              </span><span class="kt_a_1">A</span> <span class="kt_a_1">
+              <input type="checkbox" name="checkbox{$arrayCheckbox.data[chk_id].id}[]" style=" margin-left:2px; margin-top:2px; float; display:inline;" value="B" id="checkbox{$arrayCheckbox.data[chk_id].id}">
+              </span><span class="kt_a_1">B</span> <span class="kt_a_1">
+              <input type="checkbox" name="checkbox{$arrayCheckbox.data[chk_id].id}[]" style=" margin-left:2px; margin-top:2px; float; display:inline;" value="C" id="checkbox{$arrayCheckbox.data[chk_id].id}">
+              </span><span class="kt_a_1">C</span> <span class="kt_a_1">
+              <input type="checkbox" name="checkbox{$arrayCheckbox.data[chk_id].id}[]" style=" margin-left:2px; margin-top:2px; float; display:inline;" value="D" id="checkbox{$arrayCheckbox.data[chk_id].id}">
+              </span><span class="kt_a_1">D</span> <span class="kt_a_1">
+              <input type="checkbox" name="checkbox{$arrayCheckbox.data[chk_id].id}[]" style=" margin-left:2px; margin-top:2px; float; display:inline;" value="E" id="checkbox{$arrayCheckbox.data[chk_id].id}">
+              </span><span class="kt_a_1">E</span> {else} <span class="kt_a_1">
+              <input type="checkbox" name="checkbox{$arrayCheckbox.data[chk_id].id}[]" style=" margin-left:2px; margin-top:2px; float; display:inline;" value="A" id="checkbox{$arrayCheckbox.data[chk_id].id}">
+              </span><span class="kt_a_1">A</span> <span class="kt_a_1">
+              <input type="checkbox" name="checkbox{$arrayCheckbox.data[chk_id].id}[]" style=" margin-left:2px; margin-top:2px; float; display:inline;" value="B" id="checkbox{$arrayCheckbox.data[chk_id].id}">
+              </span><span class="kt_a_1">B</span> <span class="kt_a_1">
+              <input type="checkbox" name="checkbox{$arrayCheckbox.data[chk_id].id}[]" style=" margin-left:2px; margin-top:2px; float; display:inline;" value="C" id="checkbox{$arrayCheckbox.data[chk_id].id}">
+              </span><span class="kt_a_1">C</span> <span class="kt_a_1">
+              <input type="checkbox" name="checkbox{$arrayCheckbox.data[chk_id].id}[]" style=" margin-left:2px; margin-top:2px; float; display:inline;" value="D" id="checkbox{$arrayCheckbox.data[chk_id].id}">
+              </span><span class="kt_a_1">D</span> {/if} </span> 
+              <span class="kt"> <span class="kt_t">答案：{$arrayCheckbox.data[chk_id].answer}</span> </span>
+              {if $arrayCheckbox.data[chk_id].resolve!=""}
+                <span class="kt"> <span class="kt_t">解析：{$arrayCheckbox.data[chk_id].resolve}</span> </span>
+              {/if}
+
+                   <span class="kt"> <span class="kt_t">试题类别（
+               	{section name=typ_id loop=$bccdNames}
+           			{if $arrayCheckbox.data[chk_id].pro_class==$bccdNames[typ_id].id}
+          				{$bccdNames[typ_id].typename}
+					{/if}
+          		{/section}
+              ）&nbsp;&nbsp;&nbsp;分数（{$arrayCheckbox.data[chk_id].fraction}）&nbsp;&nbsp;&nbsp; <a href="aeditbccdswf.php?page={$smarty.get.page}&pro_type={$smarty.get.pro_type}&edit=t&id={$arrayCheckbox.data[chk_id].id}&big_type={$smarty.get.big_type|escape:'hex'}&small_type={'更改试题'|escape:'hex'}" class="a1">更改&nbsp;|&nbsp;<a href="alookbccdswf.php?delete=t&id={$arrayCheckbox.data[chk_id].id}&big_type={$smarty.get.big_type|escape:'hex'}&small_type={'更改试题'|escape:'hex'}" class="a1">删除</a></span></span>
+              
+              
+              </td>
+  </tr>
+     {/section}
+     
+       <br /> 
+    <div style="padding-left:6px; padding-top:6px;"> {if $arrayCheckbox.data!=false}
+      <div style="height:22px;  float:left">
+        <div style="width:400px; height:22px; border:1px solid #AED4EB; padding-left:5px; float:left; padding-top:3px"> <strong> 共{$arrayCheckbox.countRs}题&nbsp;&nbsp;每页{$arrayCheckbox.pageSize}题&nbsp;&nbsp;第{$arrayCheckbox.page}页/共{$arrayCheckbox.countPage}页&nbsp;&nbsp;<a href="{util->baseUrl}/alookbccdswf.php?page={$arrayCheckbox.first}&big_type={$smarty.get.big_type|escape:'hex'}&small_type={$smarty.get.small_type|escape:'hex'}&pro_type={$smarty.get.pro_type|escape:'hex'}&checkbox_type={$checkboxType}"" class="a1">首页</a>&nbsp;&nbsp;<a href="{util->baseUrl}/alookbccdswf.php?page={$arrayCheckbox.previous}&big_type={$smarty.get.big_type|escape:'hex'}&small_type={$smarty.get.small_type|escape:'hex'}&pro_type={$smarty.get.pro_type|escape:'hex'}&checkbox_type={$checkboxType}" class="a1">上页</a>&nbsp;&nbsp;<a href="{util->baseUrl}/alookbccdswf.php?page={$arrayCheckbox.next}&big_type={$smarty.get.big_type|escape:'hex'}&small_type={$smarty.get.small_type|escape:'hex'}&pro_type={$smarty.get.pro_type|escape:'hex'}&checkbox_type={$checkboxType}" class="a1">下页</a>&nbsp;&nbsp;<a href="{util->baseUrl}/alookbccdswf.php?page={$arrayCheckbox.last}&big_type={$smarty.get.big_type|escape:'hex'}&small_type={$smarty.get.small_type|escape:'hex'}&pro_type={$smarty.get.pro_type|escape:'hex'}&checkbox_type={$checkboxType}" class="a1">尾页</a></strong> </div>
+        {section name=numId loop=$arrayCheckbox.arrayNum}
+        <div style="width:3px; height:22px; float:left"></div>
+        <div style="width:23px; height:22px; padding-left:5px; float:left; border:1px solid #AED4EB; padding-top:3px ;{if $arrayCheckbox.arrayNum[numId]==$arrayCheckbox.page} background-color:#51D26B {/if} "> <a href="{util->baseUrl}/alookbccdswf.php?page={$arrayCheckbox.arrayNum[numId]}&big_type={$smarty.get.big_type|escape:'hex'}&small_type={$smarty.get.small_type|escape:'hex'}&pro_type={$smarty.get.pro_type|escape:'hex'}" class="{if $arrayCheckbox.arrayNum[numId]==$arrayCheckbox.page}a2{else}a6{/if}">{$arrayCheckbox.arrayNum[numId]}{if $arrayCheckbox.arrayNum[numId]==$arrayCheckbox.page}{/if}</a> </div>
+        {/section} 
+        </div>
+      {/if} </div> 
+     
+            {/if}
+            
+            {if $Fill==T}
+  <tr>
+    <td><span style="width:700px; float:left; padding-left:10px; padding-right:10px; line-height:28px;  color:#000000; margin-bottom:5px; display:inline; border:1px solid #FF0000; font-weight:bold;">{$fillTitle}题（每题{$fillFraction}分，共{if $arrayFill.countRs==''}0{else}{$arrayFill.countRs}{/if}题）</span> </td>
+  </tr>
+      {section name=fil_id loop=$arrayFill.data}
+  <tr>
+    <td><span class="kt" style="background-color:#FFFFFF; border:1px dashed #FF6600; color:#333333;"> <span style="padding-top:4px; float:left;">{$arrayFill.data[fil_id].id}、{$arrayFill.data[fil_id].content|replace:"()":" <span style=' line-height:22px; padding-left:2px; padding-right:2px;'><input name='fill[]' type='text'  style='width:80px; height:18px; line-height:18px; border:1px solid #DDDDDD;' id='fill' size='10' maxlength='50'></span>"} </span> </span>
+    
+      <span class="kt"> <span class="kt_t">答案：{$arrayFill.data[fil_id].answer}</span> </span>
+              {if $arrayFill.data[fil_id].resolve!=""}
+                <span class="kt"> <span class="kt_t">解析：{$arrayFill.data[fil_id].resolve}</span> </span>
+              {/if}
+              
+           <span class="kt"> <span class="kt_t">试题类别（
+               	{section name=typ_id loop=$bccdNames}
+           			{if $arrayFill.data[fil_id].pro_class==$bccdNames[typ_id].id}
+          				{$bccdNames[typ_id].typename}
+					{/if}
+          		{/section}
+              ）&nbsp;&nbsp;&nbsp; 分数（{$arrayFill.data[fil_id].fraction}）&nbsp;&nbsp;&nbsp;<a href="aeditbccdswf.php?page={$smarty.get.page}&pro_type={$smarty.get.pro_type}&edit=t&id={$arrayFill.data[fil_id].id}&big_type={$smarty.get.big_type|escape:'hex'}&small_type={'更改试题'|escape:'hex'}" class="a1">更改&nbsp;|&nbsp;<a href="alookbccdswf.php?delete=t&id={$arrayFill.data[fil_id].id}&big_type={$smarty.get.big_type|escape:'hex'}&small_type={'更改试题'|escape:'hex'}" class="a1">删除</a></span></span>
+    </td>
+  </tr>
+    {/section}
+       <br /> 
+    <div style="padding-left:6px; padding-top:6px;"> {if $arrayFill.data!=false}
+      <div style="height:22px;  float:left">
+        <div style="width:400px; height:22px; border:1px solid #AED4EB; padding-left:5px; float:left; padding-top:3px"> <strong> 共{$arrayFill.countRs}题&nbsp;&nbsp;每页{$arrayFill.pageSize}题&nbsp;&nbsp;第{$arrayFill.page}页/共{$arrayFill.countPage}页&nbsp;&nbsp;<a href="{util->baseUrl}/alookbccdswf.php?page={$arrayFill.first}&big_type={$smarty.get.big_type|escape:'hex'}&small_type={$smarty.get.small_type|escape:'hex'}&pro_type={$smarty.get.pro_type|escape:'hex'}&fill_type={$fillType}" class="a1">首页</a>&nbsp;&nbsp;<a href="{util->baseUrl}/alookbccdswf.php?page={$arrayFill.previous}&big_type={$smarty.get.big_type|escape:'hex'}&small_type={$smarty.get.small_type|escape:'hex'}&pro_type={$smarty.get.pro_type|escape:'hex'}&fill_type={$fillType}" class="a1">上页</a>&nbsp;&nbsp;<a href="{util->baseUrl}/alookbccdswf.php?page={$arrayFill.next}&big_type={$smarty.get.big_type|escape:'hex'}&small_type={$smarty.get.small_type|escape:'hex'}&pro_type={$smarty.get.pro_type|escape:'hex'}&fill_type={$fillType}" class="a1">下页</a>&nbsp;&nbsp;<a href="{util->baseUrl}/alookbccdswf.php?page={$arrayFill.last}&big_type={$smarty.get.big_type|escape:'hex'}&small_type={$smarty.get.small_type|escape:'hex'}&pro_type={$smarty.get.pro_type|escape:'hex'}&fill_type={$fillType}" class="a1">尾页</a></strong> </div>
+        {section name=numId loop=$arrayFill.arrayNum}
+        <div style="width:3px; height:22px; float:left"></div>
+        <div style="width:23px; height:22px; padding-left:5px; float:left; border:1px solid #AED4EB; padding-top:3px ;{if $arrayFill.arrayNum[numId]==$arrayFill.page} background-color:#51D26B {/if} "> <a href="{util->baseUrl}/alookbccdswf.php?page={$arrayFill.arrayNum[numId]}&big_type={$smarty.get.big_type|escape:'hex'}&small_type={$smarty.get.small_type|escape:'hex'}&pro_type={$smarty.get.pro_type|escape:'hex'}" class="{if $arrayFill.arrayNum[numId]==$arrayFill.page}a2{else}a6{/if}">{$arrayFill.arrayNum[numId]}{if $arrayFill.arrayNum[numId]==$arrayFill.page}{/if}</a> </div>
+        {/section} 
+        </div>
+      {/if} </div> 
+    
+    
+            {/if}
+            
+            {if $Judgment==T}
+  <tr>
+    <td><span style="width:700px; float:left; padding-left:10px; padding-right:10px; line-height:28px;  color:#000000; margin-bottom:5px; display:inline; border:1px solid #FF0000; font-weight:bold;">{$judgmentTitle}题（正确的选正确；错误的选错误）每题{$judgmentFraction}分，共{if $arrayJudgment.countRs==''}0{else}{$arrayJudgment.countRs}{/if}题</span> </td>
+  </tr>
+       {section name=jud_id loop=$arrayJudgment.data}
+  <tr>
+    <td><span class="kt"> <span class="kt_t">{$arrayJudgment.data[jud_id].id}、{$arrayJudgment.data[jud_id].content}</span> </span><span class="kt_a"> <span class="kt_a_1">
+              <input type="radio" name="judgment{$arrayJudgment.data[jud_id].id}" style="margin-top:2px; margin-left:2px; float:left; display:inline;" value="正确" id="judgment{$arrayJudgment.data[jud_id].id}">
+              </span><span class="kt_a_1" style="width:35px;">正确</span><span class="kt_a_1">
+              <input type="radio" name="judgment{$arrayJudgment.data[jud_id].id}" style="margin-top:2px; margin-left:2px; float:left; display:inline;" value="错误" id="judgment{$arrayJudgment.data[jud_id].id}">
+              </span><span class="kt_a_1" style="width:35px;">错误</span></span>
+                <span class="kt"> <span class="kt_t">答案：{$arrayJudgment.data[jud_id].answer}</span> </span>
+              {if $arrayJudgment.data[jud_id].resolve!=""}
+                <span class="kt"> <span class="kt_t">解析：{$arrayJudgment.data[jud_id].resolve}</span> </span>
+              {/if}
+              
+                  <span class="kt"> <span class="kt_t">试题类别（
+               	{section name=typ_id loop=$bccdNames}
+           			{if $arrayJudgment.data[jud_id].pro_class==$bccdNames[typ_id].id}
+          				{$bccdNames[typ_id].typename}
+					{/if}
+          		{/section}
+              ）&nbsp;&nbsp;&nbsp; 分数（{$arrayJudgment.data[jud_id].fraction}）&nbsp;&nbsp;&nbsp; <a href="aeditbccdswf.php?page={$smarty.get.page}&pro_type={$smarty.get.pro_type}&edit=t&id={$arrayJudgment.data[jud_id].id}&big_type={$smarty.get.big_type|escape:'hex'}&small_type={'更改试题'|escape:'hex'}" class="a1">更改&nbsp;|&nbsp;<a href="alookbccdswf.php?delete=t&id={$arrayJudgment.data[jud_id].id}&big_type={$smarty.get.big_type|escape:'hex'}&small_type={'更改试题'|escape:'hex'}" class="a1">删除</a></span></span>
+              </td>
+  </tr>
+       {/section}
+       
+          <br /> 
+    <div style="padding-left:6px; padding-top:6px;"> {if $arrayJudgment.data!=false}
+      <div style="height:22px;  float:left">
+        <div style="width:400px; height:22px; border:1px solid #AED4EB; padding-left:5px; float:left; padding-top:3px"> <strong> 共{$arrayJudgment.countRs}题&nbsp;&nbsp;每页{$arrayJudgment.pageSize}题&nbsp;&nbsp;第{$arrayJudgment.page}页/共{$arrayJudgment.countPage}页&nbsp;&nbsp;<a href="{util->baseUrl}/alookbccdswf.php?page={$arrayJudgment.first}&big_type={$smarty.get.big_type|escape:'hex'}&small_type={$smarty.get.small_type|escape:'hex'}&pro_type={$smarty.get.pro_type|escape:'hex'}&judgment_type={$judgmentType}" class="a1">首页</a>&nbsp;&nbsp;<a href="{util->baseUrl}/alookbccdswf.php?page={$arrayJudgment.previous}&big_type={$smarty.get.big_type|escape:'hex'}&small_type={$smarty.get.small_type|escape:'hex'}&pro_type={$smarty.get.pro_type|escape:'hex'}&judgment_type={$judgmentType}" class="a1">上页</a>&nbsp;&nbsp;<a href="{util->baseUrl}/alookbccdswf.php?page={$arrayJudgment.next}&big_type={$smarty.get.big_type|escape:'hex'}&small_type={$smarty.get.small_type|escape:'hex'}&pro_type={$smarty.get.pro_type|escape:'hex'}&judgment_type={$judgmentType}" class="a1">下页</a>&nbsp;&nbsp;<a href="{util->baseUrl}/alookbccdswf.php?page={$arrayJudgment.last}&big_type={$smarty.get.big_type|escape:'hex'}&small_type={$smarty.get.small_type|escape:'hex'}&pro_type={$smarty.get.pro_type|escape:'hex'}&judgment_type={$judgmentType}" class="a1">尾页</a></strong> </div>
+        {section name=numId loop=$arrayJudgment.arrayNum}
+        <div style="width:3px; height:22px; float:left"></div>
+        <div style="width:23px; height:22px; padding-left:5px; float:left; border:1px solid #AED4EB; padding-top:3px ;{if $arrayJudgment.arrayNum[numId]==$arrayJudgment.page} background-color:#51D26B {/if} "> <a href="{util->baseUrl}/alookbccdswf.php?page={$arrayJudgment.arrayNum[numId]}&big_type={$smarty.get.big_type|escape:'hex'}&small_type={$smarty.get.small_type|escape:'hex'}&pro_type={$smarty.get.pro_type|escape:'hex'}" class="{if $arrayJudgment.arrayNum[numId]==$arrayJudgment.page}a2{else}a6{/if}">{$arrayJudgment.arrayNum[numId]}{if $arrayJudgment.arrayNum[numId]==$arrayJudgment.page}{/if}</a> </div>
+        {/section} 
+        </div>
+      {/if} </div> 
+       
+       
+            {/if}
+
+    {if $Explain == T}
+    <tr>
+        <td><span style="width:700px; float:left; padding-left:10px; padding-right:10px; line-height:28px;  color:#000000; margin-bottom:5px; display:inline; border:1px solid #FF0000; font-weight:bold;"> 名词解释题（每题{$explainFraction}分，共{if $arrayExplain.countRs==''}0{else}{$arrayExplain.countRs}{/if}题）</span> </td>
+    </tr>
+    {section name=exp_id loop=$arrayExplain.data}
+    <tr>
+        <td><span class="kt"> <span class="kt_t" style="word-wrap: break-word;"> {$arrayExplain.data[exp_id].id}、{$arrayExplain.data[exp_id].content} </span> </span> <span style="float:left; padding-left:25px; padding-top:5px; padding-bottom:5px;">
+              <textarea name="explain{$arrayExplain.data[exp_id].id}" id="explain{$arrayExplain.data[exp_id].id}" style="width:630px; padding-left:5px; float:left; line-height:25px; border:1px solid #AAAAAA; height:50px;" ></textarea>
+              </span>
+            <span class="kt"> <span class="kt_t">答案：{$arrayExplain.data[exp_id].answer}</span> </span>
+            {if $arrayExplain.data[exp_id].resolve!=""}
+            <span class="kt"> <span class="kt_t">解析：{$arrayExplain.data[exp_id].resolve}</span> </span>
+            {/if}
+                  <span class="kt"> <span class="kt_t">试题类别（
+               	{section name=typ_id loop=$bccdNames}
+           			{if $arrayAnswer.data[ans_id].pro_class==$bccdNames[typ_id].id}
+          				{$bccdNames[typ_id].typename}
+					{/if}
+          		{/section}
+              ）&nbsp;&nbsp;&nbsp;分数（{$arrayExplain.data[exp_id].fraction}）&nbsp;&nbsp;&nbsp; <a href="aeditbccdswf.php?page={$smarty.get.page}&pro_type={$smarty.get.pro_type}&edit=t&id={$arrayExplain.data[exp_id].id}&big_type={$smarty.get.big_type|escape:'hex'}&small_type={'更改试题'|escape:'hex'}" class="a1">更改&nbsp;|&nbsp;<a href="alookbccdswf.php?delete=t&id={$arrayExplain.data[exp_id].id}&big_type={$smarty.get.big_type|escape:'hex'}&small_type={'更改试题'|escape:'hex'}" class="a1">删除</a></span></span>
+
+
+        </td>
+    </tr>
+    {/section}
+
+
+
+    <br />
+    <div style="padding-left:6px; padding-top:6px;"> {if $arrayExplain.data!=false}
+        <div style="height:22px;  float:left">
+            <div style="width:400px; height:22px; border:1px solid #AED4EB; padding-left:5px; float:left; padding-top:3px"> <strong> 共{$arrayExplain.countRs}题&nbsp;&nbsp;每页{$arrayExplain.pageSize}题&nbsp;&nbsp;第{$arrayExplain.page}页/共{$arrayExplain.countPage}页&nbsp;&nbsp;<a href="{util->baseUrl}/alookbccdswf.php?page={$arrayExplain.first}&big_type={$smarty.get.big_type|escape:'hex'}&small_type={$smarty.get.small_type|escape:'hex'}&pro_type={$smarty.get.pro_type|escape:'hex'}&explain_type={$arrayExplain}" class="a1">首页</a>&nbsp;&nbsp;<a href="{util->baseUrl}/alookbccdswf.php?page={$arrayAnswer.previous}&big_type={$smarty.get.big_type|escape:'hex'}&small_type={$smarty.get.small_type|escape:'hex'}&pro_type={$smarty.get.pro_type|escape:'hex'}&explain_type={$explainType}" class="a1">上页</a>&nbsp;&nbsp;<a href="{util->baseUrl}/alookbccdswf.php?page={$arrayExplain.next}&big_type={$smarty.get.big_type|escape:'hex'}&small_type={$smarty.get.small_type|escape:'hex'}&pro_type={$smarty.get.pro_type|escape:'hex'}&answer_type={$explainType}" class="a1">下页</a>&nbsp;&nbsp;<a href="{util->baseUrl}/alookbccdswf.php?page={$arrayExplain.last}&big_type={$smarty.get.big_type|escape:'hex'}&small_type={$smarty.get.small_type|escape:'hex'}&pro_type={$smarty.get.pro_type|escape:'hex'}&explain_type={$explainType}" class="a1">尾页</a></strong> </div>
+            {section name=numId loop=$arrayExplain.arrayNum}
+            <div style="width:3px; height:22px; float:left"></div>
+            <div style="width:23px; height:22px; padding-left:5px; float:left; border:1px solid #AED4EB; padding-top:3px ;{if $arrayExplain.arrayNum[numId]==$arrayExplain.page} background-color:#51D26B {/if} "> <a href="{util->baseUrl}/alookbccdswf.php?page={$arrayExplain.arrayNum[numId]}&big_type={$smarty.get.big_type|escape:'hex'}&small_type={$smarty.get.small_type|escape:'hex'}&pro_type={$smarty.get.pro_type|escape:'hex'}" class="{if $arrayExplain.arrayNum[numId]==$arrayExplain.page}a2{else}a6{/if}">{$arrayExplain.arrayNum[numId]}{if $arrayExplain.arrayNum[numId]==$arrayExplain.page}{/if}</a> </div>
+            {/section}
+        </div>
+        {/if} </div>
+    {/if}
+
+
+    {if $Answer==T}
+  <tr>
+    <td><span style="width:700px; float:left; padding-left:10px; padding-right:10px; line-height:28px;  color:#000000; margin-bottom:5px; display:inline; border:1px solid #FF0000; font-weight:bold;"> {$answerTitle}题（每题{$answerFraction}分，共{if $arrayAnswer.countRs==''}0{else}{$arrayAnswer.countRs}{/if}题）</span> </td>
+  </tr>
+     {section name=ans_id loop=$arrayAnswer.data}
+  <tr>
+    <td><span class="kt"> <span class="kt_t" style="word-wrap: break-word;> {$arrayAnswer.data[ans_id].id}、{$arrayAnswer.data[ans_id].content} </span> </span> <span style="float:left; padding-left:25px; padding-top:5px; padding-bottom:5px;">
+              <textarea name="answer{$arrayAnswer.data[ans_id].id}" id="answer{$arrayAnswer.data[ans_id].id}" style="width:630px; padding-left:5px; float:left; line-height:25px; border:1px solid #AAAAAA; height:50px;" ></textarea>
+              </span>
+                  <span class="kt"> <span class="kt_t">答案：{$arrayAnswer.data[ans_id].answer}</span> </span>
+              {if $arrayAnswer.data[ans_id].resolve!=""}
+                <span class="kt"> <span class="kt_t">解析：{$arrayAnswer.data[ans_id].resolve}</span> </span>
+              {/if}
+                  <span class="kt"> <span class="kt_t">试题类别（
+               	{section name=typ_id loop=$bccdNames}
+           			{if $arrayAnswer.data[ans_id].pro_class==$bccdNames[typ_id].id}
+          				{$bccdNames[typ_id].typename}
+					{/if}
+          		{/section}
+              ）&nbsp;&nbsp;&nbsp;分数（{$arrayAnswer.data[ans_id].fraction}）&nbsp;&nbsp;&nbsp; <a href="aeditbccdswf.php?page={$smarty.get.page}&pro_type={$smarty.get.pro_type}&edit=t&id={$arrayAnswer.data[ans_id].id}&big_type={$smarty.get.big_type|escape:'hex'}&small_type={'更改试题'|escape:'hex'}" class="a1">更改&nbsp;|&nbsp;<a href="alookbccdswf.php?delete=t&id={$arrayAnswer.data[ans_id].id}&big_type={$smarty.get.big_type|escape:'hex'}&small_type={'更改试题'|escape:'hex'}" class="a1">删除</a></span></span>
+              
+              
+              </td>
+  </tr>
+    {/section}
+    
+    
+     
+      <br /> 
+    <div style="padding-left:6px; padding-top:6px;"> {if $arrayAnswer.data!=false}
+      <div style="height:22px;  float:left">
+        <div style="width:400px; height:22px; border:1px solid #AED4EB; padding-left:5px; float:left; padding-top:3px"> <strong> 共{$arrayAnswer.countRs}题&nbsp;&nbsp;每页{$arrayAnswer.pageSize}题&nbsp;&nbsp;第{$arrayAnswer.page}页/共{$arrayAnswer.countPage}页&nbsp;&nbsp;<a href="{util->baseUrl}/alookbccdswf.php?page={$arrayAnswer.first}&big_type={$smarty.get.big_type|escape:'hex'}&small_type={$smarty.get.small_type|escape:'hex'}&pro_type={$smarty.get.pro_type|escape:'hex'}&answer_type={$answerType}" class="a1">首页</a>&nbsp;&nbsp;<a href="{util->baseUrl}/alookbccdswf.php?page={$arrayAnswer.previous}&big_type={$smarty.get.big_type|escape:'hex'}&small_type={$smarty.get.small_type|escape:'hex'}&pro_type={$smarty.get.pro_type|escape:'hex'}&answer_type={$answerType}" class="a1">上页</a>&nbsp;&nbsp;<a href="{util->baseUrl}/alookbccdswf.php?page={$arrayAnswer.next}&big_type={$smarty.get.big_type|escape:'hex'}&small_type={$smarty.get.small_type|escape:'hex'}&pro_type={$smarty.get.pro_type|escape:'hex'}&answer_type={$answerType}" class="a1">下页</a>&nbsp;&nbsp;<a href="{util->baseUrl}/alookbccdswf.php?page={$arrayAnswer.last}&big_type={$smarty.get.big_type|escape:'hex'}&small_type={$smarty.get.small_type|escape:'hex'}&pro_type={$smarty.get.pro_type|escape:'hex'}&answer_type={$answerType}" class="a1">尾页</a></strong> </div>
+        {section name=numId loop=$arrayAnswer.arrayNum}
+        <div style="width:3px; height:22px; float:left"></div>
+        <div style="width:23px; height:22px; padding-left:5px; float:left; border:1px solid #AED4EB; padding-top:3px ;{if $arrayAnswer.arrayNum[numId]==$arrayAnswer.page} background-color:#51D26B {/if} "> <a href="{util->baseUrl}/alookbccdswf.php?page={$arrayAnswer.arrayNum[numId]}&big_type={$smarty.get.big_type|escape:'hex'}&small_type={$smarty.get.small_type|escape:'hex'}&pro_type={$smarty.get.pro_type|escape:'hex'}" class="{if $arrayAnswer.arrayNum[numId]==$arrayAnswer.page}a2{else}a6{/if}">{$arrayAnswer.arrayNum[numId]}{if $arrayAnswer.arrayNum[numId]==$arrayAnswer.page}{/if}</a> </div>
+        {/section} 
+        </div>
+      {/if} </div> 
+            {/if}
+            
+            {if $Discourse==T}
+  <tr>
+    <td><span style="width:700px; float:left; padding-left:10px; padding-right:10px; line-height:28px;  color:#000000; margin-bottom:5px; display:inline; border:1px solid #FF0000; font-weight:bold;">{$discourseTitle}题（每题{$discourseFraction}分，共{if $arrayDiscourse.countRs==''}0{else}{$arrayDiscourse.countRs}{/if}题）</span> </td>
+  </tr>
+      {section name=dis_id loop=$arrayDiscourse.data}
+  <tr>
+    <td><span class="kt"> <span class="kt_t">{$arrayDiscourse.data[dis_id].id}、{$arrayDiscourse.data[dis_id].content}</span> </span> <span style="float:left; padding-left:25px; padding-top:5px; padding-bottom:5px;">
+              <textarea name="discourse{$arrayDiscourse.data[dis_id].id}" style="width:635px; padding-left:5px; float:left; line-height:25px; border:1px solid #AAAAAA; height:80px;" id="discourse{$arrayDiscourse.data[dis_id].id}" ></textarea>
+              </span>
+              
+                  <span class="kt"> <span class="kt_t">答案：{$arrayDiscourse.data[dis_id].answer}</span> </span>
+              {if $arrayDiscourse.data[dis_id].resolve!=""}
+                <span class="kt"> <span class="kt_t">解析：{$arrayDiscourse.data[dis_id].resolve}</span> </span>
+              {/if}
+                  <span class="kt"> <span class="kt_t">试题类别（
+               	{section name=typ_id loop=$bccdNames}
+           			{if $arrayDiscourse.data[dis_id].pro_class==$bccdNames[typ_id].id}
+          				{$bccdNames[typ_id].typename}
+					{/if}
+          		{/section}
+              ）&nbsp;&nbsp;&nbsp;分数（{$arrayDiscourse.data[dis_id].fraction}）&nbsp;&nbsp;&nbsp; <a href="aeditbccdswf.php?page={$smarty.get.page}&pro_type={$smarty.get.pro_type}&edit=t&id={$arrayDiscourse.data[dis_id].id}&big_type={$smarty.get.big_type|escape:'hex'}&small_type={'更改试题'|escape:'hex'}" class="a1">更改&nbsp;|&nbsp;<a href="alookbccdswf.php?delete=t&id={$arrayDiscourse.data[dis_id].id}&big_type={$smarty.get.big_type|escape:'hex'}&small_type={'更改试题'|escape:'hex'}" class="a1">删除</a></span></span>
+              </td>
+  </tr>
+     {/section}
+     
+     
+           <br /> 
+    <div style="padding-left:6px; padding-top:6px;"> {if $arrayDiscourse.data!=false}
+      <div style="height:22px;  float:left">
+        <div style="width:400px; height:22px; border:1px solid #AED4EB; padding-left:5px; float:left; padding-top:3px"> <strong> 共{$arrayDiscourse.countRs}题&nbsp;&nbsp;每页{$arrayDiscourse.pageSize}题&nbsp;&nbsp;第{$arrayDiscourse.page}页/共{$arrayDiscourse.countPage}页&nbsp;&nbsp;<a href="{util->baseUrl}/alookbccdswf.php?page={$arrayDiscourse.first}&big_type={$smarty.get.big_type|escape:'hex'}&small_type={$smarty.get.small_type|escape:'hex'}&pro_type={$smarty.get.pro_type|escape:'hex'}&discourse_type={$discourseType}" class="a1">首页</a>&nbsp;&nbsp;<a href="{util->baseUrl}/alookbccdswf.php?page={$arrayDiscourse.previous}&big_type={$smarty.get.big_type|escape:'hex'}&small_type={$smarty.get.small_type|escape:'hex'}&pro_type={$smarty.get.pro_type|escape:'hex'}&discourse_type={$discourseType}" class="a1">上页</a>&nbsp;&nbsp;<a href="{util->baseUrl}/alookbccdswf.php?page={$arrayDiscourse.next}&big_type={$smarty.get.big_type|escape:'hex'}&small_type={$smarty.get.small_type|escape:'hex'}&pro_type={$smarty.get.pro_type|escape:'hex'}&discourse_type={$discourseType}" class="a1">下页</a>&nbsp;&nbsp;<a href="{util->baseUrl}/alookbccdswf.php?page={$arrayDiscourse.last}&big_type={$smarty.get.big_type|escape:'hex'}&small_type={$smarty.get.small_type|escape:'hex'}&pro_type={$smarty.get.pro_type|escape:'hex'}&discourse_type={$discourseType}" class="a1">尾页</a></strong> </div>
+        {section name=numId loop=$arrayDiscourse.arrayNum}
+        <div style="width:3px; height:22px; float:left"></div>
+        <div style="width:23px; height:22px; padding-left:5px; float:left; border:1px solid #AED4EB; padding-top:3px ;{if $arrayDiscourse.arrayNum[numId]==$arrayDiscourse.page} background-color:#51D26B {/if} "> <a href="{util->baseUrl}/alookbccdswf.php?page={$arrayDiscourse.arrayNum[numId]}&big_type={$smarty.get.big_type|escape:'hex'}&small_type={$smarty.get.small_type|escape:'hex'}&pro_type={$smarty.get.pro_type|escape:'hex'}" class="{if $arrayDiscourse.arrayNum[numId]==$arrayDiscourse.page}a2{else}a6{/if}">{$arrayDiscourse.arrayNum[numId]}{if $arrayDiscourse.arrayNum[numId]==$arrayDiscourse.page}{/if}</a> </div>
+        {/section} 
+        </div>
+      {/if} </div> 
+            {/if}
+</table>
+      
+     </div>
+     </div>
+</div>

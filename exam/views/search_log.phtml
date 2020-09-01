@@ -1,0 +1,126 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>===煤矿考试系统===</title>
+    <link href="css/base.css" rel="stylesheet" type="text/css" />
+    <link href="css/reset.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<!--内容开始 -->
+	<div style="background-color: #fff;width: 1259px;margin-left: auto;margin-right: auto;">
+        <div id="sub_right">
+            <div class="right1">
+        {if $Search=="T"}
+                <h2 style="text-align: center">练习记录</h2>
+                    <DIV>
+                        <DIV style="padding-left:6px;">
+                            <div style="LINE-HEIGHT: 25px; WIDTH: 8%; FLOAT: left; text-align:center; HEIGHT: 25px;border:#21de26 1px solid;">用户名</div>
+                            <div style="LINE-HEIGHT: 25px; WIDTH: 13%; FLOAT: left; text-align:center; HEIGHT: 25px;border:#21de26 1px solid;border-left:none;">题型</div>
+                            <div style="LINE-HEIGHT: 25px; WIDTH: 39%; FLOAT: left; text-align:center; HEIGHT: 25px; border:#21de26 1px solid;border-left:none;">内容</div>
+                            <div style="LINE-HEIGHT: 25px; WIDTH: 13%; FLOAT: left; text-align:center; HEIGHT: 25px; border:#21de26 1px solid;border-left:none;">正确答案</div>
+                            <div style="LINE-HEIGHT: 25px; WIDTH: 13%; FLOAT: left; text-align:center; HEIGHT: 25px; border:#21de26 1px solid;border-left:none;">他的答案 </div>
+                        <div style="LINE-HEIGHT: 25px; WIDTH: 13%; FLOAT: left; text-align:center; HEIGHT: 25px; border:#21de26 1px solid;border-left:none;">练习类型 </div>
+                        </DIV>
+<!--                            <DIV style="padding-left:6px;">-->
+<!--                            <UL>-->
+<!--                                <LI style="LINE-HEIGHT: 25px; WIDTH: 8%; FLOAT: left; text-align:center; HEIGHT: 25px; BORDER-RIGHT: #21de26 1px solid; border:#21de26 1px solid;border-bottom: none;">用户名</LI>-->
+<!--                                <LI style="LINE-HEIGHT: 25px; WIDTH: 13%; FLOAT: left; text-align:center; HEIGHT: 25px; BORDER-RIGHT: #21de26 1px solid; border:#21de26 1px solid;border-left:none;border-bottom: none;">题型</LI>-->
+<!--                                <LI style="LINE-HEIGHT: 25px; WIDTH: 39%; FLOAT: left; text-align:center; HEIGHT: 25px; BORDER-RIGHT: #21de26 1px solid; border:#21de26 1px solid;border-left:none;border-bottom: none;">内容</LI>-->
+<!--                                <LI style="LINE-HEIGHT: 25px; WIDTH: 13%; FLOAT: left; text-align:center; HEIGHT: 25px; BORDER-RIGHT: #21de26 1px solid; border:#21de26 1px solid;border-left:none;border-bottom: none;">正确答案 </LI>-->
+<!--                                <LI style="LINE-HEIGHT: 25px; WIDTH: 13%; FLOAT: left; text-align:center; HEIGHT: 25px; BORDER-RIGHT: #21de26 1px solid; border:#21de26 1px solid;border-left:none;border-bottom: none;">他的答案 </LI>-->
+<!--                                <LI style="LINE-HEIGHT: 25px; WIDTH: 13%; FLOAT: left; text-align:center; HEIGHT: 25px; BORDER-RIGHT: #21de26 1px solid; border:#21de26 1px solid;border-left:none;border-bottom: none;">练习类型</LI>-->
+<!--                            </UL>-->
+<!--                        </DIV>-->
+                            {section name=id loop=$bcjyzs.data}
+                            <DIV style="padding-left:6px;">
+                                    <div style="LINE-HEIGHT: 23px; WIDTH: 8%; FLOAT: left; HEIGHT: 23px;text-align:center;  border:#21de26 1px solid;border-top:none;">{$bcjyzs.data[id].username}</div>
+                                    {assign var=qq value=$bcjyzs.data[id].questype}
+                                    <div style="LINE-HEIGHT: 23px; WIDTH: 13%;  FLOAT: left; HEIGHT: 23px;text-align:center; border:#21de26 1px solid;border-top:none;border-left:none;">{$exam_type.$qq}</div>
+                                    <div style="LINE-HEIGHT: 23px; WIDTH: 39%; FLOAT: left; HEIGHT: 23px;text-align:center; border:#21de26 1px solid;overflow: hidden;border-top:none;border-left:none;">{$bcjyzs.data[id].content}</div>
+                                    <div style="LINE-HEIGHT: 23px; WIDTH: 13%; FLOAT: left; text-align:center; HEIGHT: 23px;  border:#21de26 1px solid;overflow: hidden;border-top:none;border-left:none;">{$bcjyzs.data[id].answer} </div>
+                                    <div style="LINE-HEIGHT: 23px; WIDTH: 13%; FLOAT: left; text-align:center; HEIGHT: 23px;  border:#21de26 1px solid;overflow: hidden;border-top:none;border-left:none;">{$bcjyzs.data[id].useranswer} </div>
+                                    {assign var=tt value=$bcjyzs.data[id].type}
+                                    <div style="LINE-HEIGHT: 23px; WIDTH: 13%; FLOAT: left; text-align:center; HEIGHT: 23px; border:#21de26 1px solid;border-top:none;border-left:none;">{$types.$tt}</div>
+                            </DIV>
+                            {/section}
+                            <br />
+                        <div style="clear: both;"> </div>
+                        <div style="padding-left:336px; "> {if $bcjyzs.data!=false}
+                            <div style="height:22px; padding-bottom: 10px;padding-top:6px;margin-left: auto;margin-right: auto;">
+                                <div style="width:400px; height:22px; border:1px solid #AED4EB; padding-left:5px; float:left; padding-top:3px"> <strong> 共{$bcjyzs.countRs}条&nbsp;&nbsp;每页{$bcjyzs.pageSize}条&nbsp;&nbsp;第{$bcjyzs.page}页/共{$bcjyzs.countPage}页&nbsp;&nbsp;<a href="{util->baseUrl}/search_log.php?page={$bcjyzs.first}&start_time={$start_time}&end_time={$end_time}" class="a1">首页</a>&nbsp;&nbsp;<a href="{util->baseUrl}/search_log.php?page={$bcjyzs.previous}&start_time={$start_time}&end_time={$end_time}" class="a1">上页</a>&nbsp;&nbsp;<a href="{util->baseUrl}/search_log.php?page={$bcjyzs.next}&start_time={$start_time}&end_time={$end_time}" class="a1">下页</a>&nbsp;&nbsp;<a href="{util->baseUrl}/search_log.php?page={$bcjyzs.last}&start_time={$start_time}&end_time={$end_time}" class="a1">尾页</a></strong> </div>
+                                {section name=numId loop=$bcjyzs.arrayNum}
+                                <div style="width:3px; height:22px; float:left"></div>
+                                <div style="width:23px; height:22px; padding-left:5px; float:left; border:1px solid #AED4EB; padding-top:3px ;{if $bcjyzs.arrayNum[numId]==$bcjyzs.page} background-color:#51D26B {/if} "> <a href="{util->baseUrl}/search_log.php?page={$bcjyzs.arrayNum[numId]}&start_time={$start_time}&end_time={$end_time}" class="{if $bcjyzs.arrayNum[numId]==$bcjyzs.page}a2{else}a6{/if}">{$bcjyzs.arrayNum[numId]}{if $bcjyzs.arrayNum[numId]==$bcjyzs.page}{/if}</a> </div>
+                                {/section}
+                            </div>
+                            {/if} </div>
+                    </DIV>
+        {/if}
+        {if $Search=="F"}
+            <form name="form_addbccdinfo" method="post" action="search_log.php" >
+
+                        <div class="k_con">
+                            开始时间：
+                            <select name="years" id="years">
+
+                                {html_options options=$arrayYear selected=$years}
+
+
+                            </select>
+                            年
+                            <select name="months" id="months">
+
+                                {html_options options=$arrayMonth selected=01}
+
+
+                            </select>
+                            月
+                            <select name="days" id="days">
+
+                                {html_options options=$arrayDay selected=01}
+
+
+                            </select>
+                            日
+
+                           <br />
+                            <br/>
+                            结束时间：
+                            <select name="year" id="year">
+
+                                {html_options options=$arrayYear selected=$years}
+
+
+                            </select>
+                            年
+                            <select name="month" id="month">
+
+                                {html_options options=$arrayMonth selected=$months}
+
+
+                            </select>
+                            月
+                            <select name="day" id="day">
+
+                                {html_options options=$arrayDay selected=$days}
+
+
+                            </select>
+                            日
+
+                           <br />
+                            <br/>
+                            <input type="submit" name="submit" value="查询" />
+                        </div>
+
+
+                </div>
+            </form>
+        {/if}
+        </div>
+    </div>
+    </div>
+<!--内容结束 -->
+</body>
+</html>

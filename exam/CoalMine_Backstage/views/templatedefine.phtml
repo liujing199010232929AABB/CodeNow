@@ -1,0 +1,66 @@
+<link href="{util->baseUrl}/css/style.css" rel="stylesheet" type="text/css" />
+<link href="{util->baseUrl}/css/reset.css" rel="stylesheet" type="text/css" />
+<SCRIPT src="{util->baseUrl}/Scripts/jquery.js"></SCRIPT>
+<div id="con_right">
+    <div class="right_con">
+        <div class="right_con_bt">·{$smarty.get.big_type} < {$smarty.get.small_type}</div>
+        <br />
+        <br />
+        <br />
+        <DIV class="right_con_form">
+            <form name="form_templatedefine" method="post" action="" onsubmit="return chktemplate(this)">
+                <div style="width:100%; text-align:left; padding-top:5px; padding-left:50px">
+
+                    <br />
+                    <br />
+                    模板名称：<input type="text" id="templatename" name="templatename" size="30" class="input"/><br/><br/>
+                    分数和分数线：
+                    <select name="passscore">
+                        <option value="">请选择</option>
+                        {html_options options = $arrayScore}
+                    </select>
+                    <br/>
+                    <br/>
+                    <DIV style="padding-left:6px; padding-top:26px;">
+                        请输入题型个数（不填写代表0）<br/><br/>
+                        {php} $i = 1;{/php}
+                        {section name=tID loop=$tb_exam_type}
+                        <DIV >
+                            {php} echo $i;{/php}、{$tb_exam_type[tID].chinese}:<input type="text" name="{$tb_exam_type[tID].english}num" value="" class="input"/><br/><br/>
+                        </DIV>
+                        {php} $i++;{/php}
+                        {/section}
+                        <br/>
+                        <br/>
+                    <input type="submit" name="submit" value="添加" />&nbsp;&nbsp;<input type="reset" value="重置" />
+                </div>
+            </form>
+        </DIV>
+    </div>
+</div>
+
+
+<script language="javascript">
+{literal}
+    function chktemplate (form) {
+        if (form.templatename.value == "") {
+            alert("请输入模板名称！");
+            form.templatename.focus();
+            return false;
+        }
+        if (form.passscore.value == "") {
+            alert("请选择分数线！");
+            form.passscore.focus();
+            return false;
+        }
+        $(":input[type=text][id!='templatename']").each(function(){
+            if(isNaN(this.value)){
+                alert("请输入数字！");
+                this.focus();
+                return false;
+            }
+        })
+        return true;
+    }
+{/literal}
+</script>

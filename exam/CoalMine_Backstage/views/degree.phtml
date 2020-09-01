@@ -1,0 +1,71 @@
+<link href="{util->baseUrl}/css/style.css" rel="stylesheet" type="text/css" />
+<link href="{util->baseUrl}/css/reset.css" rel="stylesheet" type="text/css" />
+<div id="con_right">
+    <div class="right_con">
+        <div class="right_con_bt">·{$smarty.get.big_type} < {$smarty.get.small_type}</div>
+        <br />
+        <br />
+        <br />
+        <DIV class="right_con_form">
+            <form name="form_degree" method="post" action="" onsubmit="return chkdegree(this)">
+                <div style="width:100%; text-align:left; padding-top:5px; padding-left:50px">
+                    名称：<input type="text" name="degreename" size="30" class="input"/><br /><br />
+                    <br />
+                    <input type="submit" name="adddegree" value="添加" />&nbsp;&nbsp;<input type="reset" value="重置" />
+                </div>
+            </form>
+        </DIV>
+        <DIV style="padding-left:26px; padding-top:56px;text-align: center">
+            <DIV style="padding-left:6px; text-align: center">
+                <UL>
+                    <LI style="LINE-HEIGHT: 23px; WIDTH: 30%; FLOAT: left; text-align:center; HEIGHT: 25px; BORDER:#21de26 1px solid;">序号</LI>
+                    <LI style="LINE-HEIGHT: 23px; WIDTH: 30%; FLOAT: left; text-align:center; HEIGHT: 25px; BORDER:#21de26 1px solid;">名称</LI>
+                    <LI style="LINE-HEIGHT: 23px; WIDTH: 30%; FLOAT: left; text-align:center; HEIGHT: 25px; BORDER:#21de26 1px solid;">操作</LI>
+                </UL>
+            </DIV>
+            {php} $i = 1;{/php}
+            {section name=tID loop=$degreeArr}
+            <DIV style="padding-left:6px; text-align: center">
+                <UL>
+                    <LI style="LINE-HEIGHT: 23px; WIDTH: 30%; FLOAT: left; text-align:center; HEIGHT: 23px; BORDER:#21de26 1px solid;">{php}echo $i;{/php}</LI>
+                    <LI style="LINE-HEIGHT: 23px; WIDTH: 30%; FLOAT: left; text-align:center; HEIGHT: 23px; BORDER:#21de26 1px solid;">{$degreeArr[tID].name}</LI>
+                    <LI style="LINE-HEIGHT: 23px; WIDTH: 30%; FLOAT: left; text-align:center; HEIGHT: 23px; BORDER:#21de26 1px solid;">
+                        <a href="{util->baseUrl}/degree.php?f=edit&id={$degreeArr[tID].id}&big_type={$smarty.get.big_type|escape:'hex'}&small_type={$smarty.get.small_type|escape:'hex'}">更改</a>&nbsp;<a href="javascript:if(window.confirm('确定删除？')==true){ldelim}window.location.href='{util->baseUrl}/degree.php?f=del&id={$degreeArr[tID].id}&big_type={$smarty.get.big_type}&small_type={$smarty.get.small_type}';{rdelim}">删除</a>
+                    </LI>
+                </UL>
+            </DIV>
+            {php} $i++;{/php}
+            {/section}
+        </DIV>
+        <br />
+        <br />
+        {if $isShow == "T"}
+        <div class="right_con_form">
+            <form name="form_editdegree" method="post" action="{util->baseUrl}/degree.php?big_type={$smarty.get.big_type|escape:'hex'}&small_type={$smarty.get.small_type|escape:'hex'}" >
+                <div style="width:100%; text-align:left; padding-top:5px; padding-left:50px">
+                    名称：<input type="text" id="degreename" name="degreename" size="30" class="input" value="{$bigtype[0].name}"/><br /><br />
+                    <br />
+                    <br />
+                    <input type="hidden" name="f" value="edit" />
+                    <input type="hidden" name="id" value="{$bigtype[0].id}" />
+                    <input type="submit" name="editdegree" value="更改" />
+                </div>
+            </form>
+        </div>
+        {/if}
+    </div>
+</div>
+
+<script language="javascript">
+{literal}
+    function chkdegree (form) {
+        if (form.degreename.value == "") {
+            alert("请输入名称！");
+            form.degreename.focus();
+            return false;
+        }
+    return true;
+    }
+
+{/literal}
+</script>

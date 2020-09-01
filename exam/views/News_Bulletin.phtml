@@ -1,0 +1,53 @@
+<script src="Scripts/Random_Answer.js" type="text/javascript"></script>
+<!--内容开始 -->
+<div id="sub">
+  <div id="sub_left">
+    <div class="left_fl">
+      <div class="left_fl_bt"><img src="images/382.jpg" alt="" /></div>
+      <div id="PARENT">
+        <ul id="left_fl_con1">
+          {section name=new_id loop=$News}
+          <li><a href="News_Bulletin.php?news_id={$News[new_id].id}&new_bulletin=新闻" title="{$News[new_id].title}">{util->msubstr p=$News[new_id].title p1=0 p2=18 p3="..."}</a> </li>
+          {/section}
+        </ul>
+      </div>
+    </div>
+    <div style="line-height:5;">&nbsp;</div>
+    <div class="left_fl">
+      <div class="left_fl_bt"><img src="images/383.jpg" alt="" /></div>
+      <div id="PARENT">
+        <ul id="left_fl_con1">
+          {section name=bul_id loop=$Bulletins}
+          <li><a href="News_Bulletin.php?bulletin_id={$Bulletins[bul_id].id}&new_bulletin=公告" title="{$Bulletins[bul_id].title}">{util->msubstr p=$Bulletins[bul_id].title p1=0 p2=18 p3="..."}</a> </li>
+          {/section}
+        </ul>
+      </div>
+    </div>
+  </div>
+  {if $Bulletin_New=="T"}
+  <div id="sub_right"> {if $smarty.get.new_bulletin=="新闻"}
+    <div class="right">
+      <div class="right_bt">{$smarty.get.new_bulletin}</div>
+      <div class="right_con">
+        <div class="right_con_bt">{util->msubstr p=$arrayNews[0].title p1=0 p2=48 p3="..."}</div>
+        <div class="right_con_text"> {$arrayNews[0].content}
+          {if $arrayNews[0].attachment!=""} <br>
+          <a href="adm/upfiles/Trainingmaterials/{$arrayNews[0].attachment}" style="float:right">附近下载</a> {/if} </div>
+      </div>
+    </div>
+    {/if}
+    {if $smarty.get.new_bulletin=="公告"}
+    <div class="right">
+      <div class="right_bt">{$smarty.get.new_bulletin}</div>
+      <div class="right_con">
+        <div class="right_con_bt">{util->msubstr p=$arrayBulletin[0].title p1=0 p2=48 p3="..."}</div>
+        <div class="right_con_text"> {$arrayBulletin[0].content}
+          {if $arrayBulletin[0].attachment!=""} <br>
+          <a href="adm/upfiles/Trainingmaterials/{$arrayBulletin[0].attachment}" style="float:right">附近下载</a> {/if} </div>
+      </div>
+    </div>
+    {/if} </div>
+   {else}
+ 	<div class="right">  <img src="images/none1.jpg" alt="" /></div>
+   {/if}
+</div>

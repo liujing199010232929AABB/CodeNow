@@ -1,0 +1,36 @@
+@charset "gb2312";
+/* CSS Document */
+
+body { background:url(../images/1.jpg) repeat-x; background-color:#4a8b05; margin:0 auto;} 
+body,div,li,ul,th,td { margin:0; font-size:12px; font-family:"ËÎÌו";}
+li { list-style:none;}
+a:link { text-decoration:none;}
+a:hover { text-decoration:none;}
+a:visited { text-decoration:none;}
+a:active { text-decoration:none;}
+* { margin:0; border:0; padding:0;}
+
+#box { width:1024px; margin:0 auto;}
+.bg { width:1024px; height:715px; margin:0 auto; margin-top:0px; background:url(../images/2.jpg) no-repeat;}
+.dl { width:745px; height:434px; float:left; margin-top:95px; margin-left:144px; display:inline;}
+.dl_1 { width:745px; height:87px; background:url(../images/3.jpg) no-repeat; float:left;}
+.dl_2 { width:745px; height:347px; float:left; background:url(../images/4.jpg) no-repeat;}
+.dl_0 { width:447px; height:148px; float:left; margin-left:120px; margin-top:151px; display:inline;}
+.dl_0_l { width:319px; float:left;}
+.dl_0_l li { width:319px; float:left; font-size:14px; height:48px; line-height:48px; color:#010101;}
+.font1 { width:42px; float:left; text-align:left; height:48px;}
+.font2 { width:252px; height:25px; line-height:25px; border:1px solid #d4d4d4; margin-top:10px; display:inline;}
+.font3 { width:120px; height:39px; float:left; margin-left:66px; margin-top:5px; display:inline;}
+.font4 { color:#717171;}
+.dl_0_r { width:111px; padding-left:17px; float:left; padding-top:5px;}
+
+.sub_c { width:660px; padding-bottom:3px; float:left; padding-left:10px;}
+.sub_c_bt { width:650px; height:40px; margin-left:15px; border-bottom:1px solid #1081c9; display:inline;}
+.sub_c_bt_text { margin-left:7px; padding-left:30px; line-height:40px;  font-size:14px; float:left;}
+
+.k_con { width:655px; padding-left:15px; float:left; padding-top:5px;}
+.k_con li { width:650px; float:left; padding-top:10px;}
+
+.kt { width:660px; line-height:28px; background-color:#e6ff9a; margin-bottom:10px; float:left; font-weight:bold; padding-left:15px;}
+.kt_t { float:left; line-height:28px; color:#2d2d2d;}
+.kt_a { width:660px; float:left; padding-left:20px; padding-top:5px; line-height:22px;}

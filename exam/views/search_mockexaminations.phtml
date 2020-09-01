@@ -1,0 +1,175 @@
+<!--内容开始 -->
+
+<div id="sub">
+  <div id="sub_left">
+    <div class="left_zl">
+      <div class="left_zl_1">
+        <div class="left_zl_1_t"><img src="images/63.jpg" alt="" /></div>
+        <div class="left_zl_1_c">
+          <div class="left_zl_a">
+              <div class="left_zl_a_img">{if $smarty.session.picture != ''}<img src="CoalMine_Backstage/{$smarty.session.picture}" width="145" height="174" alt="" />{else}<img src="CoalMine_Backstage/upfiles/userface/none.jpg" width="145" height="174" alt="" />{/if}</div>
+          </div>
+          <div class="left_zl_a">
+            <div class="left_zl_a_b">
+              <ul>
+                <li><span class="font9">考生姓名：</span><span class="font10">测试账号</span></li>
+                <li><span class="font9">考核类型：</span><span class="font10">{$pro_class} </span></li>
+              </ul>
+            </div>
+          </div>
+          <div class="left_zl_b">
+            <ul>
+              <li><a href="#radio"><img src="images/61.jpg" alt="" border="0" /></a></li>
+              <li><a href="#checkbox"><img src="images/62.jpg" alt="" border="0" /></a></li>
+                <li><a href="#judgment"><img src="images/60.jpg" alt="" border="0" /></a></li>
+                <li><a href="#explain"><img src="images/602.jpg" alt="" border="0" /></a></li>
+                <li><a href="#answer"><img src="images/601.jpg" alt="" border="0" /></a></li>
+            </ul>
+            <div class="left_zl_xs">&nbsp;&nbsp;<a href="#" onClick="javascript:change(one,type);" onMouseOut="MM_swapImgRestore()" onMouseOver="MM_swapImage('Image13','','images/55.jpg',1)"><img src="images/54.jpg" name="Image13" width="92" height="25" border="0" id="Image13" /></a></div>
+          </div>
+          <script>
+          function change(nu,lx){ldelim} 
+	if(nu.style.display == "none"){ldelim} 
+		nu.style.display = "";
+	{rdelim}else{ldelim} 
+		nu.style.display = "none";
+	{rdelim}
+{rdelim}
+          </script>
+          <div class="left_zl_c" style="display:none" id="one">
+            <ul>
+              <li>{$answer}</li>
+            </ul>
+          </div>
+        </div>
+        <div class="left_zl_1_t"><img src="images/64.jpg" alt="" /></div>
+      </div>
+    </div>
+  </div>
+  <div id="sub_right">
+    <div class="right">
+      <div class="sub_c" style="padding-bottom:20px;">
+        <div class="sub_c_bt" style="padding-top:12px; color:#000000; line-height:20px; font-size:14px; font-weight:bold; text-align:center;">{$title} <br />
+          <span style=" color:#ff6101; font-weight:normal; padding-right:30px; font-size:12px; float:right;" > 成绩：{$fraction} 分 </span> </div>
+        <div class="k_con">
+          <ul>
+            <li>
+              <p> {php}$i=0;{/php}            
+                {foreach from=$pro_type item=type_id}
+                
+                {if $type_id=="radio"}
+            <li> <span style="width:660px; float:left; padding-left:13px; line-height:28px;  background-color:#ffffff;  color:#000000; margin-bottom:5px; display:inline; border:1px solid #19b10a; font-weight:bold;"> 一、 单选题（选择一个正确答案字母）每题2分，共{$Radios}题</span><a name="radio"></a> </li>
+            {section name=rad_id loop=$examination}
+            {section name=exam_id loop=$radioproblems}
+            {if $examination[rad_id].0==$radioproblems[exam_id].id}
+            <li> <span class="kt"> <span class="kt_t"> {php}
+              $i++;
+              echo $i;
+              echo "<a name=" .$i. "></a>";
+              
+              {/php}、{$radioproblems[exam_id].content}</span> </span> <span class="kt_a"> 正确答案：{$radioproblems[exam_id].answer}&nbsp;&nbsp;&nbsp;&nbsp;您的答案：{$examination[rad_id].3} </span> {if $radioproblems[exam_id].resolve!=""} <span class="kt_a"> 问题解析：{$radioproblems[exam_id].resolve} </span> {/if} </li>
+            {/if}
+            {/section}
+            
+            {/section}
+            {/if}
+            
+            
+            {if  $type_id=="checkbox"}
+            <li> <span style="width:660px; float:left; padding-left:13px; line-height:28px;  background-color:#ffffff;  color:#000000; margin-bottom:5px; display:inline; border:1px solid #19b10a; font-weight:bold;"> 二、 多选题（选择两个或两个以上正确答案字母）每题3分，共{$Checkboxs}题</span><a name="checkbox"></a> </li>
+            {section name=rad_id1 loop=$examination}
+            {section name=exam_id1 loop=$checkboxproblems}
+            {if $examination[rad_id1].0==$checkboxproblems[exam_id1].id}
+            <li> <span class="kt"> <span class="kt_t"> {php}
+              $i++;
+              echo $i;
+              echo "<a name=" .$i. "></a>";
+
+              {/php}、{$checkboxproblems[exam_id1].content}</span> </span> <span class="kt_a"> 正确答案：{$checkboxproblems[exam_id1].answer}&nbsp;&nbsp;&nbsp;&nbsp;您的答案：{$examination[rad_id1].3} </span> {if $checkboxproblems[exam_id1].resolve!=""} <span class="kt_a"> 问题解析：{$checkboxproblems[exam_id1].resolve} </span> {/if} </li>
+            {/if}
+            {/section}
+
+            {/section}
+            {/if}
+
+            {if  $type_id=="fill"}
+            <li> <span style="width:660px; float:left; padding-left:13px; line-height:28px;  background-color:#ffffff;  color:#000000; margin-bottom:5px; display:inline; border:1px solid #19b10a; font-weight:bold;"> 三、 填空题（每空1分，共{$Fills}题）</span> <a name="fill"></a></li>
+            {section name=rad_id2 loop=$examination}
+            {section name=exam_id2 loop=$fillproblems}
+            {if $examination[rad_id2].0==$fillproblems[exam_id2].id}
+            <li> <span class="kt"> <span class="kt_t"> {php}
+              $i++;
+              echo $i;
+              echo "<a name=" .$i. "></a>";
+
+              {/php}、{$fillproblems[exam_id2].content}</span> </span> <span class="kt_a"> 正确答案：{$fillproblems[exam_id2].answer}&nbsp;&nbsp;&nbsp;&nbsp;您的答案：{$examination[rad_id2].3} </span> {if $fillproblems[exam_id2].resolve!=""} <span class="kt_a"> 问题解析：{$fillproblems[exam_id2].resolve} </span> {/if} </li>
+            {/if}
+            {/section}
+
+            {/section}
+            {/if}
+
+            {if $type_id=="judgment"}
+            <li> <span style="width:660px; float:left; padding-left:13px; line-height:28px;  background-color:#ffffff;  color:#000000; margin-bottom:5px; display:inline; border:1px solid #19b10a; font-weight:bold;"> 四、 判断题（正确的选正确；错误的选错误）每题5分，共{$Judgments}题</span> <a name="judgment"></a></li>
+            {section name=rad_id3 loop=$examination}
+            {section name=exam_id3 loop=$judgmentproblems}
+            {if $examination[rad_id3].0==$judgmentproblems[exam_id3].id }
+            <li> <span class="kt"> <span class="kt_t"> {php}
+              $i++;
+              echo $i;
+              echo "<a name=" .$i. "></a>";
+
+              {/php}、{$judgmentproblems[exam_id3].content}</span> </span> <span class="kt_a"> 正确答案：{$judgmentproblems[exam_id3].answer}&nbsp;&nbsp;&nbsp;&nbsp;您的答案：{$examination[rad_id3].3} </span> {if $judgmentproblems[exam_id3].resolve!=""} <span class="kt_a"> 问题解析：{$judgmentproblems[exam_id3].resolve} </span> {/if} </li>
+            {/if}
+            {/section}
+
+            {/section}
+
+            {/if}
+              <p>{if $type_id=="explain"}
+              <li> <span style="width:660px; float:left; padding-left:13px; line-height:28px;  background-color:#ffffff;  color:#000000; margin-bottom:5px; display:inline; border:1px solid #19b10a; font-weight:bold;"> 五、 名词解释题（每题2分，共{$Explains}题）</span><a name="explain"></a> </li>
+              {section name=rad_id4 loop=$examination}
+              {section name=exam_id4 loop=$tb_exam}
+              {if $examination[rad_id4].0==$tb_exam[exam_id4].id && $examination[rad_id4].1==$type_id }
+              <li> <span class="kt"> <span class="kt_t" style="word-wrap: break-word;"> {php}
+              $i++;
+              echo $i;
+              echo "<a name=" .$i. "></a>";
+
+              {/php}、
+              {$tb_exam[exam_id4].content}</span> </span> <span class="kt_a"> 正确答案：{$tb_exam[exam_id4].answer}<br>您的答案：{$examination[rad_id4].3} </span> <br>{if $tb_exam[exam_id4].resolve!=""} <span class="kt_a"> 问题解析：{$tb_exam[exam_id4].resolve} </span> {/if} </li>
+              {/if}
+              {/section}
+
+              {/section}
+
+              {/if}
+
+              <p>{if $type_id=="answer"}
+              <li> <span style="width:660px; float:left; padding-left:13px; line-height:28px;  background-color:#ffffff;  color:#000000; margin-bottom:5px; display:inline; border:1px solid #19b10a; font-weight:bold;"> 六、 问答题（每题5分，共{$Answers}题）</span><a name="answer"></a> </li>
+              {section name=rad_id5 loop=$examination}
+              {section name=exam_id5 loop=$tb_exam}
+              {if $examination[rad_id5].0==$tb_exam[exam_id5].id && $examination[rad_id5].1==$type_id }
+              <li> <span class="kt"> <span class="kt_t" style="word-wrap: break-word;"> {php}
+              $i++;
+              echo $i;
+              echo "<a name=" .$i. "></a>";
+
+              {/php}、
+              {$tb_exam[exam_id5].content}</span> </span> <span class="kt_a"> 正确答案：{$tb_exam[exam_id5].answer}<br>您的答案：{$examination[rad_id5].3} </span><br> {if $tb_exam[exam_id5].resolve!=""} <span class="kt_a"> 问题解析：{$tb_exam[exam_id5].resolve} </span> {/if} </li>
+              {/if}
+              {/section}
+
+              {/section}
+
+              {/if}
+            
+            {/foreach}
+            </p>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!--内容结束 --> 

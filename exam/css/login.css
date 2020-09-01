@@ -1,0 +1,22 @@
+body { background-color:#FFFFFF; margin:0px auto;}
+body,div,li,ul,td,th { margin:0; font-family:"宋体"; font-size:12px;}
+li { list-style:none;}
+a:link { text-decoration:none;}
+a:hover { text-decoration:none;}
+a:visted { text-decoration:none;}
+a:active { text-decoration:none;}
+* { border:0; margin:0; padding:0;}
+
+#box { width:492px; margin:0 auto;}
+#top { width:492px; height:172px; background:url(../images/sgkh.jpg) no-repeat; font-size:0px; float:left;}
+#top1 { width:492px; height:172px; background:url(../images/cjcx.jpg) no-repeat; font-size:0px; float:left;}
+#top2 { width:492px; height:172px; background:url(../images/mnks.jpg) no-repeat; font-size:0px; float:left;}
+#top3 { width:492px; height:172px; background:url(../images/zxlx.jpg) no-repeat; font-size:0px; float:left;}
+#con { width:492px; height:114px; float:left;}
+.con_c { width:440px; float:left; padding-left:31px; padding-top:30px; height:78px;}
+.con_c_l { width:219px; float:left; height:78px;}
+.con_c_l li { width:219px; float:left; height:30px; line-height:30px; color:#0d8900;}
+.font1 { width:70px; float:left; font-weight:bold;}
+.font2 { width:135px; height:16px; border:1px solid #0d8900; float:left; margin-top:4px; display:inline;}
+.con_c_r { width:150px; height:78px; float:right; }
+.con_c_r_a { width:69px; height:25px; margin-top:17px; float:left; display:inline;}

@@ -1,0 +1,274 @@
+<link href="{util->baseUrl}/css/style.css" rel="stylesheet" type="text/css" />
+<link href="{util->baseUrl}/css/reset.css" rel="stylesheet" type="text/css" />
+<!--右侧-->
+<div id="con_right">
+    <div class="right_con">
+        <div class="right_con_bt">·{$smarty.get.big_type} < {$smarty.get.small_type}</div>
+        <div class="right_con_bt" style=" height:53px; padding-top:4px; padding-bottom:4px; alignpadding-left:6px; ">员工成绩查询：
+            <form id="form1" name="form1" method="post" action="" onSubmit="return chklogin(this)">
+                <ul style="margin-left: 20px">
+                <li>
+                姓名：
+                <input name="name" type="text" size="10" />
+
+                所属类别：
+                <select name="pro_class" id="pro_class" class="input1" >
+                    <option value="">请选择</option>
+                    {html_options options=$arrayBccdnames}
+                </select>
+                 </li>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <li>
+
+                考试名称：
+                <select name="examid" id="examid" class="input1">
+                    <option value="">请选择</option>
+                    {html_options options=$titles}
+                </select>
+                    </li>
+                <br />
+                <input type="submit" value="提交" name="submit">
+<!--                    <input name="no" type="hidden" value="60" />-->
+<!--                    <input name="no_submit" type="submit" id="no_submit" value="查询不及格者">-->
+            </form>
+
+        </div>
+        <br />
+        <br />
+        <br />
+        <DIV>
+            {if $search!= 't'}
+            <DIV style="padding-left:6px;">
+                <UL>
+                    <LI style="LINE-HEIGHT: 25px; WIDTH: 18%; FLOAT: left; text-align:center; HEIGHT: 25px; BORDER-RIGHT: #21de26 1px solid; border-bottom:#21de26 1px solid;">准考证号</LI>
+                    <LI style="LINE-HEIGHT: 25px; WIDTH: 16%; FLOAT: left; text-align:center; HEIGHT: 25px; BORDER-RIGHT: #21de26 1px solid; border-bottom:#21de26 1px solid;">考试名称 </LI>
+                    <LI style="LINE-HEIGHT: 25px; WIDTH: 16%; FLOAT: left; text-align:center; HEIGHT: 25px; BORDER-RIGHT: #21de26 1px solid; border-bottom:#21de26 1px solid;">姓名</LI>
+                    <LI style="LINE-HEIGHT: 25px; WIDTH: 18%; FLOAT: left; text-align:center; HEIGHT: 25px; BORDER-RIGHT: #21de26 1px solid; border-bottom:#21de26 1px solid;">身份证号</LI>
+                    <LI style="LINE-HEIGHT: 25px; WIDTH: 15%; FLOAT: left; text-align:center; HEIGHT: 25px; BORDER-RIGHT: #21de26 1px solid; border-bottom:#21de26 1px solid;">得分</LI>
+                    <LI style="LINE-HEIGHT: 25px; WIDTH: 15%; FLOAT: left; text-align:center; HEIGHT: 25px; BORDER-RIGHT: #21de26 1px solid; border-bottom:#21de26 1px solid;">查看</LI>
+                </UL>
+            </DIV>
+            {section name=id loop=$bcjyzs.data}
+            <DIV style="padding-left:6px;">
+                <UL>
+                    <LI style="LINE-HEIGHT: 23px; WIDTH: 18%; padding-left:10px; FLOAT: left; HEIGHT: 23px; BORDER-RIGHT: #21de26 1px solid; border-bottom:#21de26 1px solid;">{$bcjyzs.data[id].admission}</LI>
+                    <LI style="LINE-HEIGHT: 23px; WIDTH: 16%; FLOAT: left; text-align:center; HEIGHT: 23px; BORDER-RIGHT: #21de26 1px solid; border-bottom:#21de26 1px solid;">{$bcjyzs.data[id].title} </LI>
+                    <LI style="LINE-HEIGHT: 23px; WIDTH: 16%; padding-left:10px; FLOAT: left; text-align:center; HEIGHT: 23px; BORDER-RIGHT: #21de26 1px solid; border-bottom:#21de26 1px solid;">{$bcjyzs.data[id].name}</LI>
+                    <LI style="LINE-HEIGHT: 23px; WIDTH: 18%; FLOAT: left; text-align:center; HEIGHT: 23px; BORDER-RIGHT: #21de26 1px solid; border-bottom:#21de26 1px solid;">{$bcjyzs.data[id].ID_number} </LI>
+                    <LI style="LINE-HEIGHT: 23px; WIDTH: 15%; padding-left:10px; FLOAT: left; text-align:center; HEIGHT: 23px; BORDER-RIGHT: #21de26 1px solid; border-bottom:#21de26 1px solid;">{$bcjyzs.data[id].fraction}</LI>
+                    <LI style="LINE-HEIGHT: 23px; WIDTH: 15%; padding-left:10px; FLOAT: left; text-align:center; HEIGHT: 23px; BORDER-RIGHT: #21de26 1px solid; border-bottom:#21de26 1px solid;"><a href="?edit=t&id={$bcjyzs.data[id].meid}&examination_id={$bcjyzs.data[id].examination_id}&big_type={$smarty.get.big_type|escape:'hex'}&small_type={$smarty.get.small_type|escape:'hex'}" class="a1">查阅试卷</a></LI>
+                </UL>
+            </DIV>
+            {/section}
+            {/if}
+        </DIV>
+        <br />
+        <br />
+        <br />
+        {if $search=="t"}
+
+        <DIV style="padding-left:6px;">
+            <UL>
+                <LI style="LINE-HEIGHT: 25px; WIDTH: 18%; FLOAT: left; text-align:center; HEIGHT: 25px; BORDER-RIGHT: #21de26 1px solid; border-top:#21de26 1px solid; border-bottom:#21de26 1px solid;">姓名（成绩） </LI>
+                <LI style="LINE-HEIGHT: 25px; WIDTH: 45%; FLOAT: left; padding-left:6px; HEIGHT: 25px; BORDER-RIGHT: #21de26 1px solid; border-top:#21de26 1px solid; border-bottom:#21de26 1px solid;">所属单位（工种） </LI>
+                <LI style="LINE-HEIGHT: 25px; WIDTH: 20%; FLOAT: left; text-align:center; HEIGHT: 25px; BORDER-RIGHT: #21de26 1px solid; border-top:#21de26 1px solid; border-bottom:#21de26 1px solid;">考试时间</LI>
+                <LI style="LINE-HEIGHT: 25px; WIDTH: 15%; FLOAT: left; text-align:center; HEIGHT: 25px; border-top:#21de26 1px solid; border-bottom:#21de26 1px solid;">操作 </LI>
+            </UL>
+        </DIV>
+        <table style="display:none" id="brand" width="92%" height="48"  border="1" cellpadding="0" cellspacing="0" bordercolor="#FFFFFF" bordercolordark="#CCCCCC" bordercolorlight="#FFFFFF">
+            <tr align="center">
+                <td width="29%" height="30">姓名</td>
+                <td width="12%">成绩</td>
+                <td width="12%">工种</td>
+                <td width="12%">所属单位</td>
+                <td width="12%">考试时间</td>
+            </tr>
+            {section name=sea_ids loop=$search_res}
+            <tr align="center">
+                <td width="29%" height="30">{$search_res[sea_ids].name}</td>
+                <td width="12%">{$search_res[sea_ids].fraction}</td>
+                <td width="12%">{$search_res[sea_ids].pro_class}</td>
+                <td width="12%">
+                    {section name=user_ides loop=$exam_user}
+                    {if $exam_user[user_ides].admission=={$search_res[sea_ids].admission}
+                    {$exam_user[user_ides].unit}
+                    {/if}
+                    {/section}</td>
+                <td width="12%">{$search_res[sea_ids].sub_time}</td>
+            </tr>
+            {/section}
+        </table>
+        {section name=sea_id loop=$search_res}
+        <DIV style="padding-left:6px;">
+            <UL>
+                <LI style="LINE-HEIGHT: 23px; WIDTH: 18%; text-align:center; FLOAT: left; HEIGHT: 23px; BORDER-RIGHT: #21de26 1px solid; border-bottom:#21de26 1px solid;"> {$search_res[sea_id].name}（{$search_res[sea_id].fraction}）</LI>
+                <LI style="LINE-HEIGHT: 23px; WIDTH: 45%; padding-left:6px; FLOAT: left; HEIGHT: 23px; BORDER-RIGHT: #21de26 1px solid; border-bottom:#21de26 1px solid;"> {section name=user_ids loop=$exam_user}
+                    {if $exam_user[user_ids].admission=={$search_res[sea_id].admission}
+                    {$exam_user[user_ids].unit}
+                    {/if}
+                    {/section}
+                    （{$search_res[sea_id].pro_class}） </LI>
+                <LI style="LINE-HEIGHT: 23px; WIDTH: 20%; FLOAT: left; text-align:center; HEIGHT: 23px; BORDER-RIGHT: #21de26 1px solid; border-bottom:#21de26 1px solid;">{$search_res[sea_id].sub_time}</LI>
+                <LI style="LINE-HEIGHT: 23px; WIDTH: 15%; FLOAT: left; text-align:center; HEIGHT: 23px; border-bottom:#21de26 1px solid;"> <a href="?edit=t&id={$bcjyzs.data[id].meid}&examination_id={$bcjyzs.data[id].examination_id}&big_type={$smarty.get.big_type|escape:'hex'}&small_type={$smarty.get.small_type|escape:'hex'}" class="a1">查阅试卷&nbsp;|&nbsp;<a href="?delete=t&id={$search_res[sea_id].id}&examination_id={$smarty.get.examination_id}&big_type={$smarty.get.big_type|escape:'hex'}&small_type={$smarty.get.small_type|escape:'hex'}" class="a1">删除</a></LI>
+            </UL>
+        </DIV>
+        {/section}
+        <DIV style=" float:left; padding-left:480px; padding-top:10px;">符合查询条件的记录：{$search_count}条</DIV>
+        {/if} </DIV>
+    <br />
+    <br />
+    <br />
+    {if $search!='t'}
+        <div style="padding-left:6px; padding-top:6px;"> {if $bcjyzs.data!=false}
+            <div style="height:22px;  float:left">
+                <div style="width:400px; height:22px; border:1px solid #AED4EB; padding-left:5px; float:left; padding-top:3px"> <strong> 共{$bcjyzs.countRs}篇&nbsp;&nbsp;每页{$bcjyzs.pageSize}篇&nbsp;&nbsp;第{$bcjyzs.page}页/共{$bcjyzs.countPage}页&nbsp;&nbsp;<a href="{util->baseUrl}/searchmockfraction.php?page={$bcjyzs.first}&big_type={$smarty.get.big_type|escape:'hex'}&small_type={$smarty.get.small_type|escape:'hex'}" class="a1">首页</a>&nbsp;&nbsp;<a href="{util->baseUrl}/searchmockfraction.php?page={$bcjyzs.previous}&big_type={$smarty.get.big_type|escape:'hex'}&small_type={$smarty.get.small_type|escape:'hex'}" class="a1">上页</a>&nbsp;&nbsp;<a href="{util->baseUrl}/searchmockfraction.php?page={$bcjyzs.next}&big_type={$smarty.get.big_type|escape:'hex'}&small_type={$smarty.get.small_type|escape:'hex'}" class="a1">下页</a>&nbsp;&nbsp;<a href="{util->baseUrl}/searchmockfraction.php?page={$bcjyzs.last}&big_type={$smarty.get.big_type|escape:'hex'}&small_type={$smarty.get.small_type|escape:'hex'}" class="a1">尾页</a></strong> </div>
+                {section name=numId loop=$bcjyzs.arrayNum}
+                <div style="width:3px; height:22px; float:left"></div>
+                <div style="width:23px; height:22px; padding-left:5px; float:left; border:1px solid #AED4EB; padding-top:3px ;{if $bcjyzs.arrayNum[numId]==$bcjyzs.page} background-color:#51D26B {/if} "> <a href="{util->baseUrl}/searchmockfraction.php?page={$bcjyzs.arrayNum[numId]}&big_type={$smarty.get.big_type|escape:'hex'}&small_type={$smarty.get.small_type|escape:'hex'}" class="{if $bcjyzs.arrayNum[numId]==$bcjyzs.page}a2{else}a6{/if}">{$bcjyzs.arrayNum[numId]}{if $bcjyzs.arrayNum[numId]==$bcjyzs.page}{/if}</a> </div>
+                {/section}
+            </div>
+            {/if} </div>
+
+        {if $edit=='t'}
+        <div class="sub_c">
+            <div class="sub_c_bt" style="padding-top:12px; color:#000000; line-height:20px; font-size:14px; font-weight:bold; text-align:center;">{$title} <br />
+                <span style=" color:#ff6101; font-weight:normal; padding-right:30px; font-size:12px; float:right;" >姓名：{$name} &nbsp;&nbsp;&nbsp;&nbsp;类型：{$pro_class} &nbsp;&nbsp;&nbsp;&nbsp;成绩：{$fraction} 分&nbsp;&nbsp;&nbsp;&nbsp; </span> </div>
+            <div class="k_con">
+                <ul>
+                    <li>
+                        <p> {php}$i=0;{/php}
+                            {foreach from=$pro_type item=type_id}
+
+                            {if $type_id=="radio"}
+                    <li> <span style="width:660px; float:left; padding-left:10px; line-height:28px;  background-color:#ffffff;  color:#000000; margin-bottom:5px; display:inline; border:1px solid #19b10a; font-weight:bold;"> 一、 单选题（选择一个正确答案字母）每题1分，共{$Radios}题</span><a name="radio"></a> </li><br>
+                    {section name=rad_id loop=$examination}
+                    {section name=exam_id loop=$tb_exam}
+                    {if $examination[rad_id].0==$tb_exam[exam_id].id && $examination[rad_id].1==$type_id }
+                    <li> <span class="kt"> <span class="kt_t"> {php}
+            $i++;
+            echo $i;
+            echo "<a name=" .$i. "></a>";
+
+            {/php}、
+            {$tb_exam[exam_id].content}</span> </span> <span class="kt_a"> 正确答案：{$tb_exam[exam_id].answer}&nbsp;&nbsp;&nbsp;&nbsp;您的答案：{$examination[rad_id].3} </span> {if $tb_exam[exam_id].resolve!=""} <span class="kt_a"> 问题解析：{$tb_exam[exam_id].resolve} </span> {/if} </li>
+                    {/if}
+                    {/section}
+
+                    {/section}
+                    {/if}
+
+                    {if  $type_id=="checkbox"}
+                    <li> <span style="width:660px; float:left; padding-left:13px; line-height:28px;  background-color:#ffffff;  color:#000000; margin-bottom:5px; display:inline; border:1px solid #19b10a; font-weight:bold;"> 二、 多选题（选择两个或两个以上正确答案字母）每题1分，共{$Checkboxs}题</span><a name="checkbox"></a> </li>
+                    {section name=rad_id1 loop=$examination}
+                    {section name=exam_id1 loop=$tb_exam}
+                    {if $examination[rad_id1].0==$tb_exam[exam_id1].id && $examination[rad_id1].1==$type_id }
+                    <li> <span class="kt"> <span class="kt_t"> {php}
+            $i++;
+            echo $i;
+            echo "<a name=" .$i. "></a>";
+
+            {/php}、
+            {$tb_exam[exam_id1].content}</span> </span> <span class="kt_a"> 正确答案：{$tb_exam[exam_id1].answer}&nbsp;&nbsp;&nbsp;&nbsp;您的答案：{$examination[rad_id1].3} </span> {if $tb_exam[exam_id1].resolve!=""} <span class="kt_a"> 问题解析：{$tb_exam[exam_id1].resolve} </span> {/if} </li>
+                    {/if}
+                    {/section}
+
+                    {/section}
+                    {/if}
+
+                    {if  $type_id=="fill"}
+                    <li> <span style="width:660px; float:left; padding-left:13px; line-height:28px;  background-color:#ffffff;  color:#000000; margin-bottom:5px; display:inline; border:1px solid #19b10a; font-weight:bold;"> 三、 填空题（每空1分，共{$Fills}题）</span> <a name="fill"></a></li>
+                    {section name=rad_id2 loop=$examination}
+                    {section name=exam_id2 loop=$tb_exam}
+                    {if $examination[rad_id2].0==$tb_exam[exam_id2].id && $examination[rad_id2].1==$type_id }
+                    <li> <span class="kt"> <span class="kt_t"> {php}
+            $i++;
+            echo $i;
+            echo "<a name=" .$i. "></a>";
+
+            {/php}、
+            {$tb_exam[exam_id2].content}</span> </span> <span class="kt_a"> 正确答案：{$tb_exam[exam_id2].answer}&nbsp;&nbsp;&nbsp;&nbsp;您的答案：{$examination[rad_id2].3} </span> {if $tb_exam[exam_id2].resolve!=""} <span class="kt_a"> 问题解析：{$tb_exam[exam_id2].resolve} </span> {/if} </li>
+                    {/if}
+                    {/section}
+
+                    {/section}
+                    {/if}
+
+                    {if $type_id=="judgment"}
+                    <li> <span style="width:660px; float:left; padding-left:13px; line-height:28px;  background-color:#ffffff;  color:#000000; margin-bottom:5px; display:inline; border:1px solid #19b10a; font-weight:bold;"> 四、 判断题（正确的选正确；错误的选错误）每题5分，共{$Judgments}题</span> <a name="judgment"></a></li>
+                    {section name=rad_id3 loop=$examination}
+                    {section name=exam_id3 loop=$tb_exam}
+                    {if $examination[rad_id3].0==$tb_exam[exam_id3].id && $examination[rad_id3].1==$type_id }
+                    <li> <span class="kt"> <span class="kt_t"> {php}
+            $i++;
+            echo $i;
+            echo "<a name=" .$i. "></a>";
+
+            {/php}、
+            {$tb_exam[exam_id3].content}</span> </span> <span class="kt_a"> 正确答案：{$tb_exam[exam_id3].answer}&nbsp;&nbsp;&nbsp;&nbsp;您的答案：{$examination[rad_id3].3} </span> {if $tb_exam[exam_id3].resolve!=""} <span class="kt_a"> 问题解析：{$tb_exam[exam_id3].resolve} </span> {/if} </li>
+                    {/if}
+                    {/section}
+
+                    {/section}
+
+                    {/if}
+                    </p>
+                    <p> </p>
+                    <p>{if $type_id=="answer"}
+                    <li> <span style="width:660px; float:left; padding-left:13px; line-height:28px;  background-color:#ffffff;  color:#000000; margin-bottom:5px; display:inline; border:1px solid #19b10a; font-weight:bold;"> 五、 简答题（每题5分，共{$Answers}题）</span><a name="answer"></a> </li>
+                    {section name=rad_id4 loop=$examination}
+                    {section name=exam_id4 loop=$tb_exam}
+                    {if $examination[rad_id4].0==$tb_exam[exam_id4].id && $examination[rad_id4].1==$type_id }
+                    <li> <span class="kt"> <span class="kt_t"> {php}
+            $i++;
+            echo $i;
+            echo "<a name=" .$i. "></a>";
+
+            {/php}、
+            {$tb_exam[exam_id4].content}</span> </span>
+                        <span class="kt_a"> 正确答案：{$tb_exam[exam_id4].answer}</span>
+                        <span class="kt_a"> 您的答案：{$examination[rad_id4].3} </span>
+                        {if $tb_exam[exam_id4].resolve!=""} <span class="kt_a"> 问题解析：{$tb_exam[exam_id4].resolve} </span> {/if} </li>
+                    {/if}
+                    {/section}
+
+                    {/section}
+
+                    {/if}
+
+                    {if $type_id=="discourse"}
+                    <li> <span style="width:660px; float:left; padding-left:13px; line-height:28px; background-color:#ffffff;  color:#000000; margin-bottom:5px; display:inline; border:1px solid #19b10a; font-weight:bold;"> 六、 论述题（每题5分，共{$Discourses}题）</span><a name="discourse"></a> </li>
+                    {section name=rad_id5 loop=$examination}
+                    {section name=exam_id5 loop=$tb_exam}
+                    {if $examination[rad_id5].0==$tb_exam[exam_id5].id && $examination[rad_id5].1==$type_id }
+                    <li> <span class="kt"> <span class="kt_t"> {php}
+            $i++;
+            echo $i;
+            echo "<a name=" .$i. "></a>";
+
+            {/php}、
+            {$tb_exam[exam_id5].content}</span> </span>
+                        <span class="kt_a"> 正确答案：{$tb_exam[exam_id5].answer}</span>
+                        <span class="kt_a"> 您的答案：{$examination[rad_id5].3} </span>
+                        {if $tb_exam[exam_id5].resolve!=""} <span class="kt_a"> 问题解析：{$tb_exam[exam_id5].resolve} </span> {/if} </li>
+                    {/if}
+                    {/section}
+                    {/section}
+                    {/if}
+
+                    {/foreach}
+                </ul>
+            </div>
+        </div>
+        {/if}
+    {/if} </div>
+</div>
+<script language="javascript">
+    function chklogin(form){ldelim}
+    if(form.examid.value==''){ldelim}
+    alert('请选择考试名称！');
+    form.examid.focus();
+    return false;
+    {rdelim}
+    return true;
+    {rdelim}
+</script>

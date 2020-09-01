@@ -1,0 +1,43 @@
+<link href="{util->baseUrl}/css/style.css" rel="stylesheet" type="text/css" />
+<link href="{util->baseUrl}/css/reset.css" rel="stylesheet" type="text/css" />
+<div id="con_right">
+  <div class="right_con">
+    <div class="right_con_bt">·{$smarty.get.big_type} < {$smarty.get.small_type}</div>
+    <br />
+    <br />
+    <br />
+    <DIV class="right_con_form">
+     <form name="form_addbccdinfo" method="post" action="" enctype="multipart/form-data" onsubmit="return chkinputbccdinfo(this)">
+  <!--  <br />
+    所属类别：
+    <select name="pro_class" id="pro_class">
+   	  <option value="">请选择</option>
+    	{html_options options=$arrayBccdnames}
+    </select>-->
+    <br /><br />
+    新闻标题 ：
+    <input name="title" type="text" class="input1" id="title" size="65" />
+    <br/>
+<br/>
+新闻内容：{util->editor p0="content" p1="" p2="90%" p3="230"}
+<br/> 
+<br />
+    <input type="submit" value="提交"> <br />
+    <br />
+    </form>
+    </DIV>
+    <BR>
+  </div>
+</div>
+<script language="javascript">
+    function chkinputbccdinfo(form){ldelim}
+        if(form.title.value==''){ldelim}
+            alert('请输入新闻标题！');
+            form.title.focus();
+            return false; 
+        {rdelim}       
+	   
+        return true; 
+    {rdelim}
+
+</script>

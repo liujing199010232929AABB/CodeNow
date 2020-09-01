@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset=utf-8" />
+    <title>绩效评定</title>
+    <link   href="css/style.css" rel="stylesheet" />
+    <script src="js/client_js.js"></script>
+    <script src="js/riq.js"></script>
+    <script src="js/laydate/laydate.js"></script>
+</head>
+<body>
+    <table width="765" border="1" cellpadding="0" cellspacing="0" class="big_td">
+        <tr>
+            <td height="33" background="images/list.jpg" id="list">绩效评比</td>
+        </tr>
+    </table>
+    <form name="form1" method="post" action="ass_read_chk.php">
+        <table width="450" border="0" cellpadding="0" cellspacing="0" bgcolor="#DEEBEF">
+            <tr>
+                <td height="25" colspan="3" align="center" valign="middle" scope="col">从
+                    <input name="s_fmonth" placeholder="请输入开始日期" class="laydate-icon" readonly="readonly" onclick="laydate()">
+                    到
+                    <input name="s_lmonth" placeholder="请输入结束日期" class="laydate-icon" readonly="readonly" onclick="laydate()">
+                </td>
+            </tr>
+            <tr>
+                <td width="189" align="right" valign="middle">
+                    <SELECT name="left" size="10" multiple style="width:100px; ">
+                    {section name=res_id loop=$res}
+                    <option value="{$res[res_id].id}">{$res[res_id].u_name}</option>
+                    {/section}
+                    </SELECT>
+                </td>
+                <td width="96" align="center" valign="middle">
+                    <a href="#" onClick="moveSelected(document.form1.left,document.form1.right)">优秀员工&gt;&gt;</a><br>
+                    <br>
+                    <a href="#" onClick="moveSelected(document.form1.right,document.form1.left)">&lt;&lt;删除员工</a>
+                </td>
+                <td align="left" valign="middle">
+                    <select name="right" size="10" multiple style="width:100px; "></select>
+                </td>
+            </tr>
+            <tr>
+                <td height="30" colspan="3" align="center" valign="middle">
+                    <input type="hidden" name="s_id" />
+                    <input type="submit" value="添加" onClick="return glist()" />
+                    <input type="reset"  value="重置" />
+                </td>
+            </tr>
+        </table>
+    </form>
+
+</body>
+</html>

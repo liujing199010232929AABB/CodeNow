@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>修改审核内容</title>
+    <link href="css/style.css" rel="stylesheet" />
+    <script src="js/client_js.js"></script>
+</head>
+
+<body>
+<table width="765" border="1" cellpadding="0" cellspacing="0" class="big_td">
+	<tr>
+		<td height="33" background="images/list.jpg" id="list">发布审核</td>
+	</tr>
+</table>
+<form name="form1" method="post" action="modify_issuance_chk.php">
+<table border="0" cellspacing="0" cellpadding="0" bgcolor="#DEEBEF">
+ {section name=res_id loop=$res}
+  <tr>
+    <td width="100" height="30" align="right" valign="middle" scope="col">主题：</td>
+    <td height="30" align="left" valign="middle" scope="col"><input type="text" name="a_title" value="{$res[res_id].i_title}"></td>
+  </tr>
+  <tr>
+    <td align="right" valign="middle">内容：</td>
+    <td align="left" valign="middle">
+        <textarea name="a_content" cols="30" rows="5">{$res[res_id].i_content}</textarea>
+    </td>
+  </tr>
+  <tr>
+    <td height="30" colspan="2" align="center" valign="middle">
+	<input type="hidden" name="id" value="{$re_id}">
+	<input type="submit" value="修改">
+	<input type="reset"  value="重置">
+	</td>
+  </tr>
+{/section}
+</table>
+</form>
+</body>
+</html>
